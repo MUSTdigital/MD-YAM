@@ -1,0 +1,131 @@
+/*
+ * Common styles and fixes
+ */
+.md_yam_tab_content .form-table td fieldset label {
+    display: block;
+}
+
+/*
+ * Tabs related styles
+ */
+.md_yam_dashboard_widget .nav-tab-wrapper,
+.md_yam_metabox .nav-tab-wrapper {
+    padding: 9px 15px 0 10px !important;
+}
+.md_yam_dashboard_widget .nav-tab-active, .md_yam_metabox .nav-tab-active:hover,
+.md_yam_metabox .nav-tab-active, .md_yam_metabox .nav-tab-active:hover {
+    background: #fff;
+    border-bottom-color: #fff;
+}
+.md_yam_fieldset .nav-tab:focus {
+   outline: none;
+   box-shadow: none;
+}
+.md_yam_tab_content ~ .md_yam_tab_content {
+    display: none;
+}
+
+/*
+ * Dashboard widget styles
+ */
+.md_yam_dashboard_widget p.submit {
+    margin-top: .5em!important;
+}
+
+/*
+ * Options pages styles
+ */
+
+
+/*
+ * Thin styles
+ */
+.md_yam_force_thin.md_yam_fieldset .nav-tab-wrapper,
+#side-sortables .md_yam_fieldset .nav-tab-wrapper {
+    padding: 9px 15px 0 0 !important;
+}
+.md_yam_force_thin.md_yam_fieldset .nav-tab,
+#side-sortables .md_yam_fieldset .nav-tab {
+    padding: 0px 5px;
+    margin: -4px 0px -1px 0;
+}
+.md_yam_force_thin.md_yam_fieldset input.code,
+#side-sortables .md_yam_fieldset input.code {
+    padding-bottom: 5px;
+    padding-top: 10px
+}
+.md_yam_force_thin.md_yam_fieldset .form-table,
+#side-sortables .md_yam_fieldset .form-table {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+.md_yam_force_thin.md_yam_fieldset .form-table td,
+.md_yam_force_thin.md_yam_fieldset .form-table th,
+#side-sortables .md_yam_fieldset .form-table td,
+#side-sortables .md_yam_fieldset .form-table th {
+    display: block;
+    width: auto;
+    vertical-align: middle
+}
+.md_yam_force_thin.md_yam_fieldset .form-table .color-palette td,
+#side-sortables .md_yam_fieldset .form-table .color-palette td {
+    display: table-cell;
+    width: 15px
+}
+.md_yam_force_thin.md_yam_fieldset .form-table table.color-palette,
+#side-sortables .md_yam_fieldset .form-table table.color-palette {
+    margin-right: 10px
+}
+.md_yam_force_thin.md_yam_fieldset input,
+.md_yam_force_thin.md_yam_fieldset textarea,
+#side-sortables .md_yam_fieldset input,
+#side-sortables .md_yam_fieldset textarea {
+    font-size: 16px
+}
+.md_yam_force_thin.md_yam_fieldset .form-table span.description,
+.md_yam_force_thin.md_yam_fieldset .form-table td input[type=text],
+.md_yam_force_thin.md_yam_fieldset .form-table td input[type=password],
+.md_yam_force_thin.md_yam_fieldset .form-table td input[type=email],
+.md_yam_force_thin.md_yam_fieldset .form-table td select,
+.md_yam_force_thin.md_yam_fieldset .form-table td textarea,
+#side-sortables .md_yam_fieldset .form-table span.description,
+#side-sortables .md_yam_fieldset .form-table td input[type=text],
+#side-sortables .md_yam_fieldset .form-table td input[type=password],
+#side-sortables .md_yam_fieldset .form-table td input[type=email],
+#side-sortables .md_yam_fieldset .form-table td select,
+#side-sortables .md_yam_fieldset .form-table td textarea {
+    box-sizing: border-box;
+    display: block;
+    max-width: none;
+    width: 100%;
+}
+#wpbody .md_yam_force_thin.md_yam_fieldset .form-table td select,
+#wpbody #side-sortables .md_yam_fieldset .form-table td select {
+    height: 40px
+}
+.md_yam_force_thin.md_yam_fieldset .form-table span.description,
+#side-sortables .md_yam_fieldset .form-table span.description {
+    display: inline;
+    padding: 4px 0 0;
+    line-height: 1.4em;
+    font-size: 14px
+}
+.md_yam_force_thin.md_yam_fieldset .form-table th,
+#side-sortables .md_yam_fieldset .form-table th {
+    padding: 10px 0 0;
+    border-bottom: 0
+}
+.md_yam_force_thin.md_yam_fieldset .form-table td,
+#side-sortables .md_yam_fieldset .form-table td {
+    margin-bottom: 0;
+    padding: 4px 0 6px;
+}
+.md_yam_force_thin.md_yam_fieldset .form-table input.regular-text,
+#side-sortables .md_yam_fieldset .form-table input.regular-text {
+    width: 100%
+}
+.md_yam_force_thin.md_yam_fieldset .form-table fieldset label,
+#side-sortables .md_yam_fieldset .form-table fieldset label {
+    display: block
+}
