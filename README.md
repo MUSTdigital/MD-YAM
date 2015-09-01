@@ -1,14 +1,14 @@
 # MD Yet Another Metafield
 #### Table of contents
-- [Description](#)
-- [Installation and usage](#)
-- [Frequently asked questions](#)
-- [Supported display variants and their options](#)
-- [Field types and their options](#)
-- [Changelog](#)
-- [Roadmap](#)
-- [Licence](#)
-- [Meta information](#)
+- [Description](#description)
+- [Installation and usage](#installations-and-usage)
+- [Frequently asked questions](#frequently-asked-questions)
+- [Supported display variants and their options](#supported-display-variants-and-their-options)
+- [Field types and their options](#field-types-and-their-options)
+- [Changelog](#changelog)
+- [Roadmap](#roadmap)
+- [Licence](#licence)
+- [Meta information](#meta-information)
 
 ## Description
 This project is intended to be used as a part of any Wordpress plugin or theme.
