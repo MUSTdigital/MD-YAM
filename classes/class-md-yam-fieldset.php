@@ -54,13 +54,14 @@ class MD_YAM_Fieldset {
 	 *
 	 * @since    0.5.0
 	 * @access   private
-	 * @var      string    $meta_post_type  Post type slug.
-	 * @var      string    $meta_context    The part of the page where the edit screen section should be shown.
-	 * @var      string    $meta_post_id    ID of a particular post where metabox should be shown. Currently not implemented.
+	 * @var      string     $meta_post_type  Post type slug.
+	 * @var      int|array  $meta_post_id    ID of a particular post where metabox should be shown.
+	 * @var      string     $meta_context    The part of the page where the edit screen section should be shown.
 	 */
 	private $meta_post_type,
-	        $meta_context,
-            $meta_post_id;
+            $meta_post_id,
+	        $meta_context;
+
 
 	/**
 	 * Options pages properties.
@@ -99,7 +100,7 @@ class MD_YAM_Fieldset {
 	public function __construct() {
 
 		$this->project_name = 'md-yam';
-		$this->version = '0.5.0';
+		$this->version = '0.5.1';
 
         /**
          * Pre-setup defaults.
@@ -108,6 +109,7 @@ class MD_YAM_Fieldset {
         $this->meta_thin       = false;
         $this->meta_type       = 'metabox';
         $this->meta_post_type  = NULL;
+        $this->meta_post_id    = NULL;
         $this->meta_context    = 'advanced';
         $this->meta_capability = 'manage_options';
         $this->meta_icon       = '';
@@ -663,9 +665,26 @@ class MD_YAM_Fieldset {
     }
 
 	/**
+	 * Prevents running, if 'post_id' is set and doesn't match current post.
+	 * Defines hooks and runs the loader.
+	 *
 	 * @since    0.5.0
 	 */
 	public function run() {
+
+        $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+
+        if ( $this->meta_post_id ) {
+            if ( is_array( $this->meta_post_id ) ) {
+                if ( !in_array( $post_id, $this->meta_post_id ) ) {
+                    return;
+                }
+            } else {
+                if ( $post_id != $this->meta_post_id ) {
+                    return;
+                }
+            }
+        }
 
         $this->define_hooks();
 		$this->loader->run();

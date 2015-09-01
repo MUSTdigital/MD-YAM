@@ -1,8 +1,6 @@
 /*jslint browser: true*/
 /*global jQuery, console, ajaxurl, alert */
 
-console.log(new Date());
-
 (function ($) {
 	'use strict';
 
@@ -40,6 +38,5 @@ console.log(new Date());
         }, 'json');
 
     });
-
 
 }(jQuery));
