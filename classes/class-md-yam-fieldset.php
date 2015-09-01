@@ -1,23 +1,20 @@
 <?php
 
 /**
- * The admin-specific functionality of the project.
+ * Fieldset generator.
  *
  * @link       http://mustdigital.ru
  * @since      0.5.0
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/admin
+ * @subpackage MD_YAM/classes
  */
 
 /**
- * The admin-specific functionality of the project.
- *
- * Defines the project name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
+ * Class responsible for generating fieldsets and seving metafields and options.
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/admin
+ * @subpackage MD_YAM/classes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
  */
 class MD_YAM_Fieldset {
@@ -202,7 +199,7 @@ class MD_YAM_Fieldset {
 		/**
 		 * The class responsible for orchestrating the actions and filters of MD YAM.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-md-yam-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'classes/class-md-yam-loader.php';
 
         $this->loader = new MD_YAM_Loader();
 
@@ -590,7 +587,7 @@ class MD_YAM_Fieldset {
 
             }
 
-            // Final iteration
+            // Last iteration
             if ( $i === $total_items - 1) {
 
                 // Close block if there is one opened
@@ -614,7 +611,6 @@ class MD_YAM_Fieldset {
             }
 
         }
-
 
         $this->tree = $tree;
         $this->tabs = $tabs;

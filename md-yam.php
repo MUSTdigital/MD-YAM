@@ -15,8 +15,8 @@ if ( ! defined( 'WPINC' ) ) {
  * The core project class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-md-yam.php';
-require plugin_dir_path( __FILE__ ) . 'admin/class-md-yam-fieldset.php';
+require plugin_dir_path( __FILE__ ) . 'classes/class-md-yam.php';
+require plugin_dir_path( __FILE__ ) . 'classes/class-md-yam-fieldset.php';
 
 /**
  * Begins execution of the project.
@@ -29,7 +29,7 @@ require plugin_dir_path( __FILE__ ) . 'admin/class-md-yam-fieldset.php';
  */
 function run_MD_YAM() {
 
-	$project = new MD_YAM();
+	$project = new MD_YAM( plugin_dir_path( __FILE__ ), plugin_dir_url( __FILE__ ) );
 	$project->run();
 
 }

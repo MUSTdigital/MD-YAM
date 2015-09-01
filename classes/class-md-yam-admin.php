@@ -7,7 +7,7 @@
  * @since      0.5.0
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/admin
+ * @subpackage MD_YAM/classes
  */
 
 /**
@@ -17,7 +17,7 @@
  * enqueue the admin-specific stylesheet and JavaScript.
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/admin
+ * @subpackage MD_YAM/classes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
  */
 class MD_YAM_Admin {
@@ -38,13 +38,21 @@ class MD_YAM_Admin {
 
 	/**
 	 * @since    0.5.0
+	 * @access   private
+	 * @var      string    $url    The url to the project core folder.
+	 */
+	private $url;
+
+	/**
+	 * @since    0.5.0
 	 * @param      string    $project_name       The name of this project.
 	 * @param      string    $version    The version of this project.
 	 */
-	public function __construct( $project_name, $version ) {
+	public function __construct( $project_name, $version, $url ) {
 
 		$this->project_name = $project_name;
 		$this->version = $version;
+		$this->url = $url;
 
 	}
 
@@ -55,8 +63,7 @@ class MD_YAM_Admin {
 	 */
 	public function enqueue_styles() {
 
-//		wp_enqueue_style( $this->project_name, plugin_dir_url( __FILE__ ) . 'css/md-yam-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->project_name, plugin_dir_url( __FILE__ ) . 'css/md-yam-admin.css', array(), time(), 'all' );
+		wp_enqueue_style( $this->project_name, $this->url . 'assets/css/md-yam-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -67,8 +74,7 @@ class MD_YAM_Admin {
 	 */
 	public function enqueue_scripts() {
 
-//		wp_enqueue_script( $this->project_name, plugin_dir_url( __FILE__ ) . 'js/md-yam-admin.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->project_name, plugin_dir_url( __FILE__ ) . 'js/md-yam-admin.js', array( 'jquery' ), time(), true );
+		wp_enqueue_script( $this->project_name, $this->url . 'assets/js/md-yam-admin.js', array( 'jquery' ), $this->version, true );
 
 	}
 

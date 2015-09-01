@@ -6,7 +6,7 @@
  * @since      0.5.0
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/includes
+ * @subpackage MD_YAM/classes
  */
 
 /**
@@ -41,6 +41,19 @@ class MD_YAM {
 	 */
 	private $version;
 
+	/**
+	 * @since    0.5.0
+	 * @access   private
+	 * @var      string    $path    The path to the project core.
+	 */
+	private $path;
+
+	/**
+	 * @since    0.5.0
+	 * @access   private
+	 * @var      string    $url    The url to the project core folder.
+	 */
+	private $url;
 
 	/**
 	 * Define the core functionality of the MD YAM.
@@ -51,10 +64,12 @@ class MD_YAM {
 	 * @access   private
 	 * @since    0.5.0
 	 */
-    public function __construct() {
+    public function __construct( $path, $url ) {
 
 		$this->project_name = 'md-yam';
 		$this->version = '0.5.0';
+		$this->path = $path;
+		$this->url = $url;
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -84,22 +99,22 @@ class MD_YAM {
 		/**
 		 * The class responsible for orchestrating the actions and filters of MD YAM.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-md-yam-loader.php';
+		require_once $this->path . 'classes/class-md-yam-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality of MD YAM.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-md-yam-i18n.php';
+		require_once $this->path . 'classes/class-md-yam-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-md-yam-admin.php';
+		require_once $this->path . 'classes/class-md-yam-admin.php';
 
 		/**
 		 * Actions and filters refered to templates.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-md-yam-templates.php';
+		require_once $this->path . 'classes/class-md-yam-templates.php';
 
 		$this->loader = new MD_YAM_Loader();
 
@@ -116,8 +131,7 @@ class MD_YAM {
 	 */
 	private function set_locale() {
 
-		$project_i18n = new MD_YAM_i18n();
-		$project_i18n->set_domain( $this->project_name );
+		$project_i18n = new MD_YAM_i18n( $this->project_name, $this->path );
 
 		$this->loader->add_action( 'projects_loaded', $project_i18n, 'load_project_textdomain' );
 
@@ -132,7 +146,7 @@ class MD_YAM {
 	 */
 	private function define_admin_hooks() {
 
-		$project_admin = new MD_YAM_Admin( $this->project_name, $this->version );
+		$project_admin = new MD_YAM_Admin( $this->project_name, $this->version, $this->url );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $project_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $project_admin, 'enqueue_scripts' );
@@ -147,7 +161,7 @@ class MD_YAM {
 	 */
 	private function define_template_hooks() {
 
-		$project_templates = new MD_YAM_Templates( $this->project_name, $this->version );
+		$project_templates = new MD_YAM_Templates( $this->project_name, $this->version, $this->path );
 
         $this->loader->add_filter( 'md_yam_generate_field_template', $project_templates, 'generate_field_template' , 50);
         $this->loader->add_filter( 'md_yam_generate_fieldset_template', $project_templates, 'generate_fieldset_template' , 50, 2);

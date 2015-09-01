@@ -7,17 +7,13 @@
  * @since      0.5.0
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/admin
+ * @subpackage MD_YAM/classes
  */
 
 /**
- * The admin-specific functionality of the project.
- *
- * Defines the project name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
+ * Actions and filters refered to templates.
  * @package    MD_YAM
- * @subpackage MD_YAM/admin
+ * @subpackage MD_YAM/classes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
  */
 class MD_YAM_Templates {
@@ -48,11 +44,11 @@ class MD_YAM_Templates {
 	 * @param      string    $project_name       The name of this project.
 	 * @param      string    $version    The version of this project.
 	 */
-	public function __construct( $project_name, $version ) {
+	public function __construct( $project_name, $version, $path ) {
 
 		$this->project_name = $project_name;
 		$this->version = $version;
-		$this->path = plugin_dir_path( __FILE__ );
+		$this->path = $path;
 
 	}
 
@@ -64,13 +60,13 @@ class MD_YAM_Templates {
      */
     public function generate_field_template( $meta ) {
 
-        $template = 'templates/fields/' . $meta['type'] . '.php';
+        $template = 'fields/' . $meta['type'] . '.php';
 
         ob_start();
-        if ( file_exists( $this->path . $template ) ) {
-            include $this->path . $template;
+        if ( file_exists( $this->path . 'templates/' . $template ) ) {
+            include $this->path . 'templates/' . $template;
         } else {
-            echo 'No template: ' . $this->path . $template;
+            echo 'No template: ' . $template;
         }
         return ob_get_clean();
 
@@ -86,25 +82,25 @@ class MD_YAM_Templates {
         switch ( $options['type'] ) {
 
             case ( 'metabox' ):
-                $template = 'templates/types/metabox.php';
+                $template = 'types/metabox.php';
                 break;
 
             case ( 'dashboard' ):
-                $template = 'templates/types/dashboard.php';
+                $template = 'types/dashboard.php';
                 break;
 
             case ( 'menu_page' ):
             case ( 'submenu_page' ):
             default:
-                $template = 'templates/types/options.php';
+                $template = 'types/options.php';
                 break;
         }
 
         ob_start();
-        if ( file_exists( $this->path . $template ) ) {
-            include $this->path . $template;
+        if ( file_exists( $this->path . 'templates/' . $template ) ) {
+            include $this->path . 'templates/' . $template;
         } else {
-            echo 'No template: ' . $this->path . $template;
+            echo 'No template: ' . $template;
         }
        return ob_get_clean();
 

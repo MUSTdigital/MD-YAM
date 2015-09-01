@@ -10,7 +10,7 @@
  * @since      0.5.0
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/includes
+ * @subpackage MD_YAM/classes
  */
 
 /**
@@ -21,7 +21,7 @@
  *
  * @since      0.5.0
  * @package    MD_YAM
- * @subpackage MD_YAM/includes
+ * @subpackage MD_YAM/classes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
  */
 class MD_YAM_i18n {
@@ -36,6 +36,24 @@ class MD_YAM_i18n {
 	private $domain;
 
 	/**
+	 * @since    0.5.0
+	 * @access   private
+	 * @var      string    $path    The path to the project core.
+	 */
+	private $path;
+
+	/**
+	 * Set the domain equal to that of the specified domain.
+	 *
+	 * @since    0.5.0
+	 * @param    string    $domain    The domain that represents the locale of this project.
+	 */
+	public function __construct( $domain, $path ) {
+		$this->domain = $domain;
+		$this->path = $path;
+	}
+
+    /**
 	 * Load the project text domain for translation.
 	 *
 	 * @since    0.5.0
@@ -45,19 +63,9 @@ class MD_YAM_i18n {
 		load_project_textdomain(
 			$this->domain,
 			false,
-			dirname( dirname( project_basename( __FILE__ ) ) ) . '/languages/'
+			$this->path . 'languages/'
 		);
 
-	}
-
-	/**
-	 * Set the domain equal to that of the specified domain.
-	 *
-	 * @since    0.5.0
-	 * @param    string    $domain    The domain that represents the locale of this project.
-	 */
-	public function set_domain( $domain ) {
-		$this->domain = $domain;
 	}
 
 }

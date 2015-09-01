@@ -7,7 +7,7 @@
  * @since      0.5.0
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/includes
+ * @subpackage MD_YAM/classes
  */
 
 /**
@@ -18,7 +18,7 @@
  * run function to execute the list of actions and filters.
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/includes
+ * @subpackage MD_YAM/classes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
  */
 class MD_YAM_Loader {
