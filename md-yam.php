@@ -2,7 +2,7 @@
 
 /**
  * @link              http://mustdigital.ru
- * @since             1.0.0
+ * @since             0.5.0
  * @package           MD_YAM
  */
 
@@ -25,7 +25,7 @@ require plugin_dir_path( __FILE__ ) . 'admin/class-md-yam-fieldset.php';
  * then kicking off the project from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    0.5.0
  */
 function run_MD_YAM() {
 

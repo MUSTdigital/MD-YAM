@@ -3,7 +3,7 @@
 /**
  *
  * @link       http://mustdigital.ru
- * @since      1.0.0
+ * @since      0.5.0
  *
  * @package    MD_YAM
  * @subpackage MD_YAM/includes
@@ -13,7 +13,7 @@
  *
  * This is used to define internationalization and admin-specific hooks.
  *
- * @since      1.0.0
+ * @since      0.5.0
  * @package    MD_YAM
  * @subpackage MD_YAM/includes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
@@ -21,21 +21,21 @@
 class MD_YAM {
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      MD_YAM_Loader    $loader    Maintains and registers all hooks for the project.
 	 */
 	private $loader;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $project_name    The project name.
 	 */
 	private $project_name;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $version    The current version of the MD YAM.
 	 */
@@ -49,12 +49,12 @@ class MD_YAM {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area of the site.
 	 *
 	 * @access   private
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
     public function __construct() {
 
 		$this->project_name = 'md-yam';
-		$this->version = '1.0.0';
+		$this->version = '0.5.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -76,7 +76,7 @@ class MD_YAM {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -111,7 +111,7 @@ class MD_YAM {
 	 * Uses the MD_YAM_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -127,7 +127,7 @@ class MD_YAM {
 	 * Register all of the hooks related to the admin area functionality
 	 * of the project.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
@@ -142,7 +142,7 @@ class MD_YAM {
 	/**
 	 * Register all of the hooks related to the templates.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 */
 	private function define_template_hooks() {
@@ -157,7 +157,7 @@ class MD_YAM {
 	/**
 	 * Run the loader.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function run() {
 

@@ -4,7 +4,7 @@
  * The admin-specific functionality of the project.
  *
  * @link       http://mustdigital.ru
- * @since      1.0.0
+ * @since      0.5.0
  *
  * @package    MD_YAM
  * @subpackage MD_YAM/admin
@@ -23,35 +23,35 @@
 class MD_YAM_Fieldset {
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   protected
 	 * @var      MD_YAM_Loader    $loader    Maintains and registers all hooks for the project.
 	 */
 	private $loader;
 
     /**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $project_name    The ID of this project.
 	 */
 	private $project_name;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $meta_title    Title of the fieldset.
 	 */
 	private $meta_title;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $meta_short_title    Short title, used as $menu_title in add_menu_page and add_submenu_page. Default: $menu_title.
 	 */
 	private $meta_short_title;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $meta_id    Unique ID of a fieldset.
 	 */
@@ -61,35 +61,35 @@ class MD_YAM_Fieldset {
 	 * Type of a fieldset. It could be metabox ('metabox', default),
 	 * admin dashboard widget ('dashboard'), options page ('menu_page'), subpage ('submenu_page') or just html output ('html').
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $meta_type    Type of a fieldset.
 	 */
 	private $meta_type;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $meta_post_id    ID of particular post where metabox should be shown.
 	 */
 	private $meta_post_id;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $meta_post_type   Post type (built in or custom) where metabox should be shown. Optional.
 	 */
 	private $meta_post_type;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $meta_context   The part of the page where the edit screen section should be shown ('normal', 'advanced', or 'side'). Optional.
 	 */
 	private $meta_context;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $meta_capability   The capability required for menu to be displayed to the user. Defaults to 'manage_options'.
 	 */
@@ -99,70 +99,70 @@ class MD_YAM_Fieldset {
 	 * Allows grouping of several metafields or options into one.
 	 * If provided all fields will become elements of one meta_key or option, named after $meta_group.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string|bool    $meta_group   Group name. Should be unique. If $meta_group === true, it will be equal to $meta_id.
 	 */
 	private $meta_group;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      bool    $meta_thin   Set to TRUE to use thin styles.
 	 */
     private $meta_thin;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      array    $meta_icon   Path to menu icon or dashicon class.
 	 */
     private $meta_icon;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      array    $meta_parent   The slug name for the parent menu (or the file name of a standard WordPress admin page).
 	 */
     private $meta_parent;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      array    $meta_position   The position in the menu order this menu should appear. Default: bottom of menu structure.
 	 */
     private $meta_position;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      array    $fields   Array of fields.
 	 */
     private $fields;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      array    $tree   Array of fields with some helper items.
 	 */
     private $tree;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      array    $tabs   Array of tabs.
 	 */
     private $tabs;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      WP_Post    $post   Post object.
 	 */
     private $post;
 
     /**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @param      string    $project_name       The name of this project.
 	 * @param      string    $version    The version of this project.
 	 * @param      string    $loader    Loader object
@@ -170,7 +170,7 @@ class MD_YAM_Fieldset {
 	public function __construct() {
 
 		$this->project_name = 'md-yam';
-		$this->version = '1.0.0';
+		$this->version = '0.5.0';
 
         $this->meta_post_type = NULL;
         $this->meta_context = 'advanced';
@@ -194,7 +194,7 @@ class MD_YAM_Fieldset {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -248,7 +248,7 @@ class MD_YAM_Fieldset {
     /**
      * Defines hooks if needed.
      *
-     * @since 1.0.0
+     * @since 0.5.0
      */
     private function define_hooks() {
 
@@ -280,7 +280,7 @@ class MD_YAM_Fieldset {
 	/**
 	 * Adds the meta box container. (Set as public because of WP needs, do not use in code.)
 	 *
-	 * @since 1.0.0
+	 * @since 0.5.0
 	 */
 	public function add_meta_box() {
 
@@ -297,7 +297,7 @@ class MD_YAM_Fieldset {
 	/**
 	 * Adds the widget to dashboard. (Set as public because of WP needs, do not use in code.)
 	 *
-	 * @since 1.0.0
+	 * @since 0.5.0
 	 */
 	public function add_dashboard_widget() {
 
@@ -312,7 +312,7 @@ class MD_YAM_Fieldset {
 	/**
 	 * Adds the page (or sub-page) to admin menu. (Set as public because of WP needs, do not use in code.)
 	 *
-	 * @since 1.0.0
+	 * @since 0.5.0
 	 */
 	public function add_options_page() {
 
@@ -371,7 +371,7 @@ class MD_YAM_Fieldset {
 	 * Save the meta when the post is saved. (Set as public because of WP needs, do not use in code.)
 	 *
 	 * @param int $post_id The ID of the post being saved.
-     * @since 1.0.0
+     * @since 0.5.0
 	 */
 	public function save_meta( $post_id = '' ) {
 
@@ -433,7 +433,7 @@ class MD_YAM_Fieldset {
 	 * Save options via AJAX.
 	 *
 	 * @param int $post_id The ID of the post being saved.
-     * @since 1.0.0
+     * @since 0.5.0
 	 */
 	public function ajax_save_options() {
 
@@ -494,7 +494,7 @@ class MD_YAM_Fieldset {
     /**
      * Creates an array of fields, blocks and tabs.
      *
-     * @since    1.0.0
+     * @since    0.5.0
      */
     private function rebuild_tree() {
 
@@ -626,7 +626,7 @@ class MD_YAM_Fieldset {
      *
      * @param  WP_Post $post The post object.
      * @return string  $template String, containing fields html.
-     * @since    1.0.0
+     * @since    0.5.0
      */
     private function explode_meta_fields() {
 
@@ -722,7 +722,7 @@ class MD_YAM_Fieldset {
 	/**
 	 * Run the loader.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function run() {
 

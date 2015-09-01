@@ -4,7 +4,7 @@
  * The admin-specific functionality of the project.
  *
  * @link       http://mustdigital.ru
- * @since      1.0.0
+ * @since      0.5.0
  *
  * @package    MD_YAM
  * @subpackage MD_YAM/admin
@@ -23,21 +23,21 @@
 class MD_YAM_Admin {
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $project_name    The ID of this project.
 	 */
 	private $project_name;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $version    The current version of this project.
 	 */
 	private $version;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @param      string    $project_name       The name of this project.
 	 * @param      string    $version    The version of this project.
 	 */
@@ -51,7 +51,7 @@ class MD_YAM_Admin {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function enqueue_styles() {
 
@@ -63,7 +63,7 @@ class MD_YAM_Admin {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 */
 	public function enqueue_scripts() {
 

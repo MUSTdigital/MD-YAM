@@ -4,7 +4,7 @@
  * Actions and filters refered to templates
  *
  * @link       http://mustdigital.ru
- * @since      1.0.0
+ * @since      0.5.0
  *
  * @package    MD_YAM
  * @subpackage MD_YAM/admin
@@ -23,28 +23,28 @@
 class MD_YAM_Templates {
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $project_name    The ID of this project.
 	 */
 	private $project_name;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $version    The current version of this project.
 	 */
 	private $version;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $path    Path to default templates folder
 	 */
 	private $path;
 
 	/**
-	 * @since    1.0.0
+	 * @since    0.5.0
 	 * @param      string    $project_name       The name of this project.
 	 * @param      string    $version    The version of this project.
 	 */
