@@ -666,6 +666,10 @@ class MD_YAM_Fieldset {
 
         }
 
+        if ( empty( $meta['value'] ) && !empty( $meta['default'] ) ) {
+            $meta['value'] = $meta['default'];
+        }
+
         $template = apply_filters( 'md_yam_generate_field_template', $meta );
         return apply_filters( 'md_yam_field_template', $template, $meta );
     }
