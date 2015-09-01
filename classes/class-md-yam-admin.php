@@ -25,28 +25,19 @@ class MD_YAM_Admin {
 	/**
 	 * @since    0.5.0
 	 * @access   private
-	 * @var      string    $project_name    The ID of this project.
+	 * @var      string  $project_name  The ID of this project.
+	 * @var      string  $version       The current version of this project.
+	 * @var      string  $url           The url to the project core folder.
 	 */
-	private $project_name;
+	private $project_name,
+            $version,
+            $url;
 
 	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $version    The current version of this project.
-	 */
-	private $version;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $url    The url to the project core folder.
-	 */
-	private $url;
-
-	/**
-	 * @since    0.5.0
-	 * @param      string    $project_name       The name of this project.
-	 * @param      string    $version    The version of this project.
+	 * @since  0.5.0
+	 * @param  string  $project_name  The ID of this project.
+	 * @param  string  $version       The current version of this project.
+	 * @param  string  $url           The url to the project core folder.
 	 */
 	public function __construct( $project_name, $version, $url ) {
 

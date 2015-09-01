@@ -32,25 +32,23 @@ class MD_YAM_i18n {
 	 * @since    0.5.0
 	 * @access   private
 	 * @var      string    $domain    The domain identifier for this project.
-	 */
-	private $domain;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
 	 * @var      string    $path    The path to the project core.
 	 */
-	private $path;
+	private $domain,
+            $path;
 
 	/**
 	 * Set the domain equal to that of the specified domain.
 	 *
 	 * @since    0.5.0
-	 * @param    string    $domain    The domain that represents the locale of this project.
+	 * @param    string    $domain    The domain identifier for this project.
+	 * @param    string    $path    The path to the project core.
 	 */
 	public function __construct( $domain, $path ) {
+
 		$this->domain = $domain;
 		$this->path = $path;
+
 	}
 
     /**

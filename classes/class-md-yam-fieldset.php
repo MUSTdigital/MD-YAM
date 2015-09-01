@@ -20,143 +20,75 @@
 class MD_YAM_Fieldset {
 
 	/**
-	 * @since    0.5.0
-	 * @access   protected
-	 * @var      MD_YAM_Loader    $loader    Maintains and registers all hooks for the project.
+	 * @since   0.5.0
+	 * @access  private
+	 * @var     MD_YAM_Loader  $loader        Maintains and registers all hooks for the project.
+	 * @var     string         $project_name  The ID of this project.
+	 * @var     array          $fields        Array of fields.
+	 * @var     WP_Post        $post          Current post object.
 	 */
-	private $loader;
+	private $loader,
+            $project_name,
+            $fields,
+            $post;
+
+	/**
+	 * Common properties.
+	 *
+	 * @since    0.5.0
+	 * @access   private
+	 * @var      string       $meta_title  Title of the metabox.
+	 * @var      string       $meta_id     Unique ID of a fieldset.
+	 * @var      string|bool  $meta_group  Group name. Should be unique. If $meta_group === true, it will be equal to $meta_id.
+	 * @var      bool         $meta_thin   Set to TRUE to use thin styles.
+	 * @var      string       $meta_type   Type of a fieldset.
+	 */
+	private $meta_title,
+            $meta_id,
+            $meta_group,
+            $meta_thin,
+            $meta_type;
+
+	/**
+	 * Metabox properties.
+	 *
+	 * @since    0.5.0
+	 * @access   private
+	 * @var      string    $meta_post_type  Post type slug.
+	 * @var      string    $meta_context    The part of the page where the edit screen section should be shown.
+	 * @var      string    $meta_post_id    ID of a particular post where metabox should be shown. Currently not implemented.
+	 */
+	private $meta_post_type,
+	        $meta_context,
+            $meta_post_id;
+
+	/**
+	 * Options pages properties.
+	 *
+	 * @since    0.5.0
+	 * @access   private
+	 * @var      string   $meta_parent       The slug name for the parent menu.
+	 * @var      string   $meta_short_title  The on-screen name text for the menu.
+	 * @var      string   $meta_capability   The capability required for menu to be displayed to the user.
+	 * @var      string   $meta_icon         The icon for this menu.
+	 * @var      string   $meta_position     The position in the menu order this menu should appear. Default: bottom of menu structure.
+	 */
+    private $meta_parent,
+            $meta_short_title,
+            $meta_capability,
+            $meta_icon,
+            $meta_position;
 
     /**
+     * Public properties, used by class, which may be useful for development.
+     *
 	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $project_name    The ID of this project.
+	 * @access   public
+	 * @var      array    $tree  Array of fields with some helper items. Accessable after add_fields method is used.
+	 * @var      array    $tabs  Array of tabs. Accessable after add_fields method is used.
 	 */
-	private $project_name;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $meta_title    Title of the fieldset.
-	 */
-	private $meta_title;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $meta_short_title    Short title, used as $menu_title in add_menu_page and add_submenu_page. Default: $menu_title.
-	 */
-	private $meta_short_title;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $meta_id    Unique ID of a fieldset.
-	 */
-	private $meta_id;
-
-	/**
-	 * Type of a fieldset. It could be metabox ('metabox', default),
-	 * admin dashboard widget ('dashboard'), options page ('menu_page'), subpage ('submenu_page') or just html output ('html').
-	 *
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $meta_type    Type of a fieldset.
-	 */
-	private $meta_type;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $meta_post_id    ID of particular post where metabox should be shown.
-	 */
-	private $meta_post_id;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $meta_post_type   Post type (built in or custom) where metabox should be shown. Optional.
-	 */
-	private $meta_post_type;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $meta_context   The part of the page where the edit screen section should be shown ('normal', 'advanced', or 'side'). Optional.
-	 */
-	private $meta_context;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $meta_capability   The capability required for menu to be displayed to the user. Defaults to 'manage_options'.
-	 */
-	private $meta_capability;
-
-	/**
-	 * Allows grouping of several metafields or options into one.
-	 * If provided all fields will become elements of one meta_key or option, named after $meta_group.
-	 *
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string|bool    $meta_group   Group name. Should be unique. If $meta_group === true, it will be equal to $meta_id.
-	 */
-	private $meta_group;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      bool    $meta_thin   Set to TRUE to use thin styles.
-	 */
-    private $meta_thin;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      array    $meta_icon   Path to menu icon or dashicon class.
-	 */
-    private $meta_icon;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      array    $meta_parent   The slug name for the parent menu (or the file name of a standard WordPress admin page).
-	 */
-    private $meta_parent;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      array    $meta_position   The position in the menu order this menu should appear. Default: bottom of menu structure.
-	 */
-    private $meta_position;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      array    $fields   Array of fields.
-	 */
-    private $fields;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      array    $tree   Array of fields with some helper items.
-	 */
-    private $tree;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      array    $tabs   Array of tabs.
-	 */
-    private $tabs;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      WP_Post    $post   Post object.
-	 */
-    private $post;
+    public $tree,
+           $tabs;
 
     /**
 	 * @since    0.5.0
@@ -169,15 +101,19 @@ class MD_YAM_Fieldset {
 		$this->project_name = 'md-yam';
 		$this->version = '0.5.0';
 
-        $this->meta_post_type = NULL;
-        $this->meta_context = 'advanced';
-        $this->meta_type = 'metabox';
-        $this->meta_group = NULL;
+        /**
+         * Pre-setup defaults.
+         */
+        $this->meta_group      = NULL;
+        $this->meta_thin       = false;
+        $this->meta_type       = 'metabox';
+        $this->meta_post_type  = NULL;
+        $this->meta_context    = 'advanced';
         $this->meta_capability = 'manage_options';
-        $this->meta_icon = '';
-        $this->meta_position = NULL;
+        $this->meta_icon       = '';
+        $this->meta_position   = NULL;
 
-		$this->load_dependencies();
+        $this->load_dependencies();
 
 	}
 
@@ -207,18 +143,26 @@ class MD_YAM_Fieldset {
 
 
     /**
-     * @param array $options Array of options.
+     * Public method to setup fieldset properties.
+     *
+     * @param  array  $options  Array of options.
      */
     public function setup( $options ) {
 
         foreach( $options as $key => $value ){
+
             if ( !property_exists( $this, 'meta_' . $key ) ) {
                 throw new Exception( 'Undefined property "' . $key . '"' );
             }
+
             $name = 'meta_' . $key;
             $this->{$name} = $value;
+
         }
 
+        /**
+         * Setup other defaults if needed.
+         */
         if ($this->meta_group === true) {
             $this->meta_group = $this->meta_id;
         }
@@ -229,6 +173,8 @@ class MD_YAM_Fieldset {
     }
 
     /**
+     * Public method to add new fields.
+     *
      * @param array $fields Array of fields.
      */
     public function add_fields( $fields ) {
@@ -243,7 +189,7 @@ class MD_YAM_Fieldset {
 
 
     /**
-     * Defines hooks if needed.
+     * Defines hooks.
      *
      * @since 0.5.0
      */
@@ -501,6 +447,7 @@ class MD_YAM_Fieldset {
         $current_block = -1;
         $in_block = false;
         $in_tab = false;
+
         $total_items = count( $this->fields );
 
         $tab_slug = $this->project_name . '_' . $this->meta_id . '_tab_';
@@ -587,10 +534,10 @@ class MD_YAM_Fieldset {
 
             }
 
-            // Last iteration
+            // Finally - add tab and block close items, if needed.
             if ( $i === $total_items - 1) {
 
-                // Close block if there is one opened
+                // Close block if there is one opened.
                 if ( $in_block === true ) {
 
                     $tree[] = [
@@ -599,7 +546,7 @@ class MD_YAM_Fieldset {
 
                 }
 
-                // Close tab if there is one opened
+                // Close tab if there is one opened.
                 if ( $in_tab === true ) {
 
                     $tree[] = [
@@ -716,8 +663,6 @@ class MD_YAM_Fieldset {
     }
 
 	/**
-	 * Run the loader.
-	 *
 	 * @since    0.5.0
 	 */
 	public function run() {

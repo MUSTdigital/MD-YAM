@@ -21,39 +21,19 @@
 class MD_YAM {
 
 	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      MD_YAM_Loader    $loader    Maintains and registers all hooks for the project.
+	 * @since   0.5.0
+	 * @access  private
+	 * @var     string         $project_name  The project name.
+	 * @var     string         $version       The current version of the MD YAM.
+	 * @var     MD_YAM_Loader  $loader        Maintains and registers all hooks for the project.
+	 * @var     string         $path          The path to the project core.
+	 * @var     string         $url           The url to the project core folder.
 	 */
-	private $loader;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $project_name    The project name.
-	 */
-	private $project_name;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $version    The current version of the MD YAM.
-	 */
-	private $version;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $path    The path to the project core.
-	 */
-	private $path;
-
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $url    The url to the project core folder.
-	 */
-	private $url;
+	private $project_name,
+            $version,
+            $loader,
+            $path,
+            $url;
 
 	/**
 	 * Define the core functionality of the MD YAM.
@@ -87,6 +67,7 @@ class MD_YAM {
 	 * - MD_YAM_Loader. Orchestrates the hooks.
 	 * - MD_YAM_i18n. Defines internationalization functionality.
 	 * - MD_YAM_Admin. Defines all hooks for the admin area.
+	 * - MD_YAM_Templates. Defines all hooks related to templates.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
