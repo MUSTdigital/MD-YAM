@@ -88,7 +88,7 @@ This type doesn't have any special options yet.
 * **capability** *(string, required)*. The capability required for this menu to be displayed to the user. See $capability parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters).
 
 ## Field types and their options
-Each field array consists of two parts. First part consists of [common options](#common-properties) and [special options](#special-properties). Special options vary due to field type and should be stored in an 'options' key of a field array.
+Each field definition comprises two parts. First part consists of [common options](#common-properties) and second part consists of [special options](#special-properties). Special options vary due to field type and should be stored in an 'options' key of a field array.
 
 #### Available field types (by default).
 * 'text'
@@ -105,7 +105,7 @@ Each field array consists of two parts. First part consists of [common options](
   * 'number'
   * 'color'
   * 'range'
-* special types (non-fields):
+* special types (non-inputs):
   * 'heading'
   * 'tab'
 
