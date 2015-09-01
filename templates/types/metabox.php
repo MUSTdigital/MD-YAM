@@ -6,17 +6,5 @@
             true
         );
     ?>
-    <?php
-        if ( count( $options['tabs'] ) > 0 ) {
-
-            $template = '/templates/tabs.php';
-            if ( file_exists( $this->path . $template ) ) {
-                include $this->path . $template;
-            } else {
-                echo 'No template: ' . $this->path . $template;
-            }
-
-        }
-    ?>
     <?=$fields_html;?>
 </div>

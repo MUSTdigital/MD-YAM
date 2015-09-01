@@ -74,10 +74,16 @@ class MD_YAM_Templates {
         }
 
         ob_start();
+
+        // Try custom type template
         if ( file_exists( $this->theme . '/md-yam/' . $template ) ) {
             include $this->theme . '/md-yam/' . $template;
+
+        // Else try default type template
         } elseif ( file_exists( $this->path . 'templates/' . $template ) ) {
             include $this->path . 'templates/' . $template;
+
+        // Else echo error.
         } else {
             echo 'No template: ' . $template;
         }
@@ -94,16 +100,45 @@ class MD_YAM_Templates {
      */
     public function generate_field_template( $meta ) {
 
-        $template = 'fields/' . $meta['type'] . '.php';
+        switch ( $meta['type'] ) {
+
+            case 'block-end':
+            case 'block-start':
+            case 'tab-end':
+            case 'tab-start':
+            case 'tabs-nav':
+            case 'heading':
+                $template = 'helpers/' . $meta['type'] . '.php';
+                break;
+
+            default:
+                $template = 'fields/' . $meta['type'] . '.php';
+
+        }
 
         ob_start();
+
+        // Try custom field template
         if ( file_exists( $this->theme . '/md-yam/' . $template ) ) {
             include $this->theme . '/md-yam/' . $template;
+
+        // Else try default field template
         } elseif ( file_exists( $this->path . 'templates/' . $template ) ) {
             include $this->path . 'templates/' . $template;
+
+        // Else try custom text field template
+        } elseif ( file_exists( $this->theme . '/md-yam/fields/text.php' ) ) {
+            include $this->theme . '/md-yam/fields/text.php';
+
+        // Else try default text field template
+        } elseif ( file_exists( $this->path . 'templates/fields/text.php' ) ) {
+            include $this->path . 'templates/fields/text.php';
+
+        // Almost impossible situation, but whatever.
         } else {
             echo 'No template: ' . $template;
         }
+
         return ob_get_clean();
 
     }

@@ -85,7 +85,7 @@ class MD_YAM_Fieldset {
             $meta_position;
 
     /**
-     * Public properties, used by class, which may be useful for development.
+     * Public properties used by class, which may be useful for development.
      *
 	 * @since    0.5.0
 	 * @access   public
@@ -310,7 +310,6 @@ class MD_YAM_Fieldset {
             'id' => $this->meta_id,
             'context' => $this->meta_context,
             'thin' => $this->meta_thin,
-            'tabs' => $this->tabs
         ];
 
         $html = apply_filters( 'md_yam_generate_fieldset_template', $fields_html, $options );
@@ -484,6 +483,12 @@ class MD_YAM_Fieldset {
                         'type' => 'tab-end',
                     ];
 
+                // If this is a first tab, create tabs navigation.
+                } else {
+
+                    $tree[] = [
+                        'type' => 'tabs-nav',
+                    ];
                 }
 
                 $in_tab = true;
@@ -493,6 +498,7 @@ class MD_YAM_Fieldset {
                     'type' => 'tab-start',
                     'id' => $tab_slug . $current_tab
                 ];
+
                 $tabs[] = [
                     'title' => $this->fields[$i]['title'],
                     'id' => $tab_slug . $current_tab
@@ -631,13 +637,17 @@ class MD_YAM_Fieldset {
         $meta['value'] = '';
 
         if ( $meta['type'] == 'heading'
-             || $meta['type'] == 'tab'
              || $meta['type'] == 'tab-start'
              || $meta['type'] == 'tab-end'
              || $meta['type'] == 'block-start'
              || $meta['type'] == 'block-end' ) {
 
             $meta['value'] = '';
+
+        } elseif ( $meta['type'] == 'tabs-nav' ) {
+
+            $meta['value'] = '';
+            $meta['tabs'] = $this->tabs;
 
         } else {
 
