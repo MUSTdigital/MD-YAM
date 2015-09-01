@@ -26,21 +26,21 @@ Include MD YAM into your plugin or theme and require md-yam.php.
 Setup new instance of MD_YAM_Fieldset class and add new fields. Basic code looks like that:
 
 ```php
-$options = [
-    'title' => 'Test metabox',
-    'id' => 'unique_id'
-];
-$fields = [
-    [
-        'title' => 'Textield',
-        'type' => 'text',
-        'id' => 'unique_meta_id',
-    ]
-];
-$meta = new MD_YAM_Fieldset();
-$meta->setup($options);
-$meta->add_fields($fields);
-$meta->run();
+    $options = [
+        'title' => 'Test metabox',
+        'id' => 'unique_id'
+    ];
+    $fields = [
+        [
+            'title' => 'Textield',
+            'type' => 'text',
+            'id' => 'unique_meta_id',
+        ]
+    ];
+    $meta = new MD_YAM_Fieldset();
+    $meta->setup($options);
+    $meta->add_fields($fields);
+    $meta->run();
 ```
 This code will create a basic metabox with one text field. It will be added to all post types by default. Note that variable $fields is an array of arrays.
 
@@ -77,7 +77,7 @@ This project was developed for internal use, in fact. But still it have some goo
 This type doesn't have any special options yet.
 
 ### 3. Admin menu page: 'type' => 'menu_page'
-* **short_title** *(string, optional, default title)*. The on-screen name text for the menu. See $menu_title parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
+* **short_title** *(string, optional, default `title`)*. The on-screen name text for the menu. See $menu_title parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 * **capability** *(string, optional, default 'manage_options')*. The capability required for this menu to be displayed to the user. See $capability parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 * **icon** *(string, optional, default '')*. The icon for this menu. See $icon_url parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 * **position** *(string, optional, default NULL)*. The position in the menu order this menu should appear. See $position parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
@@ -91,23 +91,16 @@ This type doesn't have any special options yet.
 Each field definition comprises two parts. First part consists of [common options](#common-properties) and second part consists of [special options](#special-properties). Special options vary due to field type and should be stored in an 'options' key of a field array.
 
 #### Available field types (by default).
-* 'text'
-* 'textarea'
-* 'tinymce' (wp_editor)
-* 'checkbox'
-* 'radio'
-* 'select'
-* HTML5 fields:
-  * 'date'
-  * 'time'
-  * 'email'
-  * 'url'
-  * 'number'
-  * 'color'
-  * 'range'
+* `text`
+* `textarea`
+* `tinymce` (wp_editor)
+* `checkbox`
+* `radio`
+* `select`
+* HTML5 inputs: basically any input which uses `<input type="%type%">` syntax. This can be date, number, email, range, color etc.
 * special types (non-inputs):
-  * 'heading'
-  * 'tab'
+  * `heading`
+  * `tab`
 
 #### Common properties
 * **title** *(string, required)*. Field title.
@@ -157,6 +150,11 @@ To create a tab just use a special field type 'tab'. It has only to parameters: 
 Use special field type 'heading' to create a heading. Yeah, that simple. In addition to 'type' and 'title' parameters, heading has one special parameter -- 'tag', which defaults to 'H2'.
 
 ## Changelog
+##### 0.5.3
+* Rearranged templates.
+* Set text field type as default.
+* Tabs navigation appears right before the tab content.
+
 ##### 0.5.2
 * Added *default* field option.
 * Added custom templates system.
@@ -165,13 +163,14 @@ Use special field type 'heading' to create a heading. Yeah, that simple. In addi
 * Added *post_id* fieldset option.
 
 ##### 0.5.0
-* Initial release
+* Initial release.
 
 ## Roadmap
 ### 0.6
 * [ ] Default WP color picker.
 * [ ] Other HTML5 input tweaks.
 * [ ] 'Required' fix.
+* [ ] Multicheck.
 
 ### 0.7
 * Multiply fields support.
@@ -187,6 +186,6 @@ Use special field type 'heading' to create a heading. Yeah, that simple. In addi
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.21
+* Stable tag: 0.5.3
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
