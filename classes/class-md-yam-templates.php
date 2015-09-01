@@ -24,10 +24,12 @@ class MD_YAM_Templates {
 	 * @var     string  $project_name  The ID of this project.
 	 * @var     string  $version       The current version of this project.
 	 * @var     string  $path          Path to default templates folder.
+	 * @var     string  $theme         Path to current theme.
 	 */
 	private $project_name,
             $version,
-            $path;
+            $path,
+            $theme;
 
 	/**
 	 * @since  0.5.0
@@ -40,6 +42,7 @@ class MD_YAM_Templates {
 		$this->project_name = $project_name;
 		$this->version = $version;
 		$this->path = $path;
+        $this->theme = get_stylesheet_directory();
 
 	}
 
@@ -71,12 +74,14 @@ class MD_YAM_Templates {
         }
 
         ob_start();
-        if ( file_exists( $this->path . 'templates/' . $template ) ) {
+        if ( file_exists( $this->theme . '/md-yam/' . $template ) ) {
+            include $this->theme . '/md-yam/' . $template;
+        } elseif ( file_exists( $this->path . 'templates/' . $template ) ) {
             include $this->path . 'templates/' . $template;
         } else {
             echo 'No template: ' . $template;
         }
-       return ob_get_clean();
+        return ob_get_clean();
 
     }
 
@@ -92,7 +97,9 @@ class MD_YAM_Templates {
         $template = 'fields/' . $meta['type'] . '.php';
 
         ob_start();
-        if ( file_exists( $this->path . 'templates/' . $template ) ) {
+        if ( file_exists( $this->theme . '/md-yam/' . $template ) ) {
+            include $this->theme . '/md-yam/' . $template;
+        } elseif ( file_exists( $this->path . 'templates/' . $template ) ) {
             include $this->path . 'templates/' . $template;
         } else {
             echo 'No template: ' . $template;
