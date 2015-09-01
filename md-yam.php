@@ -11,12 +11,17 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+define( 'MDYAM_VERSION', '0.5.11' );
+define( 'MDYAM_PROJECT_NAME', 'md-yam' );
+define( 'MDYAM_PROJECT_URL', plugin_dir_url( __FILE__ ) );
+define( 'MDYAM_PROJECT_DIR', plugin_dir_path( __FILE__ ) );
+
 /**
  * The core project class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'classes/class-md-yam.php';
-require plugin_dir_path( __FILE__ ) . 'classes/class-md-yam-fieldset.php';
+require MDYAM_PROJECT_DIR . 'classes/class-md-yam.php';
+require MDYAM_PROJECT_DIR . 'classes/class-md-yam-fieldset.php';
 
 /**
  * Begins execution of the project.
@@ -29,7 +34,7 @@ require plugin_dir_path( __FILE__ ) . 'classes/class-md-yam-fieldset.php';
  */
 function run_MD_YAM() {
 
-	$project = new MD_YAM( plugin_dir_path( __FILE__ ), plugin_dir_url( __FILE__ ) );
+	$project = new MD_YAM();
 	$project->run();
 
 }

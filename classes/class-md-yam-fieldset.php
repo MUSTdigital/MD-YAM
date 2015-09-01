@@ -26,11 +26,15 @@ class MD_YAM_Fieldset {
 	 * @var     string         $project_name  The ID of this project.
 	 * @var     array          $fields        Array of fields.
 	 * @var     WP_Post        $post          Current post object.
+	 * @var     string         $path          The path to the project core.
+	 * @var     string         $url           The url to the project core folder.
 	 */
 	private $loader,
             $project_name,
             $fields,
-            $post;
+            $post,
+            $path,
+            $url;
 
 	/**
 	 * Common properties.
@@ -99,8 +103,10 @@ class MD_YAM_Fieldset {
 	 */
 	public function __construct() {
 
-		$this->project_name = 'md-yam';
-		$this->version = '0.5.1';
+		$this->project_name = MDYAM_PROJECT_NAME;
+		$this->version = MDYAM_VERSION;
+		$this->path = MDYAM_PROJECT_DIR;
+		$this->url = MDYAM_PROJECT_URL;
 
         /**
          * Pre-setup defaults.
@@ -137,7 +143,7 @@ class MD_YAM_Fieldset {
 		/**
 		 * The class responsible for orchestrating the actions and filters of MD YAM.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'classes/class-md-yam-loader.php';
+		require_once $this->path . 'classes/class-md-yam-loader.php';
 
         $this->loader = new MD_YAM_Loader();
 

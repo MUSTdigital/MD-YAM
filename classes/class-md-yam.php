@@ -44,12 +44,12 @@ class MD_YAM {
 	 * @access   private
 	 * @since    0.5.0
 	 */
-    public function __construct( $path, $url ) {
+    public function __construct() {
 
-		$this->project_name = 'md-yam';
-		$this->version = '0.5.1';
-		$this->path = $path;
-		$this->url = $url;
+		$this->project_name = MDYAM_PROJECT_NAME;
+		$this->version = MDYAM_VERSION;
+		$this->path = MDYAM_PROJECT_DIR;
+		$this->url = MDYAM_PROJECT_URL;
 
 		$this->load_dependencies();
 		$this->set_locale();
