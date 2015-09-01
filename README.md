@@ -67,13 +67,14 @@ This project was developed for internal use, in fact. But still it have some goo
 
 ### 1. Metabox: 'type' => 'metabox'
 * **post_type** *(string, optional, default NULL)*. Post type slug. See $screen parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_meta_box#Parameters).
+* **post_id** *(int|array, optional, default NULL)*. Post id. Single integer or an array of integers. Metabox would be shown only on matched edit screens.
 * **context** *(string, optional, default 'advanced')*. See $context parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_meta_box#Parameters).
 
 ### 2. Dashboard widget: 'type' => 'dashboard'
 This type doesn't have any special options yet.
 
 ### 3. Admin menu page: 'type' => 'menu_page'
-* **short_title** *(string, optional, default **title**)*. The on-screen name text for the menu. See $menu_title parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
+* **short_title** *(string, optional, default *title*)*. The on-screen name text for the menu. See $menu_title parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 * **capability** *(string, optional, default 'manage_options')*. The capability required for this menu to be displayed to the user. See $capability parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 * **icon** *(string, optional, default '')*. The icon for this menu. See $icon_url parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 * **position** *(string, optional, default NULL)*. The position in the menu order this menu should appear. See $position parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
@@ -87,7 +88,10 @@ This type doesn't have any special options yet.
 Will be added soon.  
 
 ## Changelog
-### 0.5.0
+##### 0.5.1
+* Added *post_id* option.
+
+##### 0.5.0
 * Initial release
 
 ## Roadmap
@@ -105,6 +109,6 @@ Will be added soon.
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.0
+* Stable tag: 0.5.1
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
