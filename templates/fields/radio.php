@@ -12,7 +12,7 @@ if ( $meta['options']['disabled'] != '' ) {
     <td>
         <fieldset>
             <legend class="screen-reader-text"><span><?=$meta['title'];?></span></legend>
-            <?php foreach ( $meta['options']['values'] as $key => $value ) { ?>
+            <?php foreach ( $meta['values'] as $key => $value ) { ?>
             <label title="<?=$key;?>"><input type="radio" name="<?=$meta['id'];?>" value="<?=$key;?>" <?php checked($meta['value'], $key);?> <?=$options;?>> <?=$value;?></label>
             <?php } ?>
         </fieldset>
