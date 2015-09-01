@@ -1,7 +1,7 @@
 # MD Yet Another Metafield
 #### Table of contents
 - [Description](#description)
-- [Installation and usage](#installations-and-usage)
+- [Installation and usage](#installation-and-usage)
 - [Frequently asked questions](#frequently-asked-questions)
 - [Supported display variants and their options](#supported-display-variants-and-their-options)
 - [Field types and their options](#field-types-and-their-options)
