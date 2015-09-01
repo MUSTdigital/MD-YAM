@@ -47,7 +47,7 @@ class MD_YAM {
     public function __construct( $path, $url ) {
 
 		$this->project_name = 'md-yam';
-		$this->version = '0.5.0';
+		$this->version = '0.5.1';
 		$this->path = $path;
 		$this->url = $url;
 
