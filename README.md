@@ -20,7 +20,7 @@ Thanks to [Wordpress Plugin Boilerplate](https://github.com/devinvinson/WordPres
 
 ## Installation and usage
 
-Include MD YAM into your plugin (themes are currently not supported) and require the `md-yam.php`.
+Include MD YAM into your plugin (themes currently are not supported) and require the `md-yam.php`.
 
 Setup a new instance of the `MD_YAM_Fieldset` and add new fields. Basic code looks like that:
 
@@ -175,10 +175,10 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 
 ## Roadmap
 ### 0.6
-* [x] Default WP color picker.
-* [ ] HTML5 input tweaks.
-* [ ] 'Required' fix.
-* [ ] Multicheck and multiselect
+* Default WP color picker.
+* HTML5 input tweaks.
+* 'Required' fix.
+* Multicheck and multiselect
 
 ### 0.7
 * Repeatable fields support.
