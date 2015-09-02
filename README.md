@@ -20,7 +20,7 @@ Thanks to [Wordpress Plugin Boilerplate](https://github.com/devinvinson/WordPres
 
 ## Installation and usage
 
-Include MD YAM into your plugin or theme and require the `md-yam.php`.
+Include MD YAM into your plugin (themes are currently not supported) and require the `md-yam.php`.
 
 Setup a new instance of the `MD_YAM_Fieldset` and add new fields. Basic code looks like that:
 
@@ -51,7 +51,7 @@ See options below to customize the metabox output or to work with site options.
 
 This project was developed for internal use, in fact. But still it have some goodies to offer.
 
-1. Unlike other frameworks, MD YAM allows to with both meta fields and site options.
+1. Unlike other frameworks, MD YAM allows to work with both meta fields and site options.
 2. MD YAM is incredibly simple, so that any customization takes only couple of minutes.
 3. New types of fields can be added easily.
 4. MD YAM uses standart WP admin HTML markup. With default templates you can create options pages, that look absolutly like standart wordpress admin pages.
@@ -90,13 +90,20 @@ This type doesn't have any special options yet.
 Each field definition comprises two parts. First part consists of [common options](#common-properties) and second part consists of [special options](#special-properties). Special options vary due to field type and should be stored in an `'options'` key of a field array.
 
 #### Available field types (by default).
-* `text`
-* `textarea`
-* `tinymce` (wp_editor)
-* `checkbox`
-* `radio`
-* `select`
-* HTML5 inputs: basically any input which uses `<input type="%type%">` syntax. This can be date, number, email, range, color etc.
+* Basic inputs:
+  * `text`
+  * `textarea`
+  * `checkbox`
+  * `radio`
+  * `select`
+* HTML5 inputs. Almost any input which uses `<input type="%type%">` syntax:
+  * `time`, `date`, `datetime`, `datetime-local`, `month`, `week`
+  * `number`, `range`
+  * `email`, `url`, `tel`
+  * `color`
+* Wordpress inputs:
+  * `wp-color`
+  * `tinymce` (wp_editor)
 * special types (non-inputs):
   * `heading`
   * `tab`
@@ -148,6 +155,9 @@ To create a tab just use the special field type `'tab'`. It has only two paramet
 Use the special field type `'heading'` to create a heading. Yeah, that simple. In addition to the `'type'` and the `'title'` parameters, heading has one special parameter -- `'tag'`, which defaults to `'H2'`.
 
 ## Changelog
+##### 0.5.4
+* Added default WordPress color-picker. The type is called `wp-color`, because I have another plans for `color`.
+
 ##### 0.5.3
 * Rearranged templates.
 * Set the text field type as default.
@@ -165,8 +175,8 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 
 ## Roadmap
 ### 0.6
-* [ ] Default WP color picker.
-* [ ] Other HTML5 input tweaks.
+* [x] Default WP color picker.
+* [ ] HTML5 input tweaks.
 * [ ] 'Required' fix.
 * [ ] Multicheck and multiselect
 
@@ -184,6 +194,6 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.3
+* Stable tag: 0.5.4
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html

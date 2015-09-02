@@ -39,4 +39,8 @@
 
     });
 
+    $(document).ready(function ($) {
+        $('[data-mdyam="color"]').wpColorPicker();
+    });
+
 }(jQuery));
