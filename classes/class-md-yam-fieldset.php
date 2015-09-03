@@ -36,6 +36,16 @@ class MD_YAM_Fieldset {
             $path,
             $url;
 
+
+	/**
+	 * @since   0.5.47
+	 * @access  private
+	 * @var     array  $flags
+	 */
+	private $flags;
+
+
+
 	/**
 	 * Common properties.
 	 *
@@ -455,12 +465,14 @@ class MD_YAM_Fieldset {
         $in_block = false;
         $in_tab = false;
 
-        $total_items = count( $this->fields );
+        $total_fields = count( $this->fields );
 
         $tab_slug = $this->project_name . '_' . $this->meta_id . '_tab_';
         $block_slug = $this->project_name . '_' . $this->meta_id . '_block_';
 
-        for ( $i = 0; $i < $total_items; ++$i ) {
+        for ( $i = 0; $i < $total_fields; ++$i ) {
+
+            $this->flags[$this->fields[$i]['type']] = true;
 
             // Tabs
             if ( $this->fields[$i]['type'] == 'tab' ) {
@@ -549,7 +561,7 @@ class MD_YAM_Fieldset {
             }
 
             // Finally - add tab and block close items, if needed.
-            if ( $i === $total_items - 1) {
+            if ( $i === $total_fields - 1) {
 
                 // Close block if there is one opened.
                 if ( $in_block === true ) {
