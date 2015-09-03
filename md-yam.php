@@ -11,7 +11,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'MDYAM_VERSION', '0.5.45' );
+define( 'MDYAM_VERSION', '0.5.46' );
 define( 'MDYAM_PROJECT_NAME', 'md-yam' );
 define( 'MDYAM_PROJECT_URL', plugin_dir_url( __FILE__ ) );
 define( 'MDYAM_PROJECT_DIR', plugin_dir_path( __FILE__ ) );

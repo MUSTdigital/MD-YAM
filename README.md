@@ -160,6 +160,10 @@ To create a tab just use the special field type `'tab'`. It has only two paramet
 Use the special field type `'heading'` to create a heading. Yeah, that simple. In addition to the `'type'` and the `'title'` parameters, heading has one special parameter -- `'tag'`, which defaults to `'H2'`.
 
 ## Changelog
+##### 0.5.46
+* Added posts dropdown.
+* Select fix.
+
 ##### 0.5.4
 * Added default WordPress color-picker. The type is called `wp-color`, because I have another plans for `color`.
 
@@ -199,6 +203,6 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.45
+* Stable tag: 0.5.46
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html

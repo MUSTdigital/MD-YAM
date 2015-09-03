@@ -20,6 +20,7 @@ if ( empty( $meta['values'] ) ) {
     <th scope="row"><label for="<?=$meta['id'];?>"><?=$meta['title'];?></label></th>
     <td>
         <select name="<?=$meta['id'];?>" id="<?=$meta['id'];?>"<?=$options;?>>
+            <option value=""><?php _e('-- Select --', 'md-yam'); ?></option>
         <?php foreach ( $meta['values'] as $post ) { ?>
             <option value="<?=$post->ID;?>" <?php selected($meta['value'], $post->ID);?>><?=$post->post_title;?></option>
         <?php } ?>
