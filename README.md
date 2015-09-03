@@ -102,8 +102,9 @@ Each field definition comprises two parts. First part consists of [common option
   * `email`, `url`, `tel`
   * `color`
 * Wordpress inputs:
-  * `wp-color`
-  * `tinymce` (wp_editor)
+  * `wp-color` - [wpColorPicker](https://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/).
+  * `tinymce` - [wp_editor](https://codex.wordpress.org/Function_Reference/wp_editor).
+  * `posts` - posts dropdown.
 * special types (non-inputs):
   * `heading`
   * `tab`
@@ -114,7 +115,7 @@ Each field definition comprises two parts. First part consists of [common option
 * **type** *(string, required)*. Field type.
 * **descripion** *(string, optional, default `NULL`)*. Description for the field.
 * **default** *(any, optional, default `NULL`)*. Default value for the field.
-* **values** *(array, required for certain field types)*. Available values. Can be a plain array (then an index will be used as a value) or a `'value' => 'title'` array. Titles are used for display puprose, and values will be, hmm, values themselves. Currently used by the select and radio inputs.
+* **values** *(string|array, required for certain field types)*. Available values.
 
 #### Special properties
 There are some common special properties, which can be used almost in every field. Theese are the standart HTML and HTML5 input attributes. See w3.org for details. All of the special properties are optional.
@@ -138,8 +139,12 @@ There are some common special properties, which can be used almost in every fiel
 ##### Tinymce
 * **tinymce** *(array, optional, default `array()`)*. An array of tinymce options. Will be passed directly to the `wp_editor`. See the [Codex](https://codex.wordpress.org/Function_Reference/wp_editor).
 
+##### Posts dropdown ('posts')
+You can pass a prearranged array of post objects in `'values'` field OR use the `'post_type'` special property.
+* **post_type** *(string, optional, default `array()`)*. An array of tinymce options. Will be passed directly to the `wp_editor`. See the [Codex](https://codex.wordpress.org/Function_Reference/wp_editor).
+
 ## Custom templates
-You can override old and/or create new templates easily. Of course, you can just edit default templates, but this can cause some problems with updating your MD YAM installation. Prefered way of working with custom templates is described below.
+You can override old and/or create new templates easily. Of course, you can just edit template files in /templates/ folder, but this can cause some problems with updating your MD YAM installation. Prefered way of working with custom templates is described below.
 
 1. Copy entire `/templates/` folder to your theme root. If you use child theme -- to the child theme root.
 2. Rename that folder to `'md-yam'`.
@@ -194,6 +199,6 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.4
+* Stable tag: 0.5.45
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
