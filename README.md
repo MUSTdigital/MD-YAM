@@ -141,7 +141,7 @@ There are some common special properties, which can be used almost in every fiel
 
 ##### Posts dropdown ('posts')
 You can pass a prearranged array of post objects in `'values'` field OR use the `'post_type'` special property.
-* **post_type** *(string, optional, default `array()`)*. An array of tinymce options. Will be passed directly to the `wp_editor`. See the [Codex](https://codex.wordpress.org/Function_Reference/wp_editor).
+* **post_type** *(string, optional, default `page`)*. Post type slug.
 
 ## Custom templates
 You can override old and/or create new templates easily. Of course, you can just edit template files in /templates/ folder, but this can cause some problems with updating your MD YAM installation. Prefered way of working with custom templates is described below.
@@ -203,6 +203,6 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.47
+* Stable tag: 0.5.48
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html

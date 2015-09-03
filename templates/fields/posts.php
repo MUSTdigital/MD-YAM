@@ -7,10 +7,16 @@ if ( $meta['options']['disabled'] != '' ) {
     $options .= ' disabled="disabled"';
 }
 
+if ( $meta['options']['post_type'] != '' ) {
+    $post_type = $meta['options']['post_type'];
+} else {
+    $post_type = 'page';
+}
+
 if ( empty( $meta['values'] ) ) {
     $meta['values'] = get_posts([
         'posts_per_page' => -1,
-        'post_type' => $meta['options']['post_type'],
+        'post_type' => $post_type,
         'post_status' => 'any',
     ]);
 }
