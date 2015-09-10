@@ -1,9 +1,9 @@
 <?php
 $options = '';
-if ( $meta['options']['required'] != '' ) {
+if ( isset($meta['options']['required']) ) {
     $options .= ' required="required"';
 }
-if ( $meta['options']['disabled'] != '' ) {
+if ( isset($meta['options']['disabled']) ) {
     $options .= ' disabled="disabled"';
 }
 ?>
@@ -13,6 +13,6 @@ if ( $meta['options']['disabled'] != '' ) {
     </th>
     <td>
         <input name="<?=$meta['id'];?>" type="checkbox" value="1" id="<?=$meta['id'];?>" <?php checked($meta['value'], 1);?> <?=$options;?> >
-        <?php if ($meta['description']) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
     </td>
 </tr>

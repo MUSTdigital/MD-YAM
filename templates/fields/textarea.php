@@ -2,37 +2,37 @@
 
 // Textarea options
 $options = '';
-if ( $meta['options']['maxlength'] != '' ) {
+if ( isset($meta['options']['maxlength']) ) {
     $options .= ' maxlength="' . $meta['options']['maxlength'] . '"';
 }
-if ( $meta['options']['placeholder'] != '' ) {
+if ( isset($meta['options']['placeholder']) ) {
     $options .= ' placeholder="' . $meta['options']['placeholder'] . '"';
 }
-if ( $meta['options']['rows'] != '' ) {
+if ( isset($meta['options']['rows']) ) {
     $options .= ' rows="' . $meta['options']['rows'] . '"';
 } else {
     $options .= ' rows="5"';
 }
-if ( $meta['options']['wrap'] != '' ) {
+if ( isset($meta['options']['wrap']) ) {
     $options .= ' wrap="' . $meta['options']['wrap'] . '"';
 }
-if ( $meta['options']['cols'] != '' ) {
+if ( isset($meta['options']['cols']) ) {
     $options .= ' cols="' . $meta['options']['cols'] . '"';
 } else {
     $options .= ' cols="40"';
 }
-if ( $meta['options']['readonly'] != '' ) {
+if ( isset($meta['options']['readonly']) ) {
     $options .= ' readonly="readonly"';
 }
-if ( $meta['options']['required'] != '' ) {
+if ( isset($meta['options']['required']) ) {
     $options .= ' required="required"';
 }
-if ( $meta['options']['disabled'] != '' ) {
+if ( isset($meta['options']['disabled']) ) {
     $options .= ' disabled="disabled"';
 }
 
 // Textares classes.
-if ( $meta['options']['class'] != '' ) {
+if ( isset($meta['options']['class']) ) {
     $class = $meta['options']['class'];
 }
 ?>
@@ -42,6 +42,6 @@ if ( $meta['options']['class'] != '' ) {
         <p>
             <textarea name="<?=$meta['id'];?>" id="<?=$meta['id'];?>" class="<?=$class;?>"<?=$options;?>><?=$meta['value'];?></textarea>
         </p>
-        <?php if ($meta['description']) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
     </td>
 </tr>

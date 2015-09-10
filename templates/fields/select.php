@@ -1,9 +1,9 @@
 <?php
 $options = '';
-if ( $meta['options']['required'] != '' ) {
+if ( isset($meta['options']['required']) ) {
     $options .= ' required="required"';
 }
-if ( $meta['options']['disabled'] != '' ) {
+if ( isset($meta['options']['disabled']) ) {
     $options .= ' disabled="disabled"';
 }
 ?>
@@ -16,6 +16,6 @@ if ( $meta['options']['disabled'] != '' ) {
             <option value="<?=$key;?>" <?php selected($meta['value'], $key);?>><?=$value;?></option>
         <?php } ?>
         </select>
-        <?php if ($meta['description']) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
     </td>
 </tr>

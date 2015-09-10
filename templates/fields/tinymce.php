@@ -1,7 +1,14 @@
+<?php
+if ( isset($meta['options']['tinymce']) ) {
+    $options = $meta['options']['tinymce'];
+} else {
+    $options = [];
+}
+?>
 <tr>
     <th scope="row"><label for="<?=$meta['id'];?>'"><?=$meta['title'];?></label></th>
     <td>
-        <?php wp_editor( $meta['value'], $meta['id'], $meta['options']['tinymce'] ); ?>
-        <?php if ($meta['description']) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php wp_editor( $meta['value'], $meta['id'], $options ); ?>
+        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
     </td>
 </tr>

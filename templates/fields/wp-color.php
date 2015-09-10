@@ -1,12 +1,12 @@
 <?php
 // Field options
 $options = '';
-if ( $meta['options']['disabled'] != '' ) {
+if ( isset($meta['options']['disabled']) ) {
     $options .= ' disabled="disabled"';
 }
 
 // Field classes
-if ( $meta['options']['class'] != '' ) {
+if ( isset($meta['options']['class']) ) {
     $class = $meta['options']['class'];
 } else {
     $class = 'regular-text';
@@ -17,7 +17,7 @@ if ( $meta['options']['class'] != '' ) {
         <label for="<?=$meta['id'];?>"><?=$meta['title'];?></label>
     </th>
     <td>
-        <input name="<?=$meta['id'];?>" type="text" id="<?=$meta['id'];?>" value="<?=$meta['value'];?>" class="<?=$class;?>"<?=$options;?> data-mdyam="color">
-        <?php if ($meta['description']) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <input name="<?=$meta['id'];?>" type="text" id="<?=$meta['id'];?>" value="<?=$meta['value'];?>" class="<?=$class;?>"<?=$options;?> data-mdyam="wpcolorpicker">
+        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
     </td>
 </tr>

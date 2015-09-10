@@ -1,19 +1,19 @@
 <?php
 $options = '';
-if ( $meta['options']['required'] != '' ) {
+if ( isset($meta['options']['required']) ) {
     $options .= ' required="required"';
 }
-if ( $meta['options']['disabled'] != '' ) {
+if ( isset($meta['options']['disabled']) ) {
     $options .= ' disabled="disabled"';
 }
 
-if ( $meta['options']['post_type'] != '' ) {
+if ( isset($meta['options']['post_type']) ) {
     $post_type = $meta['options']['post_type'];
 } else {
     $post_type = 'page';
 }
 
-if ( empty( $meta['values'] ) ) {
+if ( !isset( $meta['values'] ) ) {
     $meta['values'] = get_posts([
         'posts_per_page' => -1,
         'post_type' => $post_type,
@@ -31,6 +31,6 @@ if ( empty( $meta['values'] ) ) {
             <option value="<?=$post->ID;?>" <?php selected($meta['value'], $post->ID);?>><?=$post->post_title;?></option>
         <?php } ?>
         </select>
-        <?php if ($meta['description']) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
     </td>
 </tr>

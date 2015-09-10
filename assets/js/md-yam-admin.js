@@ -4,6 +4,10 @@
 (function ($) {
 	'use strict';
 
+    $(document).ready(function ($) {
+        $('[data-mdyam="wpcolorpicker"]').wpColorPicker();
+    });
+
     // Tabs
 
     $('.js-md_yam_nav-tab').click(function (event) {
@@ -37,10 +41,6 @@
             alert(response.message);
         }, 'json');
 
-    });
-
-    $(document).ready(function ($) {
-        $('[data-mdyam="color"]').wpColorPicker();
     });
 
 }(jQuery));

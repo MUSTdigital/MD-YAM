@@ -1,42 +1,42 @@
 <?php
 // Field options
 $options = '';
-if ( $meta['options']['min'] != '' ) {
+if ( isset($meta['options']['min']) ) {
     $options .= ' min="' . $meta['options']['min'] . '"';
 }
-if ( $meta['options']['max'] != '' ) {
+if ( isset($meta['options']['max']) ) {
     $options .= ' max="' . $meta['options']['max'] . '"';
 }
-if ( $meta['options']['step'] != '' ) {
+if ( isset($meta['options']['step']) ) {
     $options .= ' step="' . $meta['options']['step'] . '"';
 }
-if ( $meta['options']['size'] != '' ) {
+if ( isset($meta['options']['size']) ) {
     $options .= ' size="' . $meta['options']['size'] . '"';
 }
-if ( $meta['options']['maxlength'] != '' ) {
+if ( isset($meta['options']['maxlength']) ) {
     $options .= ' maxlength="' . $meta['options']['maxlength'] . '"';
 }
-if ( $meta['options']['multiple'] != '' ) {
+if ( isset($meta['options']['multiple']) ) {
     $options .= ' multiple="' . $meta['options']['multiple'] . '"';
 }
-if ( $meta['options']['placeholder'] != '' ) {
+if ( isset($meta['options']['placeholder']) ) {
     $options .= ' placeholder="' . $meta['options']['placeholder'] . '"';
 }
-if ( $meta['options']['pattern'] != '' ) {
+if ( isset($meta['options']['pattern']) ) {
     $options .= ' pattern="' . $meta['options']['pattern'] . '"';
 }
-if ( $meta['options']['readonly'] != '' ) {
+if ( isset($meta['options']['readonly']) ) {
     $options .= ' readonly="readonly"';
 }
-if ( $meta['options']['required'] != '' ) {
+if ( isset($meta['options']['required']) ) {
     $options .= ' required="required"';
 }
-if ( $meta['options']['disabled'] != '' ) {
+if ( isset($meta['options']['disabled']) ) {
     $options .= ' disabled="disabled"';
 }
 
 // Field classes
-if ( $meta['options']['class'] != '' ) {
+if ( isset($meta['options']['class']) ) {
     $class = $meta['options']['class'];
 } else {
     $class = 'regular-text';
@@ -48,6 +48,6 @@ if ( $meta['options']['class'] != '' ) {
     </th>
     <td>
         <input name="<?=$meta['id'];?>" type="<?=$meta['type'];?>" id="<?=$meta['id'];?>" value="<?=$meta['value'];?>" class="<?=$class;?>"<?=$options;?>>
-        <?php if ($meta['description']) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
     </td>
 </tr>
