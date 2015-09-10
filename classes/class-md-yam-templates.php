@@ -37,11 +37,11 @@ class MD_YAM_Templates {
 	 * @param  string  $version       The current version of this project.
 	 * @param  string  $path          Path to default templates folder.
 	 */
-	public function __construct( $project_name, $version, $path ) {
+	public function __construct() {
 
-		$this->project_name = $project_name;
-		$this->version = $version;
-		$this->path = $path;
+        $this->project_name = MDYAM_PROJECT_NAME;
+		$this->version = MDYAM_VERSION;
+		$this->path = MDYAM_PROJECT_DIR;
         $this->theme = get_stylesheet_directory();
 
 	}

@@ -39,11 +39,11 @@ class MD_YAM_Admin {
 	 * @param  string  $version       The current version of this project.
 	 * @param  string  $url           The url to the project core folder.
 	 */
-	public function __construct( $project_name, $version, $url ) {
+	public function __construct() {
 
-		$this->project_name = $project_name;
-		$this->version = $version;
-		$this->url = $url;
+        $this->project_name = MDYAM_PROJECT_NAME;
+		$this->version = MDYAM_VERSION;
+		$this->url = MDYAM_PROJECT_URL;
 
 	}
 

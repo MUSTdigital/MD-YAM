@@ -112,7 +112,7 @@ class MD_YAM {
 	 */
 	private function set_locale() {
 
-		$project_i18n = new MD_YAM_i18n( $this->project_name, $this->path );
+		$project_i18n = new MD_YAM_i18n();
 
 		$this->loader->add_action( 'projects_loaded', $project_i18n, 'load_project_textdomain' );
 
@@ -142,7 +142,7 @@ class MD_YAM {
 	 */
 	private function define_template_hooks() {
 
-		$project_templates = new MD_YAM_Templates( $this->project_name, $this->version, $this->path );
+		$project_templates = new MD_YAM_Templates();
 
         $this->loader->add_filter( 'md_yam_generate_field_template', $project_templates, 'generate_field_template' , 50);
         $this->loader->add_filter( 'md_yam_generate_fieldset_template', $project_templates, 'generate_fieldset_template' , 50, 2);

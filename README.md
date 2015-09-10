@@ -203,6 +203,6 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.48
+* Stable tag: 0.5.49
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html

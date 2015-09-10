@@ -704,16 +704,18 @@ class MD_YAM_Fieldset {
 	 */
 	public function run() {
 
-        $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+        if (isset($_GET['post']) || isset($_POST['post_ID'])) {
+            $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
 
-        if ( $this->meta_post_id ) {
-            if ( is_array( $this->meta_post_id ) ) {
-                if ( !in_array( $post_id, $this->meta_post_id ) ) {
-                    return;
-                }
-            } else {
-                if ( $post_id != $this->meta_post_id ) {
-                    return;
+            if ( $this->meta_post_id ) {
+                if ( is_array( $this->meta_post_id ) ) {
+                    if ( !in_array( $post_id, $this->meta_post_id ) ) {
+                        return;
+                    }
+                } else {
+                    if ( $post_id != $this->meta_post_id ) {
+                        return;
+                    }
                 }
             }
         }

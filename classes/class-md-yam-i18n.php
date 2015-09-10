@@ -44,10 +44,10 @@ class MD_YAM_i18n {
 	 * @param    string    $domain    The domain identifier for this project.
 	 * @param    string    $path    The path to the project core.
 	 */
-	public function __construct( $domain, $path ) {
+	public function __construct() {
 
-		$this->domain = $domain;
-		$this->path = $path;
+		$this->domain = MDYAM_PROJECT_NAME;
+		$this->path = MDYAM_PROJECT_DIR;
 
 	}
 
