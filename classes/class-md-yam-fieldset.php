@@ -349,7 +349,7 @@ class MD_YAM_Fieldset {
             return $post_id;
         }
 
-        if ( $this->post_type == $_POST['post_type'] ) {
+        if ( isset($_POST['post_type']) && $this->meta_post_type == $_POST['post_type'] ) {
 
             if ( ! current_user_can( 'edit_page', $post_id ) ) {
                 return $post_id;
@@ -705,7 +705,12 @@ class MD_YAM_Fieldset {
 	public function run() {
 
         if (isset($_GET['post']) || isset($_POST['post_ID'])) {
-            $post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+
+            if (isset($_GET['post']) ) {
+                $post_id = $_GET['post'];
+            } elseif ( isset($_POST['post_ID']) ) {
+                $post_id = $_POST['post_ID'];
+            }
 
             if ( $this->meta_post_id ) {
                 if ( is_array( $this->meta_post_id ) ) {
