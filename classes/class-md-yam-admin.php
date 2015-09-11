@@ -55,8 +55,8 @@ class MD_YAM_Admin {
 	public function enqueue_styles() {
 
         wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_style( 'dashicons' );
 		wp_enqueue_style( $this->project_name, $this->url . 'assets/css/md-yam-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->project_name . '-iconpicker', $this->url . 'assets/css/md-iconpicker.css', array( 'dashicons' ), $this->version, 'all' );
 
 	}
 
@@ -67,8 +67,9 @@ class MD_YAM_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->project_name . '-iconpicker', $this->url . 'assets/js/md-iconpicker.js', array( 'jquery' ), $this->version, true );
-		wp_enqueue_script( $this->project_name, $this->url . 'assets/js/md-yam-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, true );
+        wp_enqueue_script( $this->project_name, $this->url . 'assets/js/md-yam-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, true );
+		wp_enqueue_script( $this->project_name . '-iconpicker', $this->url . 'assets/js/md-iconpicker.js', array( 'jquery', $this->project_name ), $this->version, true );
+		wp_enqueue_script( $this->project_name . '-filepicker', $this->url . 'assets/js/md-filepicker.js', array( 'jquery', $this->project_name ), $this->version, true );
 
 	}
 

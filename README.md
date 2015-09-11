@@ -101,12 +101,12 @@ Each field definition comprises two parts. First part consists of [common option
   * `number`, `range`
   * `email`, `url`, `tel`
   * `color`
-* Wordpress inputs:
+* Special inputs:
   * `wp-color` - [wpColorPicker](https://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/).
   * `tinymce` - [wp_editor](https://codex.wordpress.org/Function_Reference/wp_editor).
   * `posts` - posts dropdown.
-* Special types:
   * `icon-picker`
+  * `'wp-image'`, `'wp-file'` - [WP media uploader](https://codex.wordpress.org/Javascript_Reference/wp.media).
 * Non-inputs:
   * `heading`
   * `tab`
@@ -147,7 +147,14 @@ You can pass a prearranged array of post objects in `'values'` field OR use the 
 
 ##### Icons ('icon-picker')
 You can pass a prearranged array of icons names in `'values'` field. Don't forget to enqueue appropriate styles for admin area. If nothing is provided, script will use default Wordpress Dashicons. Examples will be added soon.
+* **button_class** *(string, optional, default `button button-secondary fonticon-picker-button`)*. Class of upload button.
 * **prefix** *(string, optional, default `dashicons dashicons-`)*. Prefix to be used with each icon name.
+
+##### Image and file fields ('wp-image', 'wp-file')
+This field types use default wordpress media upload feature. The main difference between this two types is the special thumbnail container in the image template.
+* **button_class** *(string, optional, default `button button-secondary md-imagepicker-button` for `'wp-image'` and `button button-secondary md-filepicker-button` for `'wp-file'`)*. Class of upload button.
+* **value_type** *(string, optional, default `id` for `'wp-image'` and `url` for `'wp-file'`)*. Type of attachment metadata you want to see as a value of an input. Many options are available, but I can't see why you'd want to use something different from `id` or `url`. Seriously, why would you?
+
 
 ## Custom templates
 You can override old and/or create new templates easily. Of course, you can just edit template files in /templates/ folder, but this can cause some problems with updating your MD YAM installation. Prefered way of working with custom templates is described below.
@@ -160,23 +167,27 @@ You can override old and/or create new templates easily. Of course, you can just
 
 ## Tabs and headings
 #### Tabs
-To create a tab just use the special field type `'tab'`. It has only two parameters: `'type'` itself and `'title'`. All further fields (up to another tab or the end of an array) will be parts of this tab.
+To create a tab just use the special field type `'tab'`. Yeah, that simple. It has only two parameters: `'type'` itself and `'title'`. All further fields (up to another tab or the end of an array) will be parts of this tab.
 
 #### Headings
-Use the special field type `'heading'` to create a heading. Yeah, that simple. In addition to the `'type'` and the `'title'` parameters, heading has one special parameter -- `'tag'`, which defaults to `'H2'`.
+Use the special field type `'heading'` to create a heading. In addition to the `'type'` and the `'title'` parameters, heading has one special parameter -- `'tag'`, which defaults to `'h2'`.
 
 ## Changelog
+##### 0.5.7
+* Added the `'wp-image'` and `'wp-file'` field types.
+* Added standart options to `'icon-picker'`.
+
 ##### 0.5.6
-* Added `'icon-picker'` field type. Uses modified [Dashicons Picker](https://github.com/bradvin/dashicons-picker/) by bradvin.
+* Added the `'icon-picker'` field type. Uses modified [Dashicons Picker](https://github.com/bradvin/dashicons-picker/) by bradvin.
 
 ##### 0.5.5
-* Added posts dropdown.
+* Added the posts dropdown.
 * Select fix.
 * Options checks fix.
 * Other fixes.
 
 ##### 0.5.4
-* Added default WordPress color-picker. The type is called `wp-color`, because I have another plans for `color`.
+* Added the default WordPress color-picker. The type is called `wp-color`, because I have another plans for `color`.
 
 ##### 0.5.3
 * Rearranged templates.
@@ -185,7 +196,7 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 
 ##### 0.5.2
 * Added the `'default'` field option.
-* Added custom templates system.
+* Added the custom templates system.
 
 ##### 0.5.1
 * Added the `'post_id'` fieldset option.
@@ -195,7 +206,7 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 
 ## Roadmap
 ### 0.6
-* Default WP color picker.
+*  ~~Default WP color picker~~.
 * HTML5 input tweaks.
 * 'Required' fix.
 * Multicheck and multiselect
@@ -214,6 +225,6 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.61
+* Stable tag: 0.5.7
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html

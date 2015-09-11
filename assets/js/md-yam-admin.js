@@ -7,6 +7,11 @@
     $(document).ready(function ($) {
         $('[data-mdyam="wpcolorpicker"]').wpColorPicker();
         $('[data-mdyam="fonticonspicker"]').fonticonsPicker();
+        $('[data-mdyam="imagepicker"]').filePicker();
+        $('[data-mdyam="filepicker"]').filePicker({
+            image: false
+        });
+
     });
 
     // Tabs

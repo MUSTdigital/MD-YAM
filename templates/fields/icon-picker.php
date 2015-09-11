@@ -1,4 +1,26 @@
 <?php
+// Field options
+$options = '';
+if ( isset($meta['options']['placeholder']) ) {
+    $options .= ' placeholder="' . $meta['options']['placeholder'] . '"';
+}
+if ( isset($meta['options']['required']) ) {
+    $options .= ' required="required"';
+}
+
+// Field classes
+if ( isset($meta['options']['class']) ) {
+    $class = $meta['options']['class'];
+} else {
+    $class = 'regular-text';
+}
+
+// Button classes
+if ( isset($meta['options']['button_class']) ) {
+    $button_class = $meta['options']['button_class'];
+} else {
+    $button_class = 'button button-secondary fonticon-picker-button';
+}
 
 if (!isset($meta['values'])) {
     $meta['values'] = [
@@ -248,22 +270,15 @@ if (!isset($meta['values'])) {
 if ( is_array( $meta['values'] ) ) {
     $meta['values'] = implode($meta['values'], ',');
 }
-
-// Field classes
-if ( isset($meta['options']['class']) ) {
-    $class = $meta['options']['class'];
-} else {
-    $class = 'regular-text';
-}
 ?>
 <tr>
     <th scope="row">
         <?=$meta['title'];?>
     </th>
     <td>
-        <input type="text" value="<?=$meta['value'];?>" name="<?=$meta['id'];?>" id="<?=$meta['id'];?>" class="<?=$class;?>">
+        <input type="text" value="<?=$meta['value'];?>" name="<?=$meta['id'];?>" id="<?=$meta['id'];?>" class="<?=$class;?>"<?=$options;?>>
         <button value="<?=$meta['value'];?>"
-                class="button button-secondary fonticon-picker-button"
+                class="<?=$button_class;?>"
                 data-icons="<?=$meta['values'];?>"
                 data-prefix="<?=$meta['options']['prefix'];?>"
                 data-target="#<?=$meta['id'];?>"
