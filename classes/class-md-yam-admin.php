@@ -56,6 +56,7 @@ class MD_YAM_Admin {
 
         wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( $this->project_name, $this->url . 'assets/css/md-yam-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->project_name . '-iconpicker', $this->url . 'assets/css/md-iconpicker.css', array( 'dashicons' ), $this->version, 'all' );
 
 	}
 
@@ -66,6 +67,7 @@ class MD_YAM_Admin {
 	 */
 	public function enqueue_scripts() {
 
+		wp_enqueue_script( $this->project_name . '-iconpicker', $this->url . 'assets/js/md-iconpicker.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( $this->project_name, $this->url . 'assets/js/md-yam-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, true );
 
 	}

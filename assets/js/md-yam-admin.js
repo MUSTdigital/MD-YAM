@@ -6,6 +6,7 @@
 
     $(document).ready(function ($) {
         $('[data-mdyam="wpcolorpicker"]').wpColorPicker();
+        $('[data-mdyam="fonticonspicker"]').fonticonsPicker();
     });
 
     // Tabs

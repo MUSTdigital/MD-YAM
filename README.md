@@ -105,7 +105,9 @@ Each field definition comprises two parts. First part consists of [common option
   * `wp-color` - [wpColorPicker](https://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/).
   * `tinymce` - [wp_editor](https://codex.wordpress.org/Function_Reference/wp_editor).
   * `posts` - posts dropdown.
-* special types (non-inputs):
+* Special types:
+  * `icon-picker`
+* Non-inputs:
   * `heading`
   * `tab`
 
@@ -143,6 +145,10 @@ There are some common special properties, which can be used almost in every fiel
 You can pass a prearranged array of post objects in `'values'` field OR use the `'post_type'` special property.
 * **post_type** *(string, optional, default `page`)*. Post type slug.
 
+##### Icons ('icon-picker')
+You can pass a prearranged array of icons names in `'values'` field. Don't forget to enquiue appropriate styles for admin area. If nothing is provided, script will use default Wordpress Dashicons. Examples will be added soon.
+* **prefix** *(string, optional, default `dashicons dashicons-`)*. Prefix to be used with each icon name.
+
 ## Custom templates
 You can override old and/or create new templates easily. Of course, you can just edit template files in /templates/ folder, but this can cause some problems with updating your MD YAM installation. Prefered way of working with custom templates is described below.
 
@@ -160,6 +166,9 @@ To create a tab just use the special field type `'tab'`. It has only two paramet
 Use the special field type `'heading'` to create a heading. Yeah, that simple. In addition to the `'type'` and the `'title'` parameters, heading has one special parameter -- `'tag'`, which defaults to `'H2'`.
 
 ## Changelog
+##### 0.5.6
+* Added `'icon-picker'` field type.
+
 ##### 0.5.5
 * Added posts dropdown.
 * Select fix.
@@ -205,6 +214,6 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.5
+* Stable tag: 0.5.6
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
