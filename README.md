@@ -146,7 +146,7 @@ You can pass a prearranged array of post objects in `'values'` field OR use the 
 * **post_type** *(string, optional, default `page`)*. Post type slug.
 
 ##### Icons ('icon-picker')
-You can pass a prearranged array of icons names in `'values'` field. Don't forget to enquiue appropriate styles for admin area. If nothing is provided, script will use default Wordpress Dashicons. Examples will be added soon.
+You can pass a prearranged array of icons names in `'values'` field. Don't forget to enqueue appropriate styles for admin area. If nothing is provided, script will use default Wordpress Dashicons. Examples will be added soon.
 * **prefix** *(string, optional, default `dashicons dashicons-`)*. Prefix to be used with each icon name.
 
 ## Custom templates
@@ -167,7 +167,7 @@ Use the special field type `'heading'` to create a heading. Yeah, that simple. I
 
 ## Changelog
 ##### 0.5.6
-* Added `'icon-picker'` field type.
+* Added `'icon-picker'` field type. Uses modified [Dashicons Picker](https://github.com/bradvin/dashicons-picker/) by bradvin.
 
 ##### 0.5.5
 * Added posts dropdown.
