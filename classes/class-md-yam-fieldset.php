@@ -583,7 +583,7 @@ class MD_YAM_Fieldset {
 
             if( isset( $_POST[$this->meta_group] ) && $_POST[$this->meta_group] != '' )  {
                 $data = $_POST[$this->meta_group];
-                update_post_meta( $post_id, $this->meta_group, maybe_serialize($data) );
+                update_post_meta( $post_id, $this->meta_group, $data );
             } else {
                 delete_post_meta( $post_id, $this->meta_group );
             }
