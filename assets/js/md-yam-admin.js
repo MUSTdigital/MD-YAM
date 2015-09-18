@@ -5,12 +5,20 @@
 	'use strict';
 
     $(document).ready(function ($) {
-        $('[data-mdyam="wpcolorpicker"]').wpColorPicker();
-        $('[data-mdyam="fonticonspicker"]').fonticonsPicker();
-        $('[data-mdyam="imagepicker"]').filePicker();
-        $('[data-mdyam="filepicker"]').filePicker({
-            image: false
-        });
+
+        if (typeof jQuery().fonticonsPicker === "function") {
+            $('[data-mdyam="wpcolorpicker"]').wpColorPicker();
+        }
+        if (typeof jQuery().fonticonsPicker === "function") {
+            $('[data-mdyam="fonticonspicker"]').fonticonsPicker();
+        }
+
+        if (typeof jQuery().filePicker === "function") {
+            $('[data-mdyam="imagepicker"]').filePicker();
+            $('[data-mdyam="filepicker"]').filePicker({
+                image: false
+            });
+        }
 
     });
 
