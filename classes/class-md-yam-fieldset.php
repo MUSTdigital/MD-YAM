@@ -804,29 +804,28 @@ class MD_YAM_Fieldset {
      */
     private function check_post() {
 
-        if (isset($_GET['post']) || isset($_POST['post_ID'])) {
-
-            if (isset($_GET['post']) ) {
-                $post_id = $_GET['post'];
-            } elseif ( isset($_POST['post_ID']) ) {
-                $post_id = $_POST['post_ID'];
+        if (isset($_GET['post']) ) {
+            $post_id = $_GET['post'];
+        } elseif ( isset($_POST['post_ID']) ) {
+            $post_id = $_POST['post_ID'];
+        } else {
+            if ($this->meta_post_id) {
+                return false;
             }
+        }
 
-            if ( $this->meta_post_id ) {
-                if ( is_array( $this->meta_post_id ) ) {
-                    if ( !in_array( $post_id, $this->meta_post_id ) ) {
-                        return false;
-                    }
-                    return true;
-                } else {
-                    if ( $post_id != $this->meta_post_id ) {
-                        return false;
-                    }
-                    return true;
+        if ( $this->meta_post_id ) {
+            if ( is_array( $this->meta_post_id ) ) {
+                if ( !in_array( $post_id, $this->meta_post_id ) ) {
+                    return false;
                 }
+                return true;
+            } else {
+                if ( $post_id != $this->meta_post_id ) {
+                    return false;
+                }
+                return true;
             }
-
-            return true;
         }
 
         return true;
