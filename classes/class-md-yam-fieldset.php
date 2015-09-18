@@ -40,11 +40,18 @@ class MD_YAM_Fieldset {
 	/**
 	 * @since   0.5.47
 	 * @access  private
-	 * @var     array  $flags
+	 * @var     array  $flags  Array of field types.
 	 */
 	private $flags;
 
-
+	/**
+	 * @since   0.5.8
+	 * @access  private
+	 * @var     array  $scripts  Scripts needed to be enqueued.
+	 * @var     array  $styles   Styles needed to be enqueued.
+	 */
+	private $scripts,
+            $styles;
 
 	/**
 	 * Common properties.
@@ -202,254 +209,10 @@ class MD_YAM_Fieldset {
         }
 
         $this->rebuild_tree();
+        $this->check_scripts();
 
     }
 
-
-    /**
-     * Defines hooks.
-     *
-     * @since 0.5.0
-     */
-    private function define_hooks() {
-
-        switch ($this->meta_type) {
-
-            case ('metabox'):
-                $this->loader->add_action( 'add_meta_boxes', $this, 'add_meta_box' );
-                $this->loader->add_action( 'save_post', $this, 'save_meta' );
-                break;
-
-            case ('dashboard'):
-                $this->loader->add_action( 'wp_dashboard_setup', $this, 'add_dashboard_widget' );
-                $this->loader->add_action( 'wp_ajax_md_yam_save_options', $this, 'ajax_save_options' );
-                break;
-
-            case ('menu_page'):
-            case ('submenu_page'):
-                $this->loader->add_action( 'admin_menu', $this, 'add_options_page' );
-                $this->loader->add_action( 'wp_ajax_md_yam_save_options', $this, 'ajax_save_options' );
-                break;
-
-            default:
-
-                break;
-        }
-
-    }
-
-	/**
-	 * Adds the meta box container. (Set as public because of WP needs, do not use in code.)
-	 *
-	 * @since 0.5.0
-	 */
-	public function add_meta_box() {
-
-        add_meta_box(
-            $this->meta_id,
-            $this->meta_title,
-            [ $this, 'render_content' ],
-            $this->meta_post_type,
-            $this->meta_context
-        );
-
-	}
-
-	/**
-	 * Adds the widget to dashboard. (Set as public because of WP needs, do not use in code.)
-	 *
-	 * @since 0.5.0
-	 */
-	public function add_dashboard_widget() {
-
-        wp_add_dashboard_widget(
-            $this->meta_id,
-            $this->meta_title,
-            [ $this, 'render_content' ]
-        );
-
-	}
-
-	/**
-	 * Adds the page (or sub-page) to admin menu. (Set as public because of WP needs, do not use in code.)
-	 *
-	 * @since 0.5.0
-	 */
-	public function add_options_page() {
-
-        if ( $this->meta_type == 'menu_page') {
-
-            add_menu_page(
-                $this->meta_title,
-                $this->meta_short_title,
-                $this->meta_capability,
-                $this->meta_id,
-                [ $this, 'render_content' ],
-                $this->meta_icon,
-                $this->meta_position
-            );
-
-        } elseif ( $this->meta_type == 'submenu_page') {
-
-            add_submenu_page(
-                $this->meta_parent,
-                $this->meta_title,
-                $this->meta_short_title,
-                $this->meta_capability,
-                $this->meta_id,
-                [ $this, 'render_content' ]
-            );
-
-        }
-
-	}
-
-	/**
-	 * Render Meta Box content. (Set as public because of WP needs, do not use in code.)
-	 *
-	 * @param WP_Post $post The post object.
-	 */
-	public function render_content( $post ) {
-
-        $this->post = $post;
-
-        $fields_html = $this->explode_meta_fields();
-
-        $options = [
-            'type' => $this->meta_type,
-            'id' => $this->meta_id,
-            'context' => $this->meta_context,
-            'thin' => $this->meta_thin,
-        ];
-
-        $html = apply_filters( 'md_yam_generate_fieldset_template', $fields_html, $options );
-        echo apply_filters( 'md_yam_fieldset_template', $html);
-
-	}
-
-    /**
-	 * Save the meta when the post is saved. (Set as public because of WP needs, do not use in code.)
-	 *
-	 * @param int $post_id The ID of the post being saved.
-     * @since 0.5.0
-	 */
-	public function save_meta( $post_id = '' ) {
-
-		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->meta_id] ) ) {
-			return $post_id;
-        }
-
-		$nonce = $_POST['_wpnonce_md_yam' . $this->meta_id];
-
-		if ( ! wp_verify_nonce( $nonce, 'save_metabox_' . $this->meta_id ) ) {
-			return $post_id;
-        }
-
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-            return $post_id;
-        }
-
-        if ( isset($_POST['post_type']) && $this->meta_post_type == $_POST['post_type'] ) {
-
-            if ( ! current_user_can( 'edit_page', $post_id ) ) {
-                return $post_id;
-            }
-
-        } else {
-
-            if ( ! current_user_can( 'edit_post', $post_id ) ) {
-                return $post_id;
-            }
-
-        }
-
-        if ( $this->meta_group != NULL ) {
-
-            if( isset( $_POST[$this->meta_group] ) && $_POST[$this->meta_group] != '' )  {
-                $data = $_POST[$this->meta_group];
-                update_post_meta( $post_id, $this->meta_group, maybe_serialize($data) );
-            } else {
-                delete_post_meta( $post_id, $this->meta_group );
-            }
-
-        } else {
-
-             foreach ( $this->fields as $meta ) {
-
-                if( isset( $_POST[$meta['id']] ) && $_POST[$meta['id']] != '' )  {
-                    $data = $_POST[$meta['id']];
-                    update_post_meta( $post_id, $meta['id'], $data );
-                } else {
-                    delete_post_meta( $post_id, $meta['id'] );
-                }
-
-            }
-
-        }
-
-	}
-
-    /**
-	 * Save options via AJAX.
-	 *
-	 * @param int $post_id The ID of the post being saved.
-     * @since 0.5.0
-	 */
-	public function ajax_save_options() {
-
-		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->meta_id] ) ) {
-			exit(json_encode([
-                'result' => 'error',
-                'message' => __( 'Nonce not set, can\'t save options.', 'md-yam')
-            ]));
-        }
-
-		$nonce = $_POST['_wpnonce_md_yam' . $this->meta_id];
-
-		if ( ! wp_verify_nonce( $nonce, 'save_options_' . $this->meta_id ) ) {
-			exit(json_encode([
-                'result' => 'error',
-                'message' => __( 'Nonce can\'t be verified, can\'t save options.', 'md-yam')
-            ]));
-        }
-
-        if ( ! current_user_can( $this->meta_capability, $post_id ) ) {
-			exit(json_encode([
-                'result' => 'error',
-                'message' => __( 'You don\'t have enough capabilities to edit this options.', 'md-yam')
-            ]));
-        }
-
-        if ( $this->meta_group != NULL ) {
-
-            if( isset( $_POST[$this->meta_group] ) && $_POST[$this->meta_group] != '' )  {
-                $data = $_POST[$this->meta_group];
-                update_option( $this->meta_group, maybe_serialize($data) );
-            } else {
-                delete_option( $this->meta_group );
-            }
-
-        } else {
-
-             foreach ( $this->fields as $meta ) {
-
-                if( isset( $_POST[$meta['id']] ) && $_POST[$meta['id']] != '' )  {
-                    $data = $_POST[$meta['id']];
-                    update_option( $meta['id'], $data );
-                } else {
-                    delete_option( $meta['id'] );
-                }
-
-            }
-
-        }
-
-        exit(json_encode([
-            'result' => 'ok',
-            'message' => __( 'Options saved!', 'md-yam')
-        ]));
-
-	}
 
     /**
      * Creates an array of fields, blocks and tabs.
@@ -591,6 +354,365 @@ class MD_YAM_Fieldset {
     }
 
     /**
+     * Creates arrays of scripts and styles needed to be enqueued.
+     *
+     * @since    0.5.8
+     */
+    private function check_scripts() {
+
+        $this->scripts = [];
+        $this->styles  = [];
+
+        foreach($this->flags as $flag => $val){
+
+            switch ($flag) {
+
+                case ('wp-color'):
+                    $this->scripts[] = 'wp-color-picker';
+                    $this->styles[]  = 'wp-color-picker';
+                    break;
+
+                case ('icon-picker'):
+                    $this->scripts[] = $this->project_name . '-iconpicker';
+                    $this->styles[]  = $this->project_name . '-iconpicker';
+                    break;
+
+                case ('wp-file'):
+                case ('wp-image'):
+                    $this->scripts[] = $this->project_name . '-filepicker';
+                    $this->styles[]  = $this->project_name . '-filepicker';
+                    break;
+
+                default:
+                    break;
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Enqueues styles and scripts for metabox.
+     *
+     * @since 0.5.8
+     */
+    public function enqueue_metabox_scripts() {
+
+        if (!$this->check_post()) {
+            return;
+        }
+
+        foreach($this->scripts as $script){
+            wp_enqueue_script($script);
+        }
+
+        foreach($this->styles as $style){
+            wp_enqueue_style($style);
+        }
+
+    }
+
+    /**
+     * Enqueues styles and scripts for dashboard.
+     *
+     * @since 0.5.8
+     */
+    public function enqueue_dashboard_scripts($hook) {
+
+        if ( 'index.php' != $hook ) {
+            return;
+        }
+
+        if ( array_key_exists('wp-file', $this->flags) || array_key_exists('wp-image', $this->flags)) {
+            wp_enqueue_media();
+        }
+
+        foreach($this->scripts as $script){
+            wp_enqueue_script($script);
+        }
+
+        foreach($this->styles as $style){
+            wp_enqueue_style($style);
+        }
+
+    }
+
+    /**
+     * Enqueues styles and scripts for admin menu pages.
+     *
+     * @since 0.5.8
+     */
+    public function enqueue_menupage_scripts($hook) {
+
+        if ( strpos( $hook, $this->meta_id ) == false) {
+            return;
+        }
+
+        if ( array_key_exists('wp-file', $this->flags) || array_key_exists('wp-image', $this->flags)) {
+            wp_enqueue_media();
+        }
+
+        foreach($this->scripts as $script){
+            wp_enqueue_script($script);
+
+        }
+
+        foreach($this->styles as $style){
+            wp_enqueue_style($style);
+        }
+
+    }
+
+    /**
+     * Defines hooks.
+     *
+     * @since 0.5.0
+     */
+    private function define_hooks() {
+
+        switch ($this->meta_type) {
+
+            case ('metabox'):
+                $this->loader->add_action( 'add_meta_boxes', $this, 'add_meta_box' );
+                $this->loader->add_action( 'save_post', $this, 'save_meta' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_metabox_scripts' );
+                break;
+
+            case ('dashboard'):
+                $this->loader->add_action( 'wp_dashboard_setup', $this, 'add_dashboard_widget' );
+                $this->loader->add_action( 'wp_ajax_md_yam_save_options', $this, 'ajax_save_options' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_dashboard_scripts' );
+                break;
+
+            case ('menu_page'):
+            case ('submenu_page'):
+                $this->loader->add_action( 'admin_menu', $this, 'add_options_page' );
+                $this->loader->add_action( 'wp_ajax_md_yam_save_options', $this, 'ajax_save_options' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_menupage_scripts' );
+                break;
+
+            default:
+
+                break;
+        }
+
+    }
+
+	/**
+	 * Adds the meta box container. (Set as public because of WP needs, do not use in code.)
+	 *
+	 * @since 0.5.0
+	 */
+	public function add_meta_box() {
+
+        add_meta_box(
+            $this->meta_id,
+            $this->meta_title,
+            [ $this, 'render_content' ],
+            $this->meta_post_type,
+            $this->meta_context
+        );
+
+	}
+
+	/**
+	 * Adds the widget to dashboard. (Set as public because of WP needs, do not use in code.)
+	 *
+	 * @since 0.5.0
+	 */
+	public function add_dashboard_widget() {
+
+        wp_add_dashboard_widget(
+            $this->meta_id,
+            $this->meta_title,
+            [ $this, 'render_content' ]
+        );
+
+	}
+
+	/**
+	 * Adds the page (or sub-page) to admin menu. (Set as public because of WP needs, do not use in code.)
+	 *
+	 * @since 0.5.0
+	 */
+	public function add_options_page() {
+
+        if ( $this->meta_type == 'menu_page') {
+
+            add_menu_page(
+                $this->meta_title,
+                $this->meta_short_title,
+                $this->meta_capability,
+                $this->meta_id,
+                [ $this, 'render_content' ],
+                $this->meta_icon,
+                $this->meta_position
+            );
+
+        } elseif ( $this->meta_type == 'submenu_page') {
+
+            add_submenu_page(
+                $this->meta_parent,
+                $this->meta_title,
+                $this->meta_short_title,
+                $this->meta_capability,
+                $this->meta_id,
+                [ $this, 'render_content' ]
+            );
+
+        }
+
+	}
+
+    /**
+	 * Save the meta when the post is saved. (Set as public because of WP needs, do not use in code.)
+	 *
+	 * @param int $post_id The ID of the post being saved.
+     * @since 0.5.0
+	 */
+	public function save_meta( $post_id = '' ) {
+
+		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->meta_id] ) ) {
+			return $post_id;
+        }
+
+		$nonce = $_POST['_wpnonce_md_yam' . $this->meta_id];
+
+		if ( ! wp_verify_nonce( $nonce, 'save_metabox_' . $this->meta_id ) ) {
+			return $post_id;
+        }
+
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+            return $post_id;
+        }
+
+        if ( isset($_POST['post_type']) && $this->meta_post_type == $_POST['post_type'] ) {
+
+            if ( ! current_user_can( 'edit_page', $post_id ) ) {
+                return $post_id;
+            }
+
+        } else {
+
+            if ( ! current_user_can( 'edit_post', $post_id ) ) {
+                return $post_id;
+            }
+
+        }
+
+        if ( $this->meta_group != NULL ) {
+
+            if( isset( $_POST[$this->meta_group] ) && $_POST[$this->meta_group] != '' )  {
+                $data = $_POST[$this->meta_group];
+                update_post_meta( $post_id, $this->meta_group, maybe_serialize($data) );
+            } else {
+                delete_post_meta( $post_id, $this->meta_group );
+            }
+
+        } else {
+
+             foreach ( $this->fields as $meta ) {
+
+                if( isset( $_POST[$meta['id']] ) && $_POST[$meta['id']] != '' )  {
+                    $data = $_POST[$meta['id']];
+                    update_post_meta( $post_id, $meta['id'], $data );
+                } else {
+                    delete_post_meta( $post_id, $meta['id'] );
+                }
+
+            }
+
+        }
+
+	}
+
+    /**
+	 * Save options via AJAX.
+	 *
+	 * @param int $post_id The ID of the post being saved.
+     * @since 0.5.0
+	 */
+	public function ajax_save_options() {
+
+		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->meta_id] ) ) {
+			exit(json_encode([
+                'result' => 'error',
+                'message' => __( 'Nonce not set, can\'t save options.', 'md-yam')
+            ]));
+        }
+
+		$nonce = $_POST['_wpnonce_md_yam' . $this->meta_id];
+
+		if ( ! wp_verify_nonce( $nonce, 'save_options_' . $this->meta_id ) ) {
+			exit(json_encode([
+                'result' => 'error',
+                'message' => __( 'Nonce can\'t be verified, can\'t save options.', 'md-yam')
+            ]));
+        }
+
+        if ( ! current_user_can( $this->meta_capability, $post_id ) ) {
+			exit(json_encode([
+                'result' => 'error',
+                'message' => __( 'You don\'t have enough capabilities to edit this options.', 'md-yam')
+            ]));
+        }
+
+        if ( $this->meta_group != NULL ) {
+
+            if( isset( $_POST[$this->meta_group] ) && $_POST[$this->meta_group] != '' )  {
+                $data = $_POST[$this->meta_group];
+                update_option( $this->meta_group, maybe_serialize($data) );
+            } else {
+                delete_option( $this->meta_group );
+            }
+
+        } else {
+
+             foreach ( $this->fields as $meta ) {
+
+                if( isset( $_POST[$meta['id']] ) && $_POST[$meta['id']] != '' )  {
+                    $data = $_POST[$meta['id']];
+                    update_option( $meta['id'], $data );
+                } else {
+                    delete_option( $meta['id'] );
+                }
+
+            }
+
+        }
+
+        exit(json_encode([
+            'result' => 'ok',
+            'message' => __( 'Options saved!', 'md-yam')
+        ]));
+
+	}
+
+	/**
+	 * Render Meta Box content. (Set as public because of WP needs, do not use in code.)
+	 *
+	 * @param WP_Post $post The post object.
+	 */
+	public function render_content( $post ) {
+
+        $this->post = $post;
+
+        $fields_html = $this->explode_meta_fields();
+
+        $options = [
+            'type' => $this->meta_type,
+            'id' => $this->meta_id,
+            'context' => $this->meta_context,
+            'thin' => $this->meta_thin,
+        ];
+
+        $html = apply_filters( 'md_yam_generate_fieldset_template', $fields_html, $options );
+        echo apply_filters( 'md_yam_fieldset_template', $html);
+
+	}
+
+    /**
      * Returns html for meta fields.
      *
      * @param  WP_Post $post The post object.
@@ -696,13 +818,13 @@ class MD_YAM_Fieldset {
         return apply_filters( 'md_yam_field_template', $template, $meta );
     }
 
-	/**
-	 * Prevents running, if 'post_id' is set and doesn't match current post.
-	 * Defines hooks and runs the loader.
-	 *
-	 * @since    0.5.0
-	 */
-	public function run() {
+    /**
+     * Checks if curren edit screen matches post_id defined during setup.
+     * @return boolean  true if match, false if doesn't.
+     *
+     * @since 0.5.8
+     */
+    private function check_post() {
 
         if (isset($_GET['post']) || isset($_POST['post_ID'])) {
 
@@ -715,18 +837,37 @@ class MD_YAM_Fieldset {
             if ( $this->meta_post_id ) {
                 if ( is_array( $this->meta_post_id ) ) {
                     if ( !in_array( $post_id, $this->meta_post_id ) ) {
-                        return;
+                        return false;
                     }
+                    return true;
                 } else {
                     if ( $post_id != $this->meta_post_id ) {
-                        return;
+                        return false;
                     }
+                    return true;
                 }
             }
+
+            return true;
+        }
+
+        return true;
+
+    }
+
+	/**
+	 * Defines hooks and runs the loader.
+	 *
+	 * @since    0.5.0
+	 */
+	public function run() {
+
+        if (!$this->check_post()) {
+            return;
         }
 
         $this->define_hooks();
-		$this->loader->run();
+        $this->loader->run();
 
 	}
 

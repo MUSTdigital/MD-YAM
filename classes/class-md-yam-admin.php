@@ -68,8 +68,8 @@ class MD_YAM_Admin {
 	public function enqueue_scripts() {
 
         wp_enqueue_script( $this->project_name, $this->url . 'assets/js/md-yam-admin.js', array( 'jquery' ), $this->version, true );
-		wp_register_style( $this->project_name . '-iconpicker', $this->url . 'assets/js/md-iconpicker.js', array( 'jquery', $this->project_name ), $this->version, true );
-		wp_register_style( $this->project_name . '-filepicker', $this->url . 'assets/js/md-filepicker.js', array( 'jquery', $this->project_name ), $this->version, true );
+		wp_register_script( $this->project_name . '-iconpicker', $this->url . 'assets/js/md-iconpicker.js', array( 'jquery', $this->project_name ), $this->version, true );
+		wp_register_script( $this->project_name . '-filepicker', $this->url . 'assets/js/md-filepicker.js', array( 'jquery', $this->project_name ), $this->version, true );
 
 	}
 
