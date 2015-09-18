@@ -13,35 +13,36 @@
 - [Meta information](#meta-information)
 
 ## Description
-This project is intended to be used as a part of any Wordpress plugin or theme.
-It can work with meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
+This plugin can work with meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
 
 Thanks to [Wordpress Plugin Boilerplate](https://github.com/devinvinson/WordPress-Plugin-Boilerplate/) for a starting point!
 
 ## Installation and usage
 
-Include MD YAM into your plugin (themes currently are not supported) and require the `md-yam.php`.
-
-Setup a new instance of the `MD_YAM_Fieldset` and add new fields. Basic code looks like that:
+Include MD YAM as any other plugin. You can make new fieldsets with function `md_yam_mf()`. Basic code looks like that:
 
 ```php
-    $options = [
-        'title' => 'Test metabox',
-        'id' => 'unique_id'
-    ];
-    $fields = [
-        [
-            'title' => 'Textield',
-            'type' => 'text',
-            'id' => 'unique_meta_id',
-        ]
-    ];
-    $meta = new MD_YAM_Fieldset();
-    $meta->setup($options);
-    $meta->add_fields($fields);
-    $meta->run();
+    function my_metabox() {
+        
+        $options = [
+            'title' => 'Test metabox',
+            'id' => 'unique_id''
+        ];
+        
+        $fields = [
+            [
+                'title' => 'Textield',
+                'type' => 'text',
+                'id' => 'unique_meta_id',
+            ]
+        ];
+        
+        md_yam_mf( $options, $fields );
+
+    }
+    add_action('md_yam_init', 'my_metabox');
 ```
-This code will create a basic metabox with one text field. It will be added to all post types by default. Note that the variable $fields is an array of arrays.
+This code will create a basic metabox with one text field. It will be added to all post types by default. Note that the variable $fields is an array of arrays. You cannot call `md_yam_mf()` directly, you have to place it in a function, hooked to `'md_yam_init'`.
 
 See options below to customize the metabox output or to work with site options.
 
@@ -49,7 +50,7 @@ See options below to customize the metabox output or to work with site options.
 ## Frequently Asked Questions
 #### Another one? How come?
 
-This project was developed for internal use, in fact. But still it have some goodies to offer.
+This plugin was developed for internal use, in fact. But still it have some goodies to offer.
 
 1. Unlike other frameworks, MD YAM allows to work with both meta fields and site options.
 2. MD YAM is incredibly simple, so that any customization takes only couple of minutes.
@@ -180,6 +181,13 @@ To create a tab just use the special field type `'tab'`. Yeah, that simple. It h
 Use the special field type `'heading'` to create a heading. In addition to the `'type'` and the `'title'` parameters, heading has one special parameter -- `'tag'`, which defaults to `'h2'`.
 
 ## Changelog
+##### 0.6.0
+* MD YAM is a plugin. Again.
+* Full localization support.
+* Restructure.
+* Various fixes.
+* Changed the way of creating a fieldset.
+
 ##### 0.5.8
 * Added the `'code-editor'` field type.
 * Scripts and styles are enqueued on demand.
@@ -217,16 +225,13 @@ Use the special field type `'heading'` to create a heading. In addition to the `
 * Initial release.
 
 ## Roadmap
-### 0.6
+### 1.0
+* Repeatable fields support.
 *  ~~Default WP color picker~~.
+*  ~~Localization support~~.
 * HTML5 input tweaks.
 * 'Required' fix.
 * Multicheck and multiselect
-
-### 0.7
-* Repeatable fields support.
-
-### 0.8
 * Taxonomy meta fields. Integration with [Tax Meta Class](https://github.com/bainternet/Tax-Meta-Class)? 
 
 ## Licence
@@ -237,6 +242,6 @@ Use the special field type `'heading'` to create a heading. In addition to the `
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.8
+* Stable tag: 0.6.0
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html

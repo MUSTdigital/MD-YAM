@@ -21,25 +21,25 @@ class MD_YAM_Templates {
 	/**
 	 * @since   0.5.0
 	 * @access  private
-	 * @var     string  $project_name  The ID of this project.
-	 * @var     string  $version       The current version of this project.
+	 * @var     string  $plugin_name  The ID of this plugin.
+	 * @var     string  $version       The current version of this plugin.
 	 * @var     string  $path          Path to default templates folder.
 	 * @var     string  $theme         Path to current theme.
 	 */
-	private $project_name,
+	private $plugin_name,
             $version,
             $path,
             $theme;
 
 	/**
 	 * @since  0.5.0
-	 * @param  string  $project_name  The ID of this project.
-	 * @param  string  $version       The current version of this project.
+	 * @param  string  $plugin_name  The ID of this plugin.
+	 * @param  string  $version       The current version of this plugin.
 	 * @param  string  $path          Path to default templates folder.
 	 */
 	public function __construct() {
 
-        $this->project_name = MDYAM_PROJECT_NAME;
+        $this->plugin_name = MDYAM_PROJECT_NAME;
 		$this->version = MDYAM_VERSION;
 		$this->path = MDYAM_PROJECT_DIR;
         $this->theme = get_stylesheet_directory();

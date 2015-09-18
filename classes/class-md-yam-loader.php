@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Register all actions and filters for the project
+ * Register all actions and filters for the plugin
  *
  * @link       http://mustdigital.ru
  * @since      0.5.0
@@ -11,10 +11,10 @@
  */
 
 /**
- * Register all actions and filters for the project.
+ * Register all actions and filters for the plugin.
  *
  * Maintain a list of all hooks that are registered throughout
- * the project, and register them with the WordPress API. Call the
+ * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
  * @package    MD_YAM
@@ -28,8 +28,8 @@ class MD_YAM_Loader {
 	 *
 	 * @since    0.5.0
 	 * @access   protected
-	 * @var      array    $actions    The actions registered with WordPress to fire when the project loads.
-	 * @var      array    $filters    The filters registered with WordPress to fire when the project loads.
+	 * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
+	 * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
 	 */
 	protected $actions,
               $filters;

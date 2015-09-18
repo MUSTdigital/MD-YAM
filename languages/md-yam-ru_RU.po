@@ -1,60 +1,66 @@
-#, fuzzy
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: MD Yet Another Metafield\n"
-"POT-Creation-Date: 2015-09-19 00:27+0300\n"
-"PO-Revision-Date: 2015-09-19 00:27+0300\n"
+"POT-Creation-Date: 2015-09-19 01:22+0300\n"
+"PO-Revision-Date: 2015-09-19 01:22+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: md-yam.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: classes/class-md-yam-fieldset.php:619
 msgid "Nonce not set, can't save options."
-msgstr ""
+msgstr "Не указано nonce, сохранение не удалось."
 
 #: classes/class-md-yam-fieldset.php:628
 msgid "Nonce can't be verified, can't save options."
-msgstr ""
+msgstr "Nonce некорректен, сохранение не удалось."
 
 #: classes/class-md-yam-fieldset.php:635
 msgid "You don't have enough capabilities to edit this options."
-msgstr ""
+msgstr "У вас не достаточно прав для управления этими настройками."
 
 #: classes/class-md-yam-fieldset.php:665
 msgid "Options saved!"
-msgstr ""
+msgstr "Настройки сохранены!"
+
+#: classes/class-md-yam-i18n.php:80
+msgctxt "Iconpicker script"
+msgid "Search"
+msgstr "Поиск"
 
 #: templates/fields/icon-picker.php:286
 msgid "Select an icon"
-msgstr ""
+msgstr "Выберите иконку"
 
 #: templates/fields/posts.php:29 templates/fields/select.php:14
 msgid "-- Select --"
-msgstr ""
+msgstr "-- Выберите --"
 
 #: templates/fields/wp-file.php:43
 msgid "Select file"
-msgstr ""
+msgstr "Выберите файл"
 
 #: templates/fields/wp-image.php:58
 msgid "Select image"
-msgstr ""
+msgstr "Выберите изображение"
 
 #: templates/types/dashboard.php:12 templates/types/options.php:12
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #. Plugin Name of the plugin/theme
 msgid "MD Yet Another Metafield"
@@ -75,3 +81,6 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://mustdigital.ru/"
 msgstr ""
+
+#~ msgid "Search"
+#~ msgstr "Поиск"

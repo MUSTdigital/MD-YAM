@@ -23,22 +23,29 @@ class MD_YAM {
 	/**
 	 * @since   0.5.0
 	 * @access  private
-	 * @var     string         $project_name  The project name.
+	 * @var     string         $plugin_name  The plugin name.
 	 * @var     string         $version       The current version of the MD YAM.
-	 * @var     MD_YAM_Loader  $loader        Maintains and registers all hooks for the project.
-	 * @var     string         $path          The path to the project core.
-	 * @var     string         $url           The url to the project core folder.
+	 * @var     MD_YAM_Loader  $loader        Maintains and registers all hooks for the plugin.
+	 * @var     string         $path          The path to the plugin core.
+	 * @var     string         $url           The url to the plugin core folder.
 	 */
-	private $project_name,
+	private $plugin_name,
             $version,
             $loader,
             $path,
             $url;
 
 	/**
+	 * @since   0.5.0
+	 * @access  private
+	 * @var     string   $functions  Helper functions object.
+	 */
+    private $functions;
+
+	/**
 	 * Define the core functionality of the MD YAM.
 	 *
-	 * Set the prefix and MD YAM version that can be used throughout the project.
+	 * Set the prefix and MD YAM version that can be used throughout the plugin.
 	 * Load the dependencies, define the locale, and set the hooks for the admin area of the site.
 	 *
 	 * @access   private
@@ -46,7 +53,7 @@ class MD_YAM {
 	 */
     public function __construct() {
 
-		$this->project_name = MDYAM_PROJECT_NAME;
+		$this->plugin_name = MDYAM_PROJECT_NAME;
 		$this->version = MDYAM_VERSION;
 		$this->path = MDYAM_PROJECT_DIR;
 		$this->url = MDYAM_PROJECT_URL;
@@ -60,7 +67,7 @@ class MD_YAM {
 
 
 	/**
-	 * Load the required dependencies for the project.
+	 * Load the required dependencies for the plugin.
 	 *
 	 * Include the following files that make up the MD YAM:
 	 *
@@ -97,12 +104,23 @@ class MD_YAM {
 		 */
 		require_once $this->path . 'classes/class-md-yam-templates.php';
 
+		/**
+		 * Contains helper functions.
+		 */
+		require_once $this->path . 'classes/class-md-yam-functions.php';
+
+		/**
+		 * Contains helper functions.
+		 */
+		require_once $this->path . 'classes/class-md-yam-fieldset.php';
+
 		$this->loader = new MD_YAM_Loader();
+		$this->functions = new MD_YAM_Functions($this->loader);
 
 	}
 
 	/**
-	 * Define the locale for this project for internationalization.
+	 * Define the locale for this plugin for internationalization.
 	 *
 	 * Uses the MD_YAM_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
@@ -112,25 +130,27 @@ class MD_YAM {
 	 */
 	private function set_locale() {
 
-		$project_i18n = new MD_YAM_i18n();
-
-		$this->loader->add_action( 'plugins_loaded', $project_i18n, 'load_project_textdomain' );
+		$plugin_i18n = new MD_YAM_i18n();
+		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_i18n, 'localize_scripts' );
 
 	}
 
 	/**
 	 * Register all of the hooks related to the admin area functionality
-	 * of the project.
+	 * of the plugin.
 	 *
 	 * @since    0.5.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
 
-		$project_admin = new MD_YAM_Admin( $this->project_name, $this->version, $this->url );
+		$plugin_admin = new MD_YAM_Admin();
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $project_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $project_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_styles' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_scripts' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 	}
 
@@ -142,10 +162,10 @@ class MD_YAM {
 	 */
 	private function define_template_hooks() {
 
-		$project_templates = new MD_YAM_Templates();
+		$plugin_templates = new MD_YAM_Templates();
 
-        $this->loader->add_filter( 'md_yam_generate_field_template', $project_templates, 'generate_field_template' , 50);
-        $this->loader->add_filter( 'md_yam_generate_fieldset_template', $project_templates, 'generate_fieldset_template' , 50, 2);
+        $this->loader->add_filter( 'md_yam_generate_field_template', $plugin_templates, 'generate_field_template' , 50);
+        $this->loader->add_filter( 'md_yam_generate_fieldset_template', $plugin_templates, 'generate_fieldset_template' , 50, 2);
 
 	}
 
@@ -157,6 +177,26 @@ class MD_YAM {
 	public function run() {
 
 		$this->loader->run();
+	}
+
+	/**
+	 * The reference to the class that orchestrates the hooks with the plugin.
+	 *
+	 * @since     0.6.0
+	 * @return    MD_YAM_Loader    Orchestrates the hooks of the plugin.
+	 */
+	public function get_loader() {
+		return $this->loader;
+	}
+
+	/**
+	 * The reference to the class that orchestrates the hooks with the plugin.
+	 *
+	 * @since     0.6.0
+	 * @return    MD_YAM_Functions    Contains helper functions.
+	 */
+	public function get_functions() {
+		return $this->functions;
 	}
 
 }

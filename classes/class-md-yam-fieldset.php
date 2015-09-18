@@ -22,15 +22,15 @@ class MD_YAM_Fieldset {
 	/**
 	 * @since   0.5.0
 	 * @access  private
-	 * @var     MD_YAM_Loader  $loader        Maintains and registers all hooks for the project.
-	 * @var     string         $project_name  The ID of this project.
+	 * @var     MD_YAM_Loader  $loader        Maintains and registers all hooks for the plugin.
+	 * @var     string         $plugin_name  The ID of this plugin.
 	 * @var     array          $fields        Array of fields.
 	 * @var     WP_Post        $post          Current post object.
-	 * @var     string         $path          The path to the project core.
-	 * @var     string         $url           The url to the project core folder.
+	 * @var     string         $path          The path to the plugin core.
+	 * @var     string         $url           The url to the plugin core folder.
 	 */
 	private $loader,
-            $project_name,
+            $plugin_name,
             $fields,
             $post,
             $path,
@@ -114,16 +114,17 @@ class MD_YAM_Fieldset {
 
     /**
 	 * @since    0.5.0
-	 * @param      string    $project_name       The name of this project.
-	 * @param      string    $version    The version of this project.
+	 * @param      string    $plugin_name       The name of this plugin.
+	 * @param      string    $version    The version of this plugin.
 	 * @param      string    $loader    Loader object
 	 */
-	public function __construct() {
+	public function __construct($loader) {
 
-		$this->project_name = MDYAM_PROJECT_NAME;
+		$this->plugin_name = MDYAM_PROJECT_NAME;
 		$this->version = MDYAM_VERSION;
 		$this->path = MDYAM_PROJECT_DIR;
 		$this->url = MDYAM_PROJECT_URL;
+		$this->loader = $loader;
 
         /**
          * Pre-setup defaults.
@@ -138,34 +139,7 @@ class MD_YAM_Fieldset {
         $this->meta_icon       = '';
         $this->meta_position   = NULL;
 
-        $this->load_dependencies();
-
 	}
-
-	/**
-	 * Load the required dependencies for this class.
-	 *
-	 * Include the following files that make up the MD YAM:
-	 *
-	 * - MD_YAM_Loader. Orchestrates the hooks.
-	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
-	 *
-	 * @since    0.5.0
-	 * @access   private
-	 */
-	private function load_dependencies() {
-
-		/**
-		 * The class responsible for orchestrating the actions and filters of MD YAM.
-		 */
-		require_once $this->path . 'classes/class-md-yam-loader.php';
-
-        $this->loader = new MD_YAM_Loader();
-
-	}
-
 
     /**
      * Public method to setup fieldset properties.
@@ -230,8 +204,8 @@ class MD_YAM_Fieldset {
 
         $total_fields = count( $this->fields );
 
-        $tab_slug = $this->project_name . '_' . $this->meta_id . '_tab_';
-        $block_slug = $this->project_name . '_' . $this->meta_id . '_block_';
+        $tab_slug = $this->plugin_name . '_' . $this->meta_id . '_tab_';
+        $block_slug = $this->plugin_name . '_' . $this->meta_id . '_block_';
 
         for ( $i = 0; $i < $total_fields; ++$i ) {
 
@@ -373,19 +347,19 @@ class MD_YAM_Fieldset {
                     break;
 
                 case ('icon-picker'):
-                    $this->scripts[] = $this->project_name . '-iconpicker';
-                    $this->styles[]  = $this->project_name . '-iconpicker';
+                    $this->scripts[] = $this->plugin_name . '-iconpicker';
+                    $this->styles[]  = $this->plugin_name . '-iconpicker';
                     break;
 
                 case ('wp-file'):
                 case ('wp-image'):
-                    $this->scripts[] = $this->project_name . '-filepicker';
-                    $this->styles[]  = $this->project_name . '-filepicker';
+                    $this->scripts[] = $this->plugin_name . '-filepicker';
+                    $this->styles[]  = $this->plugin_name . '-filepicker';
                     break;
 
                 case ('code-editor'):
-                    $this->scripts[] = $this->project_name . '-ace';
-                    $this->styles[] = $this->project_name . '-ace';
+                    $this->scripts[] = $this->plugin_name . '-ace';
+                    $this->styles[] = $this->plugin_name . '-ace';
 
                 default:
                     break;
@@ -871,7 +845,6 @@ class MD_YAM_Fieldset {
         }
 
         $this->define_hooks();
-        $this->loader->run();
 
 	}
 

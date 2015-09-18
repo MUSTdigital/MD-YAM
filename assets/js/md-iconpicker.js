@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, indent: 4, es5: true*/
-/*global jQuery */
+/*global jQuery, mdLocaleIconpicker */
 /**
  * Fonticons Picker
  *
@@ -56,7 +56,7 @@
                     removePopup();
                 });
 
-                control.html('<input type="text" class="" placeholder="Search" >');
+                control.html('<input type="text" class="" placeholder="' + mdLocaleIconpicker.search + '" >');
 
                 popup.appendTo('body').show();
 
