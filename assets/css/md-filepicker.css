@@ -1,0 +1,9 @@
+/*
+ *  Filepicker styles
+ */
+
+.md-imagepicker-container {
+    float: left;
+    max-width: 60px;
+    margin-right: 5px;
+}

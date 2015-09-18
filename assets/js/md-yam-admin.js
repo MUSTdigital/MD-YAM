@@ -6,14 +6,14 @@
 
     $(document).ready(function ($) {
 
-        if (typeof jQuery().fonticonsPicker === "function") {
+        if (typeof $().wpColorPicker === "function") {
             $('[data-mdyam="wpcolorpicker"]').wpColorPicker();
         }
-        if (typeof jQuery().fonticonsPicker === "function") {
+        if (typeof $().fonticonsPicker === "function") {
             $('[data-mdyam="fonticonspicker"]').fonticonsPicker();
         }
 
-        if (typeof jQuery().filePicker === "function") {
+        if (typeof $().filePicker === "function") {
             $('[data-mdyam="imagepicker"]').filePicker();
             $('[data-mdyam="filepicker"]').filePicker({
                 image: false
