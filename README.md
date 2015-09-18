@@ -107,6 +107,7 @@ Each field definition comprises two parts. First part consists of [common option
   * `posts` - posts dropdown.
   * `icon-picker`
   * `'wp-image'`, `'wp-file'` - [WP media uploader](https://codex.wordpress.org/Javascript_Reference/wp.media).
+  * `'code-editor'` - [ACE Editor](http://ace.c9.io/).
 * Non-inputs:
   * `heading`
   * `tab`
@@ -151,10 +152,16 @@ You can pass a prearranged array of icons names in `'values'` field. Don't forge
 * **prefix** *(string, optional, default `dashicons dashicons-`)*. Prefix to be used with each icon name.
 
 ##### Image and file fields ('wp-image', 'wp-file')
-This field types use default wordpress media upload feature. The main difference between this two types is the special thumbnail container in the image template.
+This field types use default wordpress media upload feature. The main difference between this two types is the special thumbnail container in the image template. In addition, `wp-image` displays the thumbnail on an image.
 * **button_class** *(string, optional, default `button button-secondary md-imagepicker-button` for `'wp-image'` and `button button-secondary md-filepicker-button` for `'wp-file'`)*. Class of upload button.
 * **value_type** *(string, optional, default `id` for `'wp-image'` and `url` for `'wp-file'`)*. Type of attachment metadata you want to see as a value of an input. Many options are available, but I can't see why you'd want to use something different from `id` or `url`. Seriously, why would you?
 
+##### Code editor ('code-editor')
+Very basic implementation of ACE editor. To add new themes or languages you have to manually upload them to `assets/js/ace/` folder. I didn't add many of them, 'cause I didn't need to. Sorry. See [full list](https://github.com/ajaxorg/ace-builds/tree/master/src-min-noconflict) of themes and supported languages.
+* **height** *(string, optional, default `100px`)*. Height of the editor.
+* **width** *(string, optional, default `50em`)*. Width of the editor.
+* **language** *(string, optional, default `''`)*. Programming language mode. Available by default: `css`, `html`, `javascript` and `php`.
+* **theme** *(string, optional, default `''`)*. Theme of the editor. Available by default: `chrome` (light theme) and `monokai` (dark theme).
 
 ## Custom templates
 You can override old and/or create new templates easily. Of course, you can just edit template files in /templates/ folder, but this can cause some problems with updating your MD YAM installation. Prefered way of working with custom templates is described below.
@@ -173,6 +180,11 @@ To create a tab just use the special field type `'tab'`. Yeah, that simple. It h
 Use the special field type `'heading'` to create a heading. In addition to the `'type'` and the `'title'` parameters, heading has one special parameter -- `'tag'`, which defaults to `'h2'`.
 
 ## Changelog
+##### 0.5.8
+* Added the `'code-editor'` field type.
+* Scripts and styles are enqueued on demand.
+* Various fixes.
+
 ##### 0.5.7
 * Added the `'wp-image'` and `'wp-file'` field types.
 * Added standart options to `'icon-picker'`.
@@ -225,6 +237,6 @@ Use the special field type `'heading'` to create a heading. In addition to the `
 * Tags: metabox, metafields, site options, options
 * Requires at least: 4.3
 * Tested up to: 4.3
-* Stable tag: 0.5.7
+* Stable tag: 0.5.8
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
