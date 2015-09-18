@@ -9,7 +9,7 @@
             );
         ?>
         <input type="hidden" name="action" value="md_yam_save_options">
-        <input type="submit" name="save" class="button button-primary js_md_yam_save_options" value="Сохранить" data-id="<?=md5($options['id']);?>">
+        <input type="submit" name="save" class="button button-primary js_md_yam_save_options" value="<?php _e('Save', 'md-yam');?>" data-id="<?=md5($options['id']);?>">
         <br class="clear">
     </p>
 </form>

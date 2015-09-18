@@ -114,7 +114,7 @@ class MD_YAM {
 
 		$project_i18n = new MD_YAM_i18n();
 
-		$this->loader->add_action( 'projects_loaded', $project_i18n, 'load_project_textdomain' );
+		$this->loader->add_action( 'plugins_loaded', $project_i18n, 'load_project_textdomain' );
 
 	}
 

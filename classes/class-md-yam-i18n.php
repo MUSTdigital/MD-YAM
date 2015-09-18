@@ -58,7 +58,7 @@ class MD_YAM_i18n {
 	 */
 	public function load_project_textdomain() {
 
-		load_project_textdomain(
+		load_plugin_textdomain(
 			$this->domain,
 			false,
 			$this->path . 'languages/'
