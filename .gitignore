@@ -1,0 +1,8 @@
+/assets/js/ace/*
+!/assets/js/ace/ace.js
+!/assets/js/ace/mode-css.js
+!/assets/js/ace/mode-html.js
+!/assets/js/ace/mode-javascript.js
+!/assets/js/ace/mode-php.js
+!/assets/js/ace/theme-chrome.js
+!/assets/js/ace/theme-monokai.js

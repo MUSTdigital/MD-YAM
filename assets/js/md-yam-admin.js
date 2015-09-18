@@ -1,5 +1,5 @@
-/*jslint browser: true*/
-/*global jQuery, console, ajaxurl, alert */
+/*jslint browser: true, devel: true*/
+/*global jQuery, ajaxurl, ace */
 
 (function ($) {
 	'use strict';
@@ -9,6 +9,7 @@
         if (typeof $().wpColorPicker === "function") {
             $('[data-mdyam="wpcolorpicker"]').wpColorPicker();
         }
+
         if (typeof $().fonticonsPicker === "function") {
             $('[data-mdyam="fonticonspicker"]').fonticonsPicker();
         }
@@ -20,6 +21,26 @@
             });
         }
 
+        if (typeof ace === "object") {
+            $('[data-mdyam="code-editor"]').each(function () {
+                var editor   = ace.edit(this),
+                    theme    = $(this).data('theme'),
+                    language = $(this).data('language'),
+                    input    = $($(this).data('input'));
+                console.log(input);
+
+                if (theme !== '') {
+                    editor.setTheme('ace/theme/' + theme);
+                }
+                if (language !== '') {
+                    editor.getSession().setMode('ace/mode/' + language);
+                }
+
+                editor.getSession().on('change', function (event) {
+                    input.val(editor.getValue());
+                });
+            });
+        }
     });
 
     // Tabs

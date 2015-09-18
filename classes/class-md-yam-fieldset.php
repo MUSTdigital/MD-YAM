@@ -383,6 +383,10 @@ class MD_YAM_Fieldset {
                     $this->styles[]  = $this->project_name . '-filepicker';
                     break;
 
+                case ('code-editor'):
+                    $this->scripts[] = $this->project_name . '-ace';
+                    $this->styles[] = $this->project_name . '-ace';
+
                 default:
                     break;
 
