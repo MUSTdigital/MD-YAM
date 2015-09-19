@@ -27,7 +27,6 @@
                     theme    = $(this).data('theme'),
                     language = $(this).data('language'),
                     input    = $($(this).data('input'));
-                console.log(input);
 
                 if (theme !== '') {
                     editor.setTheme('ace/theme/' + theme);

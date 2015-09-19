@@ -2,10 +2,10 @@
 // Editor sizes
 $style = '';
 if ( isset($meta['options']['width']) ) {
-    $style = 'width: ' . $meta['options']['width'] . '; ';
+    $style .= 'width: ' . $meta['options']['width'] . '; ';
 }
 if ( isset($meta['options']['height']) ) {
-    $style = 'height: ' . $meta['options']['height'] . '; ';
+    $style .= 'height: ' . $meta['options']['height'] . '; ';
 }
 
 // Editor options
