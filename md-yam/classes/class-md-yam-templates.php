@@ -22,9 +22,9 @@ class MD_YAM_Templates {
 	 * @since   0.5.0
 	 * @access  private
 	 * @var     string  $plugin_name  The ID of this plugin.
-	 * @var     string  $version       The current version of this plugin.
-	 * @var     string  $path          Path to default templates folder.
-	 * @var     string  $theme         Path to current theme.
+	 * @var     string  $version      The current version of this plugin.
+	 * @var     string  $path         Path to default templates folder.
+	 * @var     string  $theme        Path to current theme.
 	 */
 	private $plugin_name,
             $version,
@@ -34,8 +34,8 @@ class MD_YAM_Templates {
 	/**
 	 * @since  0.5.0
 	 * @param  string  $plugin_name  The ID of this plugin.
-	 * @param  string  $version       The current version of this plugin.
-	 * @param  string  $path          Path to default templates folder.
+	 * @param  string  $version      The current version of this plugin.
+	 * @param  string  $path         Path to default templates folder.
 	 */
 	public function __construct() {
 
@@ -85,7 +85,7 @@ class MD_YAM_Templates {
 
         // Else echo error.
         } else {
-            echo 'No template: ' . $template;
+            echo sprintf( __( 'No template: %s', 'md-yam' ), $template );
         }
         return ob_get_clean();
 
@@ -136,7 +136,7 @@ class MD_YAM_Templates {
 
         // Almost impossible situation, but whatever.
         } else {
-            echo 'No template: ' . $template;
+            echo sprintf( __( 'No template: %s', 'md-yam' ), $template );
         }
 
         return ob_get_clean();

@@ -151,7 +151,7 @@ class MD_YAM_Fieldset {
         foreach( $options as $key => $value ){
 
             if ( !property_exists( $this, 'meta_' . $key ) ) {
-                throw new Exception( 'Undefined property "' . $key . '"' );
+                throw new Exception( sprintf( __( 'Undefined property "%s"', 'md-yam' ), $key ) );
             }
 
             $name = 'meta_' . $key;

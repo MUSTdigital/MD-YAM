@@ -8,8 +8,8 @@
  * @wordpress-plugin
  * Plugin Name:       MD Yet Another Metafield
  * Plugin URI:        http://mustdigital.ru/projects/md-yam
- * Description:       No description yet.
- * Version:           0.6.1
+ * Description:       This plugin can work with meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
+ * Version:           0.6.11
  * Author:            Dmitry Korolev
  * Author URI:        http://mustdigital.ru/
  * License:           GPL-2.0+

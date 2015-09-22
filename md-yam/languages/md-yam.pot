@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: MD Yet Another Metafield\n"
-"POT-Creation-Date: 2015-09-19 00:27+0300\n"
-"PO-Revision-Date: 2015-09-19 00:27+0300\n"
+"POT-Creation-Date: 2015-09-22 23:25+0300\n"
+"PO-Revision-Date: 2015-09-22 23:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
+#: classes/class-md-yam-fieldset.php:154
+#, php-format
+msgid "Undefined property \"%s\""
+msgstr ""
+
 #: classes/class-md-yam-fieldset.php:619
 msgid "Nonce not set, can't save options."
 msgstr ""
@@ -34,6 +39,16 @@ msgstr ""
 
 #: classes/class-md-yam-fieldset.php:665
 msgid "Options saved!"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:80
+msgctxt "Iconpicker script"
+msgid "Search"
+msgstr ""
+
+#: classes/class-md-yam-templates.php:88 classes/class-md-yam-templates.php:139
+#, php-format
+msgid "No template: %s"
 msgstr ""
 
 #: templates/fields/icon-picker.php:286
@@ -65,7 +80,9 @@ msgid "http://mustdigital.ru/projects/md-yam"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "No description yet."
+msgid ""
+"This plugin can work with meta fields (metaboxes) and site options (options "
+"pages and admin dashboard widgets)."
 msgstr ""
 
 #. Author of the plugin/theme
