@@ -129,3 +129,23 @@
 #side-sortables .md_yam_fieldset .form-table fieldset label {
     display: block
 }
+
+/*
+ * Admin menu table style
+ */
+.md_yam_admintable p {
+    margin: 0 0 0.3em!important;
+}
+
+.md_yam_admintable th:first-child {
+    width: 20%;
+}
+.md_yam_admintable th:nth-child(2),
+.md_yam_admintable th:nth-child(3),
+.md_yam_admintable th:nth-child(4) {
+    width: 10%;
+}
+
+.md_yam_admintable input {
+    width: 100%;
+}

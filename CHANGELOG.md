@@ -1,4 +1,7 @@
 ## Changelog
+##### 0.6.2
+* Added admin page, which shows all fieldsets with corresponding fields.
+
 ##### 0.6.1
 * Moved the entire plugin to the subdirectory
 * Added readme.txt.

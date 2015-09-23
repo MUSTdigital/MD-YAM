@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: MD Yet Another Metafield\n"
-"POT-Creation-Date: 2015-09-22 23:25+0300\n"
-"PO-Revision-Date: 2015-09-22 23:25+0300\n"
+"POT-Creation-Date: 2015-09-23 22:14+0300\n"
+"PO-Revision-Date: 2015-09-23 22:14+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,30 +20,195 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: classes/class-md-yam-fieldset.php:154
+#. Plugin Name of the plugin/theme
+#: assets/partitials/admin-page.php:2 classes/class-md-yam-admin.php:106
+msgid "MD Yet Another Metafield"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:61
+msgid "Fieldset"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:64
+msgid "Field title"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:67
+msgid "Field ID"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:70
+msgid "Field type"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:73
+msgid "Code"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:80
+msgid "Title"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:81
+msgid "ID"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:82
+msgid "Type"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:85
+msgid "Group"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:89
+msgid "Post type"
+msgstr ""
+
+#: assets/partitials/fieldset-table.php:93
+msgid "Post ID"
+msgstr ""
+
+#: classes/class-md-yam-admin.php:107
+msgid "MD YAM"
+msgstr ""
+
+#: classes/class-md-yam-fieldset.php:157
 #, php-format
 msgid "Undefined property \"%s\""
 msgstr ""
 
-#: classes/class-md-yam-fieldset.php:619
+#: classes/class-md-yam-fieldset.php:639
 msgid "Nonce not set, can't save options."
 msgstr ""
 
-#: classes/class-md-yam-fieldset.php:628
+#: classes/class-md-yam-fieldset.php:648
 msgid "Nonce can't be verified, can't save options."
 msgstr ""
 
-#: classes/class-md-yam-fieldset.php:635
+#: classes/class-md-yam-fieldset.php:655
 msgid "You don't have enough capabilities to edit this options."
 msgstr ""
 
-#: classes/class-md-yam-fieldset.php:665
+#: classes/class-md-yam-fieldset.php:685
 msgid "Options saved!"
 msgstr ""
 
 #: classes/class-md-yam-i18n.php:80
 msgctxt "Iconpicker script"
 msgid "Search"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:97
+msgid "Metabox"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:98
+msgid "Dashboard widget"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:99
+msgid "Admin menu page"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:100
+msgid "Admin sub menu page"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:103
+msgid "Checkbox"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:104
+msgid "Code editor"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:105
+msgid "Icon picker"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:106
+msgid "Posts dropdown"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:107
+msgid "Radio"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:108
+msgid "Select"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:109
+msgid "Textarea"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:110
+msgid "TinyMCE"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:111
+msgid "WP color picker"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:112
+msgid "WP file picker"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:113
+msgid "WP image picker"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:114
+msgid "Text"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:117
+msgid "Time"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:118
+msgid "Date"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:119
+msgid "Date and time"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:120
+msgid "Local date and time"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:121
+msgid "Month"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:122
+msgid "Week"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:123
+msgid "Number"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:124
+msgid "Range"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:125
+msgid "Email"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:126
+msgid "URL"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:127
+msgid "Phone number"
+msgstr ""
+
+#: classes/class-md-yam-i18n.php:128
+msgid "Color picker"
 msgstr ""
 
 #: classes/class-md-yam-templates.php:88 classes/class-md-yam-templates.php:139
@@ -69,10 +234,6 @@ msgstr ""
 
 #: templates/types/dashboard.php:12 templates/types/options.php:12
 msgid "Save"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "MD Yet Another Metafield"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

@@ -43,6 +43,7 @@ class MD_YAM_Admin {
 
         $this->plugin_name = MDYAM_PROJECT_NAME;
 		$this->version = MDYAM_VERSION;
+		$this->path = MDYAM_PROJECT_DIR;
 		$this->url = MDYAM_PROJECT_URL;
 
 	}
@@ -94,5 +95,29 @@ class MD_YAM_Admin {
 		wp_register_script( $this->plugin_name . '-ace', $this->url . 'assets/js/ace/ace.js', array(), $this->version, true );
 
 	}
+
+    /**
+     * Admin page for MD YAM
+     *
+     * @since 0.6.2
+     */
+    public function add_admin_page() {
+        add_management_page(
+            __('MD Yet Another Metafield', 'md-yam'),
+            __('MD YAM', 'md-yam'),
+            'manage_options',
+            'md-yam',
+            [ $this, 'admin_page_template' ]
+        );
+    }
+
+    /**
+     * Render admin menu page.
+     *
+     * @since 0.6.2
+     */
+    public function admin_page_template() {
+        require_once $this->path . 'assets/partitials/admin-page.php';
+    }
 
 }

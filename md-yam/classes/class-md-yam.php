@@ -133,6 +133,7 @@ class MD_YAM {
 		$plugin_i18n = new MD_YAM_i18n();
 		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_i18n, 'localize_scripts' );
+		$this->loader->add_filter( '_md_yam_loc', $plugin_i18n, 'all_in_one_localization' );
 
 	}
 
@@ -149,6 +150,7 @@ class MD_YAM {
 
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_styles' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_page' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 

@@ -60,11 +60,15 @@ class MD_YAM_i18n {
 	 */
 	public function load_plugin_textdomain() {
 
-        load_plugin_textdomain(
+        $var = load_plugin_textdomain(
 			$this->domain,
 			false,
 			$this->path . '/languages'
 		);
+
+//        if (!$var) {
+//            mdd(MDYAM_PROJECT_REL_DIR);
+//        }
 
 	}
 
@@ -83,4 +87,51 @@ class MD_YAM_i18n {
 
 	}
 
+    /**
+     * Localize strings in some special occasions.
+     *
+     * @since    0.6.2
+     * @access   public
+     * @param  sting  $string String to localize
+     * @return string         Localized string
+     */
+    public function all_in_one_localization($string) {
+        $strings = [
+            // Fieldset types
+            'metabox'        => __('Metabox', 'md-yam'),
+            'dashboard'      => __('Dashboard widget', 'md-yam'),
+            'menu_page'      => __('Admin menu page', 'md-yam'),
+            'submenu_page'   => __('Admin sub menu page', 'md-yam'),
+
+            // Field types
+            'checkbox'       => __('Checkbox', 'md-yam'),
+            'code-editor'    => __('Code editor', 'md-yam'),
+            'icon-picker'    => __('Icon picker', 'md-yam'),
+            'posts'          => __('Posts dropdown', 'md-yam'),
+            'radio'          => __('Radio', 'md-yam'),
+            'select'         => __('Select', 'md-yam'),
+            'textarea'       => __('Textarea', 'md-yam'),
+            'tinymce'        => __('TinyMCE', 'md-yam'),
+            'wp-color'       => __('WP color picker', 'md-yam'),
+            'wp-file'        => __('WP file picker', 'md-yam'),
+            'wp-image'       => __('WP image picker', 'md-yam'),
+            'text'           => __('Text', 'md-yam'),
+
+            // HTML5 Field types
+            'time'           => __('Time', 'md-yam'),
+            'date'           => __('Date', 'md-yam'),
+            'datetime'       => __('Date and time', 'md-yam'),
+            'datetime-local' => __('Local date and time', 'md-yam'),
+            'month'          => __('Month', 'md-yam'),
+            'week'           => __('Week', 'md-yam'),
+            'number'         => __('Number', 'md-yam'),
+            'range'          => __('Range', 'md-yam'),
+            'email'          => __('Email', 'md-yam'),
+            'url'            => __('URL', 'md-yam'),
+            'tel'            => __('Phone number', 'md-yam'),
+            'color'          => __('Color picker', 'md-yam')
+        ];
+
+        return $strings[$string];
+    }
 }

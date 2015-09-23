@@ -21,10 +21,12 @@ class MD_YAM_Fieldset {
 
 	/**
 	 * @since   0.5.0
+	 * @since   0.6.2 Added $only_fields
 	 * @access  private
 	 * @var     MD_YAM_Loader  $loader        Maintains and registers all hooks for the plugin.
 	 * @var     string         $plugin_name  The ID of this plugin.
 	 * @var     array          $fields        Array of fields.
+	 * @var     array          $only_fields   Array of fields. Only fields. No helpers. No tabs. Only fields. I mean it.
 	 * @var     WP_Post        $post          Current post object.
 	 * @var     string         $path          The path to the plugin core.
 	 * @var     string         $url           The url to the plugin core folder.
@@ -32,6 +34,7 @@ class MD_YAM_Fieldset {
 	private $loader,
             $plugin_name,
             $fields,
+            $only_fields,
             $post,
             $path,
             $url;
@@ -197,6 +200,7 @@ class MD_YAM_Fieldset {
 
         $tree = [];
         $tabs = [];
+        $only_fields = [];
         $current_tab = -1;
         $current_block = -1;
         $in_block = false;
@@ -294,6 +298,7 @@ class MD_YAM_Fieldset {
                 }
 
                 $tree[] = $this->fields[$i];
+                $only_fields[] = $this->fields[$i];
 
             }
 
@@ -324,6 +329,7 @@ class MD_YAM_Fieldset {
 
         $this->tree = $tree;
         $this->tabs = $tabs;
+        $this->only_fields = $only_fields;
 
     }
 
@@ -446,8 +452,11 @@ class MD_YAM_Fieldset {
      * Defines hooks.
      *
      * @since 0.5.0
+     * @since 0.6.2 Added action '_md_yam_metabox_list'
      */
     private function define_hooks() {
+
+        $this->loader->add_action( '_md_yam_metabox_list', $this, 'add_fieldset_listitem' );
 
         switch ($this->meta_type) {
 
@@ -540,6 +549,13 @@ class MD_YAM_Fieldset {
             );
 
         }
+
+	}
+
+
+	public function add_fieldset_listitem() {
+
+        require $this->path . 'assets/partitials/fieldset-table.php';
 
 	}
 

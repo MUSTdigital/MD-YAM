@@ -115,7 +115,7 @@ Each field definition comprises two parts. First part consists of [common option
 
 #### Common properties
 * **title** *(string, required)*. Field title.
-* **id** *(string, required)*. Field id. Should be unique.
+* **id** *(string, required)*. Field id. Should be unique (at least for the hole fieldset, even if a field is a part of a group);
 * **type** *(string, required)*. Field type.
 * **descripion** *(string, optional, default `NULL`)*. Description for the field.
 * **default** *(any, optional, default `NULL`)*. Default value for the field.
@@ -185,10 +185,8 @@ Use the special field type `'heading'` to create a heading. In addition to the `
 
 
 ## Changelog
-##### 0.6.1
-* Moved the entire plugin to the subdirectory
-* Added readme.txt.
-* Various fixes.
+##### 0.6.2
+* Added admin page, which shows all fieldsets with corresponding fields.
 
 
 ## Roadmap
@@ -196,9 +194,10 @@ Use the special field type `'heading'` to create a heading. In addition to the `
 * Repeatable fields support.
 *  ~~Default WP color picker~~.
 *  ~~Localization support~~.
+* Helper function to get the values of fields.
 * HTML5 input tweaks and fixes.
 * Multicheck and multiselect
-* Taxonomy meta fields. Integration with [Tax Meta Class](https://github.com/bainternet/Tax-Meta-Class)? 
+* Taxonomy meta fields.
 
 ## Licence
 [GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)

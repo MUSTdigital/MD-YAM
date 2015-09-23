@@ -3,7 +3,7 @@ Contributors: mustdigital
 Tags: metabox, metafields, site options, options
 Requires at least: 4.3
 Tested up to: 4.3
-Stable tag: 0.6.11
+Stable tag: 0.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,6 +52,9 @@ This plugin was developed for internal use, but still it have some goodies to of
 6. Custom templates. 
 
 == Changelog ==
+= 0.6.2 =
+* Added admin page, which shows all fieldsets with corresponding fields.
+
 = 0.6.1 =
 * Moved the entire plugin to the subdirectory
 * Added readme.txt.
