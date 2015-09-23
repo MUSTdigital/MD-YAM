@@ -12,7 +12,7 @@
 - [Licence](#licence)
 
 ## Description
-This plugin can work with meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
+This plugin can work with post meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
 
 Thanks to [Wordpress Plugin Boilerplate](https://github.com/devinvinson/WordPress-Plugin-Boilerplate/) for a starting point!
 
@@ -43,7 +43,7 @@ Install MD YAM as any other plugin. You can make new fieldsets with the function
 ```
 This code will create a basic metabox with one text field. It will be added to all post types. Note that the variable `$fields` is an array of arrays. If you are using `md_yam_mf()` inside another plugin, don't dorget to place it in a function, hooked to `'md_yam_init'`, to avoid plugin order issues.
 
-See options below to customize the metabox output or to work with site options.
+See options below to customize the fieldset output or to work with site options.
 
 
 ## Frequently Asked Questions
@@ -61,13 +61,13 @@ This plugin was developed for internal use, but still it have some goodies to of
 
 ## Supported display variants and their options 
 ### 0. Common options
-* **title** *(string, required)*. Title of the metabox.
-* **id** *(string, required)*. ID of the metabox. Should be unique, and I'm not kidding.
+* **title** *(string, required)*. Title of the fieldset.
+* **id** *(string, required)*. ID of the fieldset. Should be unique, and I'm not kidding.
 * **group** *(string|bool, optional, default `NULL`)*. You can group fields by setting this option. This will make everything to be saved in one postmeta (or site option) as an array. If `true`, will be equal to the `id`.
-* **thin** *(bool, optional, default `'false`)*. If set to `true`, the metabox will use thin styles (derived from core @media rules).
-* **type** *(string, optional, default `'metabox'`)*. Type of the fieldset. See options below.
+* **thin** *(bool, optional, default `'false`)*. If set to `true`, the fieldset will use thin styles (derived from core @media rules).
+* **type** *(string, optional, default `'postmeta'`)*. Type of the fieldset. See options below.
 
-### 1. Metabox: 'type' => 'metabox'
+### 1. Metabox: 'type' => 'postmeta'
 * **post_type** *(string, optional, default `NULL`)*. Post type slug. See the `$screen` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_meta_box#Parameters).
 * **post_id** *(int|array, optional, default `NULL`)*. Post id. Single integer or an array of integers. The metabox would be shown only on the matched edit screens.
 * **context** *(string, optional, default `'advanced'`)*. See the `$context` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_meta_box#Parameters).

@@ -5,7 +5,7 @@
     $fields = array_map(function ($field) {
 
         switch ($this->meta_type) {
-            case 'metabox':
+            case 'postmeta':
                 $field['_function'] = 'get_post_meta( ';
 
                 if ($this->meta_group) {

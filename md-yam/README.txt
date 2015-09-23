@@ -1,16 +1,16 @@
 === MD Yet Another Metafield ===
 Contributors: mustdigital
-Tags: metabox, metafields, site options, options
+Tags: metabox, metafields, site options, options, fieldset
 Requires at least: 4.3
 Tested up to: 4.3
-Stable tag: 0.6.2
+Stable tag: 0.6.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin can work with meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
+This plugin can work with post meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
 
 == Description ==
-This plugin can work with meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
+This plugin can work with post meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
 
 == Installation ==
 Install MD YAM as any other plugin. You can make new fieldsets with the function `md_yam_mf()`. Basic code looks like that:

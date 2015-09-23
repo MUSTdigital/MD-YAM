@@ -58,8 +58,8 @@ class MD_YAM_Templates {
 
         switch ( $options['type'] ) {
 
-            case ( 'metabox' ):
-                $template = 'types/metabox.php';
+            case ( 'postmeta' ):
+                $template = 'types/postmeta.php';
                 break;
 
             case ( 'dashboard' ):

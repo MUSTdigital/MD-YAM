@@ -61,7 +61,7 @@ class MD_YAM_Fieldset {
 	 *
 	 * @since    0.5.0
 	 * @access   private
-	 * @var      string       $meta_title  Title of the metabox.
+	 * @var      string       $meta_title  Title of the fieldset.
 	 * @var      string       $meta_id     Unique ID of a fieldset.
 	 * @var      string|bool  $meta_group  Group name. Should be unique. If $meta_group === true, it will be equal to $meta_id.
 	 * @var      bool         $meta_thin   Set to TRUE to use thin styles.
@@ -134,7 +134,7 @@ class MD_YAM_Fieldset {
          */
         $this->meta_group      = NULL;
         $this->meta_thin       = false;
-        $this->meta_type       = 'metabox';
+        $this->meta_type       = 'postmeta';
         $this->meta_post_type  = NULL;
         $this->meta_post_id    = NULL;
         $this->meta_context    = 'advanced';
@@ -377,11 +377,11 @@ class MD_YAM_Fieldset {
     }
 
     /**
-     * Enqueues styles and scripts for metabox.
+     * Enqueues styles and scripts for post metabox.
      *
      * @since 0.5.8
      */
-    public function enqueue_metabox_scripts() {
+    public function enqueue_postmeta_scripts() {
 
         if (!$this->check_post()) {
             return;
@@ -452,18 +452,22 @@ class MD_YAM_Fieldset {
      * Defines hooks.
      *
      * @since 0.5.0
-     * @since 0.6.2 Added action '_md_yam_metabox_list'
+     * @since 0.6.2 Added action '_md_yam_fieldset_list'
      */
     private function define_hooks() {
 
-        $this->loader->add_action( '_md_yam_metabox_list', $this, 'add_fieldset_listitem' );
+        $this->loader->add_action( '_md_yam_fieldset_list', $this, 'add_fieldset_listitem' );
+
+        if (!$this->check_post()) {
+            return;
+        }
 
         switch ($this->meta_type) {
 
-            case ('metabox'):
+            case ('postmeta'):
                 $this->loader->add_action( 'add_meta_boxes', $this, 'add_meta_box' );
                 $this->loader->add_action( 'save_post', $this, 'save_meta' );
-                $this->loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_metabox_scripts' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_postmeta_scripts' );
                 break;
 
             case ('dashboard'):
@@ -573,7 +577,7 @@ class MD_YAM_Fieldset {
 
 		$nonce = $_POST['_wpnonce_md_yam' . $this->meta_id];
 
-		if ( ! wp_verify_nonce( $nonce, 'save_metabox_' . $this->meta_id ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'save_postmeta_' . $this->meta_id ) ) {
 			return $post_id;
         }
 
@@ -854,10 +858,6 @@ class MD_YAM_Fieldset {
 	 * @since    0.5.0
 	 */
 	public function run() {
-
-        if (!$this->check_post()) {
-            return;
-        }
 
         $this->define_hooks();
 

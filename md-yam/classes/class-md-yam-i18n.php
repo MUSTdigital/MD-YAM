@@ -98,7 +98,7 @@ class MD_YAM_i18n {
     public function all_in_one_localization($string) {
         $strings = [
             // Fieldset types
-            'metabox'        => __('Metabox', 'md-yam'),
+            'postmeta'       => __('Post metabox', 'md-yam'),
             'dashboard'      => __('Dashboard widget', 'md-yam'),
             'menu_page'      => __('Admin menu page', 'md-yam'),
             'submenu_page'   => __('Admin sub menu page', 'md-yam'),
