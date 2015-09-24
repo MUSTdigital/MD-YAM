@@ -1,29 +1,29 @@
 <?php
 // Field options
 $options = '';
-if ( isset($meta['options']['placeholder']) ) {
-    $options .= ' placeholder="' . $meta['options']['placeholder'] . '"';
+if ( isset($field['options']['placeholder']) ) {
+    $options .= ' placeholder="' . esc_attr($field['options']['placeholder']) . '"';
 }
-if ( isset($meta['options']['required']) ) {
+if ( isset($field['options']['required']) ) {
     $options .= ' required="required"';
 }
 
 // Field classes
-if ( isset($meta['options']['class']) ) {
-    $class = $meta['options']['class'];
+if ( isset($field['options']['class']) ) {
+    $class = esc_attr($field['options']['class']);
 } else {
     $class = 'regular-text';
 }
 
 // Button classes
-if ( isset($meta['options']['button_class']) ) {
-    $button_class = $meta['options']['button_class'];
+if ( isset($field['options']['button_class']) ) {
+    $button_class = esc_attr($field['options']['button_class']);
 } else {
     $button_class = 'button button-secondary fonticon-picker-button';
 }
 
-if (!isset($meta['values'])) {
-    $meta['values'] = [
+if (!isset($field['values'])) {
+    $field['values'] = [
         'menu',
         'admin-site',
         'dashboard',
@@ -263,28 +263,30 @@ if (!isset($meta['values'])) {
         'layout'
     ];
 
-    $meta['options']['prefix'] = 'dashicons dashicons-';
+    $field['options']['prefix'] = 'dashicons dashicons-';
 
 }
 
-if ( is_array( $meta['values'] ) ) {
-    $meta['values'] = implode($meta['values'], ',');
+if ( is_array( $field['values'] ) ) {
+    $field['values'] = implode($field['values'], ',');
 }
 ?>
 <tr>
     <th scope="row">
-        <?=$meta['title'];?>
+        <label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label>
     </th>
     <td>
-        <input type="text" value="<?=$meta['value'];?>" name="<?=$meta['id'];?>" id="<?=$meta['id'];?>" class="<?=$class;?>"<?=$options;?>>
-        <button value="<?=$meta['value'];?>"
-                class="<?=$button_class;?>"
-                data-icons="<?=$meta['values'];?>"
-                data-prefix="<?=$meta['options']['prefix'];?>"
-                data-target="#<?=$meta['id'];?>"
+        <input type="text" value="<?=esc_attr($field['value']);?>" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>" class="<?=$class;?>"<?=$options;?>>
+        <button class="<?=$button_class;?>"
+                data-icons="<?=esc_attr($field['values']);?>"
+                data-prefix="<?=esc_attr($field['options']['prefix']);?>"
+                data-target="#<?=esc_attr($field['id']);?>"
                 data-mdyam="fonticonspicker">
+            <?php if ($field['value'] != '') { ?>
+            <span class="<?=esc_attr($field['options']['prefix'] . $field['value']);?>"></span>
+            <?php } ?>
             <?php _e('Select an icon', 'md-yam'); ?>
         </button>
-        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>
     </td>
 </tr>

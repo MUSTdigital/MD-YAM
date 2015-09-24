@@ -1,4 +1,8 @@
 ## Changelog
+##### 0.6.3
+* Some rearrangement. 
+* Added user meta fields support.
+
 ##### 0.6.2
 * Added admin page, which shows all fieldsets with corresponding fields.
 

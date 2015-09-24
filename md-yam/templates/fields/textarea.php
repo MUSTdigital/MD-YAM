@@ -2,46 +2,46 @@
 
 // Textarea options
 $options = '';
-if ( isset($meta['options']['maxlength']) ) {
-    $options .= ' maxlength="' . $meta['options']['maxlength'] . '"';
+if ( isset($field['options']['maxlength']) ) {
+    $options .= ' maxlength="' . esc_attr($field['options']['maxlength']) . '"';
 }
-if ( isset($meta['options']['placeholder']) ) {
-    $options .= ' placeholder="' . $meta['options']['placeholder'] . '"';
+if ( isset($field['options']['placeholder']) ) {
+    $options .= ' placeholder="' . esc_attr($field['options']['placeholder']) . '"';
 }
-if ( isset($meta['options']['rows']) ) {
-    $options .= ' rows="' . $meta['options']['rows'] . '"';
+if ( isset($field['options']['rows']) ) {
+    $options .= ' rows="' . esc_attr($field['options']['rows']) . '"';
 } else {
     $options .= ' rows="5"';
 }
-if ( isset($meta['options']['wrap']) ) {
-    $options .= ' wrap="' . $meta['options']['wrap'] . '"';
+if ( isset($field['options']['wrap']) ) {
+    $options .= ' wrap="' . esc_attr($field['options']['wrap']) . '"';
 }
-if ( isset($meta['options']['cols']) ) {
-    $options .= ' cols="' . $meta['options']['cols'] . '"';
+if ( isset($field['options']['cols']) ) {
+    $options .= ' cols="' . esc_attr($field['options']['cols']) . '"';
 } else {
     $options .= ' cols="40"';
 }
-if ( isset($meta['options']['readonly']) ) {
+if ( isset($field['options']['readonly']) ) {
     $options .= ' readonly="readonly"';
 }
-if ( isset($meta['options']['required']) ) {
+if ( isset($field['options']['required']) ) {
     $options .= ' required="required"';
 }
-if ( isset($meta['options']['disabled']) ) {
+if ( isset($field['options']['disabled']) ) {
     $options .= ' disabled="disabled"';
 }
 
 // Textares classes.
-if ( isset($meta['options']['class']) ) {
-    $class = $meta['options']['class'];
+if ( isset($field['options']['class']) ) {
+    $class = esc_attr($field['options']['class']);
 }
 ?>
 <tr>
-    <th scope="row"><label for="<?=$meta['id'];?>'"><?=$meta['title'];?></label></th>
+    <th scope="row"><label for="<?=esc_attr($field['id']);?>'"><?=$field['title'];?></label></th>
     <td>
         <p>
-            <textarea name="<?=$meta['id'];?>" id="<?=$meta['id'];?>" class="<?=$class;?>"<?=$options;?>><?=$meta['value'];?></textarea>
+            <textarea name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>" class="<?=$class;?>"<?=$options;?>><?=esc_textarea($field['value']);?></textarea>
         </p>
-        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>
     </td>
 </tr>

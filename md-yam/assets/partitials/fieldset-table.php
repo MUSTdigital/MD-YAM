@@ -4,24 +4,29 @@
 
     $fields = array_map(function ($field) {
 
-        switch ($this->meta_type) {
+        switch ($this->options['type']) {
             case 'postmeta':
-                $field['_function'] = 'get_post_meta( ';
+            case 'usermeta':
+                $type = $this->options['type'] === 'postmeta' ? 'post' : 'user';
 
-                if ($this->meta_group) {
-                    $field['_function'] .= '$post_id, \'' . $this->meta_group . '\', true';
+                $field['_function'] = 'get_' . $type . '_meta( ';
+
+                if ($this->options['group']) {
+                    $field['_function'] .= '$' . $type . '_id, \'' . $this->options['group'] . '\', true';
                 } else {
-                    $field['_function'] .= '$post_id, \'' . $field['id'] . '\', true';
+                    $field['_function'] .= '$' . $type . '_id, \'' . $field['name'] . '\', true';
                 }
 
-                if ($this->meta_group) {
-                    $field['_function'] .= ' )[\'' . $field['id'] . '\'];';
+                if ($this->options['group']) {
+                    $field['_function'] .= ' )[\'' . $field['name'] . '\'];';
                 } else {
                     $field['_function'] .= ' );';
                 }
 
-                if ($this->meta_post_id) {
-                    $field['_function'] = str_replace('$post_id', $this->meta_post_id, $field['_function']);
+                if ($this->options['post_id']) {
+                    $field['_function'] = str_replace('$post_id', $this->options['post_id'], $field['_function']);
+                } elseif ($this->options['user_id']) {
+                    $field['_function'] = str_replace('$user_id', $this->options['user_id'], $field['_function']);
                 }
                 break;
 
@@ -30,14 +35,14 @@
             case 'submenu_page':
                 $field['_function'] = 'get_option( ';
 
-                if ($this->meta_group) {
-                    $field['_function'] .= '\'' . $this->meta_group . '\'';
+                if ($this->options['group']) {
+                    $field['_function'] .= '\'' . $this->options['group'] . '\'';
                 } else {
-                    $field['_function'] .= '\'' . $field['id'] . '\'';
+                    $field['_function'] .= '\'' . $field['name'] . '\'';
                 }
 
-                if ($this->meta_group) {
-                    $field['_function'] .= ' )[\'' . $field['id'] . '\'];';
+                if ($this->options['group']) {
+                    $field['_function'] .= ' )[\'' . $field['name'] . '\'];';
                 } else {
                     $field['_function'] .= ' );';
                 }
@@ -46,7 +51,7 @@
 
         return $field;
 
-    }, $this->only_fields);
+    }, $this->fields);
 
     $count = count($fields);
     $field = $fields[0];
@@ -77,20 +82,24 @@
     <tbody>
         <tr>
             <td rowspan="<?php echo $count;?>">
-                <p><?php _e( 'Title', 'md-yam' );?>: <strong><?php echo $this->meta_title;?></strong></p>
-                <p><?php _e( 'ID', 'md-yam' );?>: <strong><?php echo $this->meta_id;?></strong></p>
-                <p><?php _e( 'Type', 'md-yam' );?>: <strong><?php echo apply_filters( '_md_yam_loc', $this->meta_type );?></strong></p>
+                <p><?php _e( 'Title', 'md-yam' );?>: <strong><?php echo $this->options['title'];?></strong></p>
+                <p><?php _e( 'ID', 'md-yam' );?>: <strong><?php echo $this->options['id'];?></strong></p>
+                <p><?php _e( 'Type', 'md-yam' );?>: <strong><?php echo apply_filters( '_md_yam_loc', $this->options['type'] );?></strong></p>
 
-                <?php if ( $this->meta_group ) { ?>
-                <p><?php _e( 'Group', 'md-yam' );?>: <strong><?php echo $this->meta_group;?></strong></p>
+                <?php if ( $this->options['group'] ) { ?>
+                <p><?php _e( 'Group', 'md-yam' );?>: <strong><?php echo $this->options['group'];?></strong></p>
                 <?php } ?>
 
-                <?php if ( $this->meta_post_type ) { ?>
-                <p><?php _e( 'Post type', 'md-yam' );?>: <strong><?php echo $this->meta_post_type;?></strong></p>
+                <?php if ( $this->options['post_type'] ) { ?>
+                <p><?php _e( 'Post type', 'md-yam' );?>: <strong><?php echo $this->options['post_type'];?></strong></p>
                 <?php } ?>
 
-                <?php if ( $this->meta_post_id ) { ?>
-                <p><?php _e( 'Post ID', 'md-yam' );?>: <strong><?php echo $this->meta_post_id;?></strong></p>
+                <?php if ( $this->options['post_id'] ) { ?>
+                <p><?php _e( 'Post ID', 'md-yam' );?>: <strong><?php echo $this->options['post_id'];?></strong></p>
+                <?php } ?>
+
+                <?php if ( $this->options['user_id'] ) { ?>
+                <p><?php _e( 'User ID', 'md-yam' );?>: <strong><?php echo $this->options['user_id'];?></strong></p>
                 <?php } ?>
 
             </td>
@@ -98,7 +107,7 @@
                 <p><?php echo $field['title'];?></p>
             </td>
             <td>
-                <p><?php echo $field['id'];?></p>
+                <p><?php echo $field['name'];?></p>
             </td>
             <td>
                 <p><?php echo apply_filters( '_md_yam_loc', $field['type'] );?></p>
@@ -114,7 +123,7 @@
                 <p><?php echo $field['title'];?></p>
             </td>
             <td>
-                <p><?php echo $field['id'];?></p>
+                <p><?php echo $field['name'];?></p>
             </td>
             <td>
                 <p><?php echo apply_filters( '_md_yam_loc', $field['type'] );?></p>

@@ -36,13 +36,6 @@ class MD_YAM {
             $url;
 
 	/**
-	 * @since   0.5.0
-	 * @access  private
-	 * @var     string   $functions  Helper functions object.
-	 */
-    private $functions;
-
-	/**
 	 * Define the core functionality of the MD YAM.
 	 *
 	 * Set the prefix and MD YAM version that can be used throughout the plugin.
@@ -64,7 +57,6 @@ class MD_YAM {
 		$this->define_template_hooks();
 
     }
-
 
 	/**
 	 * Load the required dependencies for the plugin.
@@ -102,20 +94,29 @@ class MD_YAM {
 		/**
 		 * Actions and filters refered to templates.
 		 */
-		require_once $this->path . 'classes/class-md-yam-templates.php';
+		require_once $this->path . 'fieldset/class-md-yam-templates.php';
 
 		/**
-		 * Contains helper functions.
+		 * Fieldset generator.
 		 */
-		require_once $this->path . 'classes/class-md-yam-functions.php';
+		require_once $this->path . 'fieldset/class-md-yam-fieldset.php';
 
 		/**
-		 * Contains helper functions.
+		 * Contains metabox actions.
 		 */
-		require_once $this->path . 'classes/class-md-yam-fieldset.php';
+		require_once $this->path . 'fieldset/class-md-yam-postmeta.php';
+
+		/**
+		 * Contains usermeta actions.
+		 */
+		require_once $this->path . 'fieldset/class-md-yam-usermeta.php';
+
+		/**
+		 * Contains options actions..
+		 */
+		require_once $this->path . 'fieldset/class-md-yam-site-options.php';
 
 		$this->loader = new MD_YAM_Loader();
-		$this->functions = new MD_YAM_Functions($this->loader);
 
 	}
 
@@ -172,6 +173,63 @@ class MD_YAM {
 	}
 
 	/**
+	 * Generate new fieldset.
+	 *
+	 * @access   private
+	 * @since    0.6.3
+	 */
+	private function make_fieldset( $options, $fields ) {
+
+        $fieldset = new MD_YAM_Fieldset( $options, $fields );
+
+        $this->loader->add_action( '_md_yam_fieldset_list', $fieldset, 'add_fieldset_listitem' );
+
+        if (!$fieldset->check_object_id()) {
+            return;
+        }
+
+        switch ($fieldset->get_var('options')['type']) {
+
+            case ('postmeta'):
+                $postmeta = new MD_YAM_Postmeta( $fieldset );
+
+                $this->loader->add_action( 'add_meta_boxes', $postmeta, 'add_meta_box' );
+                $this->loader->add_action( 'save_post', $postmeta, 'save_meta' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $postmeta, 'enqueue_postmeta_scripts' );
+                break;
+
+            case ('usermeta'):
+                $usermeta = new MD_YAM_Usermeta( $fieldset );
+
+                $this->loader->add_action( 'show_user_profile', $usermeta, 'add_meta_fields' );
+                $this->loader->add_action( 'edit_user_profile', $usermeta, 'add_meta_fields' );
+                $this->loader->add_action( 'personal_options_update', $usermeta, 'save_meta' );
+                $this->loader->add_action( 'edit_user_profile_update', $usermeta, 'save_meta' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $usermeta, 'enqueue_usermeta_scripts' );
+                break;
+
+            case ('dashboard'):
+                $site_options = new MD_YAM_Site_Options( $fieldset );
+
+                $this->loader->add_action( 'wp_dashboard_setup', $site_options, 'add_dashboard_widget' );
+                $this->loader->add_action( 'wp_ajax_md_yam_save_options', $site_options, 'ajax_save_options' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $site_options, 'enqueue_dashboard_scripts' );
+                break;
+
+            case ('menu_page'):
+            case ('submenu_page'):
+                $site_options = new MD_YAM_Site_Options( $fieldset );
+
+                $this->loader->add_action( 'admin_menu', $site_options, 'add_options_page' );
+                $this->loader->add_action( 'wp_ajax_md_yam_save_options', $site_options, 'ajax_save_options' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $site_options, 'enqueue_menupage_scripts' );
+                break;
+
+        }
+
+	}
+
+	/**
 	 * Run the loader.
 	 *
 	 * @since    0.5.0
@@ -184,21 +242,22 @@ class MD_YAM {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     0.6.0
-	 * @return    MD_YAM_Loader    Orchestrates the hooks of the plugin.
+	 * @access  public
+	 * @since   0.6.0
+	 * @return  MD_YAM_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
 	}
 
 	/**
-	 * The reference to the class that orchestrates the hooks with the plugin.
+	 * Reference for a new Fieldset
 	 *
-	 * @since     0.6.0
-	 * @return    MD_YAM_Functions    Contains helper functions.
+	 * @access  public
+	 * @since   0.6.3
 	 */
-	public function get_functions() {
-		return $this->functions;
+	public function new_fieldset( $options, $fields ) {
+		$this->make_fieldset( $options, $fields );
 	}
 
 }

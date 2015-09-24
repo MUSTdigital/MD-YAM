@@ -3,14 +3,14 @@ Contributors: mustdigital
 Tags: metabox, metafields, site options, options, fieldset
 Requires at least: 4.3
 Tested up to: 4.3
-Stable tag: 0.6.21
+Stable tag: 0.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin can work with post meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
+This plugin can work with post meta fields (metaboxes), user meta and site options (options pages and admin dashboard widgets).
 
 == Description ==
-This plugin can work with post meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
+This plugin can work with post meta fields, user meta and site options. All-in-one solution. Post metaboxes, user meta fields, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that. Taxonomy terms meta fields will be added soon.
 
 == Installation ==
 Install MD YAM as any other plugin. You can make new fieldsets with the function `md_yam_mf()`. Basic code looks like that:
@@ -42,9 +42,7 @@ See [GitHub repo](https://github.com/MUSTdigital/md-yam) for full readme and sup
 
 == Frequently Asked Questions ==
 = Another one? How come? =
-This plugin was developed for internal use, but still it have some goodies to offer:
-
-1. Unlike other frameworks, MD YAM allows to work with both meta fields and site options.
+1. Unlike other frameworks, MD YAM is all-in-one solution. Post metaboxes, user meta fields, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that. Taxonomy terms meta fields will be added soon.
 2. MD YAM is incredibly simple, so that almost any customization takes only couple of minutes.
 3. New types of fields can be added easily.
 4. MD YAM uses standart WP admin HTML markup. With default templates you can create options pages, that look absolutly like standart wordpress admin pages.
@@ -52,6 +50,10 @@ This plugin was developed for internal use, but still it have some goodies to of
 6. Custom templates. 
 
 == Changelog ==
+= 0.6.3 =
+* Some rearrangement. 
+* Added user meta fields support.
+
 = 0.6.2 =
 * Added admin page, which shows all fieldsets with corresponding fields.
 

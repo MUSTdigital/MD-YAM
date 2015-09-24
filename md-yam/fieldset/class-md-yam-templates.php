@@ -21,15 +21,9 @@ class MD_YAM_Templates {
 	/**
 	 * @since   0.5.0
 	 * @access  private
-	 * @var     string  $plugin_name  The ID of this plugin.
-	 * @var     string  $version      The current version of this plugin.
-	 * @var     string  $path         Path to default templates folder.
 	 * @var     string  $theme        Path to current theme.
 	 */
-	private $plugin_name,
-            $version,
-            $path,
-            $theme;
+	private $theme;
 
 	/**
 	 * @since  0.5.0
@@ -39,9 +33,6 @@ class MD_YAM_Templates {
 	 */
 	public function __construct() {
 
-        $this->plugin_name = MDYAM_PROJECT_NAME;
-		$this->version = MDYAM_VERSION;
-		$this->path = MDYAM_PROJECT_DIR;
         $this->theme = get_stylesheet_directory();
 
 	}
@@ -62,6 +53,10 @@ class MD_YAM_Templates {
                 $template = 'types/postmeta.php';
                 break;
 
+            case ( 'usermeta' ):
+                $template = 'types/usermeta.php';
+                break;
+
             case ( 'dashboard' ):
                 $template = 'types/dashboard.php';
                 break;
@@ -80,8 +75,8 @@ class MD_YAM_Templates {
             include $this->theme . '/md-yam/' . $template;
 
         // Else try default type template
-        } elseif ( file_exists( $this->path . 'templates/' . $template ) ) {
-            include $this->path . 'templates/' . $template;
+        } elseif ( file_exists( MDYAM_PROJECT_DIR . 'templates/' . $template ) ) {
+            include MDYAM_PROJECT_DIR . 'templates/' . $template;
 
         // Else echo error.
         } else {
@@ -93,14 +88,14 @@ class MD_YAM_Templates {
 
     /**
      * Generate HTML for particular field with appropriate template.
-     * Used in 'md_yam_generate_fieldset_template' filter.
+     * Used in 'md_yam_generate_field_template' filter.
      *
-     * @param  array   $meta  Field meta.
-     * @return string         Generated HTML.
+     * @param  array   $field  Field meta.
+     * @return string          Generated HTML.
      */
-    public function generate_field_template( $meta ) {
+    public function generate_field_template( $field ) {
 
-        switch ( $meta['type'] ) {
+        switch ( $field['type'] ) {
 
             case 'block-end':
             case 'block-start':
@@ -108,11 +103,11 @@ class MD_YAM_Templates {
             case 'tab-start':
             case 'tabs-nav':
             case 'heading':
-                $template = 'helpers/' . $meta['type'] . '.php';
+                $template = 'helpers/' . $field['type'] . '.php';
                 break;
 
             default:
-                $template = 'fields/' . $meta['type'] . '.php';
+                $template = 'fields/' . $field['type'] . '.php';
 
         }
 
@@ -123,16 +118,16 @@ class MD_YAM_Templates {
             include $this->theme . '/md-yam/' . $template;
 
         // Else try default field template
-        } elseif ( file_exists( $this->path . 'templates/' . $template ) ) {
-            include $this->path . 'templates/' . $template;
+        } elseif ( file_exists( MDYAM_PROJECT_DIR . 'templates/' . $template ) ) {
+            include MDYAM_PROJECT_DIR . 'templates/' . $template;
 
         // Else try custom text field template
         } elseif ( file_exists( $this->theme . '/md-yam/fields/text.php' ) ) {
             include $this->theme . '/md-yam/fields/text.php';
 
         // Else try default text field template
-        } elseif ( file_exists( $this->path . 'templates/fields/text.php' ) ) {
-            include $this->path . 'templates/fields/text.php';
+        } elseif ( file_exists( MDYAM_PROJECT_DIR . 'templates/fields/text.php' ) ) {
+            include MDYAM_PROJECT_DIR . 'templates/fields/text.php';
 
         // Almost impossible situation, but whatever.
         } else {

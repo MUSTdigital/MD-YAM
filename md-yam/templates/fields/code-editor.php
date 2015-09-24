@@ -1,40 +1,40 @@
 <?php
 // Editor sizes
 $style = '';
-if ( isset($meta['options']['width']) ) {
-    $style .= 'width: ' . $meta['options']['width'] . '; ';
+if ( isset($field['options']['width']) ) {
+    $style .= 'width: ' . $field['options']['width'] . '; ';
 }
-if ( isset($meta['options']['height']) ) {
-    $style .= 'height: ' . $meta['options']['height'] . '; ';
+if ( isset($field['options']['height']) ) {
+    $style .= 'height: ' . $field['options']['height'] . '; ';
 }
 
 // Editor options
 $language = '';
 $theme = '';
-if ( isset($meta['options']['language']) ) {
-    $language = $meta['options']['language'];
+if ( isset($field['options']['language']) ) {
+    $language = esc_attr($field['options']['language']);
 }
-if ( isset($meta['options']['theme']) ) {
-    $theme = $meta['options']['theme'];
+if ( isset($field['options']['theme']) ) {
+    $theme = esc_attr($field['options']['theme']);
 }
 
 // Container classes.
-if ( isset($meta['options']['class']) ) {
-    $class = $meta['options']['class'];
+if ( isset($field['options']['class']) ) {
+    $class = esc_attr($field['options']['class']);
 }
 ?>
 <tr>
-    <th scope="row"><?=$meta['title'];?></th>
+    <th scope="row"><?=$field['title'];?></th>
     <td>
-        <div class="md-codeeditor-container <?=$class;?>" style="<?=$style;?>">
-            <input type="hidden" name="<?=$meta['id'];?>" id="<?=$meta['id'];?>-input" value="<?=$meta['value'];?>">
+        <div class="md-codeeditor-container <?=$class;?>" style="<?=esc_attr($style);?>">
+            <input type="hidden" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>-input" value="<?=esc_attr($field['value']);?>">
             <div class="md-codeeditor"
-                 id="<?=$meta['id'];?>"
+                 id="<?=esc_attr($field['id']);?>"
                  data-mdyam="code-editor"
                  data-language="<?=$language;?>"
                  data-theme="<?=$theme;?>"
-                 data-input="#<?=$meta['id'];?>-input"><?=$meta['value'];?></div>
+                 data-input="#<?=esc_attr($field['id']);?>-input"><?=esc_textarea($field['value']);?></div>
         </div>
-        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>
     </td>
 </tr>

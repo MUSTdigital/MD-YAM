@@ -12,7 +12,7 @@
 - [Licence](#licence)
 
 ## Description
-This plugin can work with post meta fields (metaboxes) and site options (options pages and admin dashboard widgets).
+This plugin can work with post meta fields (metaboxes), user meta and site options (options pages and admin dashboard widgets).
 
 Thanks to [Wordpress Plugin Boilerplate](https://github.com/devinvinson/WordPress-Plugin-Boilerplate/) for a starting point!
 
@@ -51,7 +51,7 @@ See options below to customize the fieldset output or to work with site options.
 
 This plugin was developed for internal use, but still it have some goodies to offer:
 
-1. Unlike other frameworks, MD YAM allows to work with both meta fields and site options.
+1. Unlike other frameworks, MD YAM is all-in-one solution. Post metaboxes, user meta fields, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that. Taxonomy terms meta fields will be added soon.
 2. MD YAM is incredibly simple, so that almost any customization takes only couple of minutes.
 3. New types of fields can be added easily.
 4. MD YAM uses standart WP admin HTML markup. With default templates you can create options pages, that look absolutly like standart wordpress admin pages.
@@ -63,27 +63,30 @@ This plugin was developed for internal use, but still it have some goodies to of
 ### 0. Common options
 * **title** *(string, required)*. Title of the fieldset.
 * **id** *(string, required)*. ID of the fieldset. Should be unique, and I'm not kidding.
-* **group** *(string|bool, optional, default `NULL`)*. You can group fields by setting this option. This will make everything to be saved in one postmeta (or site option) as an array. If `true`, will be equal to the `id`.
+* **group** *(string|bool, optional, default `false`)*. You can group fields by setting this option. This will make everything to be saved in one postmeta (or site option) as an array. If `true`, will be equal to the `id`.
 * **thin** *(bool, optional, default `'false`)*. If set to `true`, the fieldset will use thin styles (derived from core @media rules).
-* **type** *(string, optional, default `'postmeta'`)*. Type of the fieldset. See options below.
+* **type** *(string, optional, default `'postmeta'`)*. Type of the fieldset.
 
 ### 1. Metabox: 'type' => 'postmeta'
 * **post_type** *(string, optional, default `NULL`)*. Post type slug. See the `$screen` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_meta_box#Parameters).
-* **post_id** *(int|array, optional, default `NULL`)*. Post id. Single integer or an array of integers. The metabox would be shown only on the matched edit screens.
+* **post_id** *(int|array, optional, default `false`)*. Post id. Single integer or an array of integers. The metabox would be shown only on the matched edit screens.
 * **context** *(string, optional, default `'advanced'`)*. See the `$context` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_meta_box#Parameters).
 
-### 2. Dashboard widget: 'type' => 'dashboard'
+### 2. Usermeta: 'type' => 'usermeta'
+* **user_id** *(int|array, optional, default `false`)*. User id. Single integer or an array of integers. Fields would be shown only on the matched edit screens.
+
+### 3. Dashboard widget: 'type' => 'dashboard'
 This type doesn't have any special options yet.
 
-### 3. Admin menu page: 'type' => 'menu_page'
-* **short_title** *(string, optional, default `title`)*. The on-screen name text for the menu. See the `$menu_title` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
+### 4. Admin menu page: 'type' => 'menu_page'
+* **menu_title** *(string, optional, default `title`)*. The on-screen name text for the menu. See the `$menu_title` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 * **capability** *(string, optional, default `'manage_options'`)*. The capability required for this menu to be displayed to the user. See the `$capability` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
-* **icon** *(string, optional, default `''`)*. The icon for this menu. See `$icon_url` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
+* **icon_url** *(string, optional, default `''`)*. The icon for this menu. See `$icon_url` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 * **position** *(string, optional, default `NULL`)*. The position in the menu order this menu should appear. See the `$position` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_menu_page#Parameters).
 
-### 4. Admin submenu page: 'type' => 'submenu_page'
-* **parent** *(string, required)*. The slug name for the parent menu. See the `$parent_slug` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters).
-* **short_title** *(string, optional, default `title`)*. The on-screen name text for the menu. See the `$menu_title` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters).
+### 5. Admin submenu page: 'type' => 'submenu_page'
+* **parent_slug** *(string, optional, default `'options-general.php'`)*. The slug name for the parent menu. See the `$parent_slug` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters).
+* **menu_title** *(string, optional, default `title`)*. The on-screen name text for the menu. See the `$menu_title` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters).
 * **capability** *(string, optional, default `'manage_options'`)*. The capability required for this menu to be displayed to the user. See the `$capability` parameter on the [Codex](https://codex.wordpress.org/Function_Reference/add_submenu_page#Parameters).
 
 
@@ -115,7 +118,7 @@ Each field definition comprises two parts. First part consists of [common option
 
 #### Common properties
 * **title** *(string, required)*. Field title.
-* **id** *(string, required)*. Field id. Should be unique (at least for the hole fieldset, even if a field is a part of a group);
+* **name** *(string, required)*. Field name. Should be unique (at least for the hole fieldset, even if a field is a part of a group);
 * **type** *(string, required)*. Field type.
 * **descripion** *(string, optional, default `NULL`)*. Description for the field.
 * **default** *(any, optional, default `NULL`)*. Default value for the field.
@@ -141,7 +144,6 @@ There are some common special properties, which can be used almost in every fiel
 * **rows** *(int, optional, default `5`)*.
 
 ##### Tinymce
-Note: may not work properly if `'group'` option is set. Working on 'at, pals.
 * **tinymce** *(array, optional, default `array()`)*. An array of tinymce options. Will be passed directly to the `wp_editor`. See the [Codex](https://codex.wordpress.org/Function_Reference/wp_editor).
 
 ##### Posts dropdown ('posts')
@@ -178,15 +180,16 @@ You can override old and/or create new templates easily. Of course, you can just
 
 ## Tabs and headings
 #### Tabs
-To create a tab just use the special field type `'tab'`. Yeah, that simple. It has only two parameters: `'type'` itself and `'title'`. All further fields (up to another tab or the end of an array) will be parts of this tab.
+To create a tab use the special field type `'tab'`. Yeah, that simple. It has only two parameters: `'type'` itself and `'title'`. All further fields (up to another tab or the end of an array) will be parts of this tab.
 
 #### Headings
 Use the special field type `'heading'` to create a heading. In addition to the `'type'` and the `'title'` parameters, heading has one special parameter -- `'tag'`, which defaults to `'h2'`.
 
 
 ## Changelog
-##### 0.6.2
-* Added admin page, which shows all fieldsets with corresponding fields.
+##### 0.6.3
+* Some rearrangement. 
+* Added user meta fields support.
 
 
 ## Roadmap

@@ -1,62 +1,62 @@
 <?php
 // Field options
 $options = '';
-if ( isset($meta['options']['placeholder']) ) {
-    $options .= ' placeholder="' . $meta['options']['placeholder'] . '"';
+if ( isset($field['options']['placeholder']) ) {
+    $options .= ' placeholder="' . esc_attr($field['options']['placeholder']) . '"';
 }
-if ( isset($meta['options']['required']) ) {
+if ( isset($field['options']['required']) ) {
     $options .= ' required="required"';
 }
 
 // Field classes
-if ( isset($meta['options']['class']) ) {
-    $class = $meta['options']['class'];
+if ( isset($field['options']['class']) ) {
+    $class = esc_attr($field['options']['class']);
 } else {
     $class = 'regular-text';
 }
 
 // Button classes
-if ( isset($meta['options']['button_class']) ) {
-    $button_class = $meta['options']['button_class'];
+if ( isset($field['options']['button_class']) ) {
+    $button_class = esc_attr($field['options']['button_class']);
 } else {
     $button_class = 'button button-secondary md-imagepicker-button';
 }
 
 // Value type
-if ( isset($meta['options']['value_type']) ) {
-    $value_type = $meta['options']['value_type'];
+if ( isset($field['options']['value_type']) ) {
+    $value_type = $field['options']['value_type'];
 } else {
     $value_type = 'id';
 }
 
 // Get image url
-if ( $meta['value'] != '' ) {
+if ( $field['value'] != '' ) {
     if ( $value_type === 'id' ) {
-        $image_url = wp_get_attachment_thumb_url($meta['value']);
+        $image_url = wp_get_attachment_thumb_url($field['value']);
     } else {
-        $image_url = $meta['value'];
+        $image_url = $field['value'];
     }
 }
 ?>
 <tr>
     <th scope="row">
-        <?=$meta['title'];?>
+        <label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label>
     </th>
     <td>
-        <div class="md-imagepicker-container" id="<?=$meta['id'];?>-image">
+        <div class="md-imagepicker-container" id="<?=esc_attr($field['id']);?>-image">
         <?php if ( isset($image_url) ) { ?>
             <img src="<?=$image_url;?>" style="max-width:100%;">
         <?php }?>
         </div>
-        <input type="text" value="<?=$meta['value'];?>" name="<?=$meta['id'];?>" id="<?=$meta['id'];?>" class="<?=$class;?>"<?=$options;?>><br>
-        <button value="<?=$meta['value'];?>"
+        <input type="text" value="<?=esc_attr($field['value']);?>" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>" class="<?=$class;?>"<?=$options;?>><br>
+        <button value="<?=$field['value'];?>"
                 class="<?=$button_class;?>"
-                data-value-type="<?=$value_type;?>"
-                data-image-container="#<?=$meta['id'];?>-image"
-                data-target="#<?=$meta['id'];?>"
+                data-value-type="<?=esc_attr($value_type);?>"
+                data-image-container="#<?=esc_attr($field['id']);?>-image"
+                data-target="#<?=esc_attr($field['id']);?>"
                 data-mdyam="filepicker">
             <?php _e('Select image', 'md-yam'); ?>
         </button>
-        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>
     </td>
 </tr>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MD Yet Another Metafield\n"
-"POT-Creation-Date: 2015-09-23 22:14+0300\n"
-"PO-Revision-Date: 2015-09-23 22:14+0300\n"
+"POT-Creation-Date: 2015-09-24 17:03+0300\n"
+"PO-Revision-Date: 2015-09-24 17:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -16,8 +16,8 @@ msgstr ""
 "X-Poedit-WPHeader: md-yam.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -26,198 +26,210 @@ msgstr ""
 msgid "MD Yet Another Metafield"
 msgstr "MD Yet Another Metafield"
 
-#: assets/partitials/fieldset-table.php:61
+#: assets/partitials/fieldset-table.php:66
 msgid "Fieldset"
 msgstr "Группа полей"
 
-#: assets/partitials/fieldset-table.php:64
+#: assets/partitials/fieldset-table.php:69
 msgid "Field title"
 msgstr "Название поля"
 
-#: assets/partitials/fieldset-table.php:67
+#: assets/partitials/fieldset-table.php:72
 msgid "Field ID"
 msgstr "ID поля"
 
-#: assets/partitials/fieldset-table.php:70
+#: assets/partitials/fieldset-table.php:75
 msgid "Field type"
 msgstr "Тип поля"
 
-#: assets/partitials/fieldset-table.php:73
+#: assets/partitials/fieldset-table.php:78
 msgid "Code"
 msgstr "Код"
 
-#: assets/partitials/fieldset-table.php:80
+#: assets/partitials/fieldset-table.php:85
 msgid "Title"
 msgstr "Название"
 
-#: assets/partitials/fieldset-table.php:81
+#: assets/partitials/fieldset-table.php:86
 msgid "ID"
 msgstr "ID"
 
-#: assets/partitials/fieldset-table.php:82
+#: assets/partitials/fieldset-table.php:87
 msgid "Type"
 msgstr "Тип"
 
-#: assets/partitials/fieldset-table.php:85
+#: assets/partitials/fieldset-table.php:90
 msgid "Group"
 msgstr "Группа"
 
-#: assets/partitials/fieldset-table.php:89
+#: assets/partitials/fieldset-table.php:94
 msgid "Post type"
 msgstr "Тип записей"
 
-#: assets/partitials/fieldset-table.php:93
+#: assets/partitials/fieldset-table.php:98
 msgid "Post ID"
 msgstr "ID записи"
+
+#: assets/partitials/fieldset-table.php:102
+msgid "User ID"
+msgstr "ID пользователя"
 
 #: classes/class-md-yam-admin.php:107
 msgid "MD YAM"
 msgstr "MD YAM"
 
-#: classes/class-md-yam-fieldset.php:157
-#, php-format
-msgid "Undefined property \"%s\""
-msgstr "Неизвестное свойство \"%s\""
-
-#: classes/class-md-yam-fieldset.php:639
-msgid "Nonce not set, can't save options."
-msgstr "Не указано nonce, сохранение не удалось."
-
-#: classes/class-md-yam-fieldset.php:648
-msgid "Nonce can't be verified, can't save options."
-msgstr "Nonce некорректен, сохранение не удалось."
-
-#: classes/class-md-yam-fieldset.php:655
-msgid "You don't have enough capabilities to edit this options."
-msgstr "У вас не достаточно прав для управления этими настройками."
-
-#: classes/class-md-yam-fieldset.php:685
-msgid "Options saved!"
-msgstr "Настройки сохранены!"
-
-#: classes/class-md-yam-i18n.php:80
+#: classes/class-md-yam-i18n.php:84
 msgctxt "Iconpicker script"
 msgid "Search"
 msgstr "Поиск"
 
-#: classes/class-md-yam-i18n.php:97
-msgid "Metabox"
+#: classes/class-md-yam-i18n.php:101
+msgid "Post metabox"
 msgstr "Метабокс"
 
-#: classes/class-md-yam-i18n.php:98
+#: classes/class-md-yam-i18n.php:102
+msgid "User meta"
+msgstr "Мета-поля пользователя"
+
+#: classes/class-md-yam-i18n.php:103
 msgid "Dashboard widget"
 msgstr "Виджет в консоли"
 
-#: classes/class-md-yam-i18n.php:99
+#: classes/class-md-yam-i18n.php:104
 msgid "Admin menu page"
 msgstr "Страница в админ-панели"
 
-#: classes/class-md-yam-i18n.php:100
+#: classes/class-md-yam-i18n.php:105
 msgid "Admin sub menu page"
 msgstr "Подстраница в админ-панели"
 
-#: classes/class-md-yam-i18n.php:103
+#: classes/class-md-yam-i18n.php:108
 msgid "Checkbox"
 msgstr "Чекбокс"
 
-#: classes/class-md-yam-i18n.php:104
+#: classes/class-md-yam-i18n.php:109
 msgid "Code editor"
 msgstr "Редактор кода"
 
-#: classes/class-md-yam-i18n.php:105
+#: classes/class-md-yam-i18n.php:110
 msgid "Icon picker"
 msgstr "Выбор иконки"
 
-#: classes/class-md-yam-i18n.php:106
+#: classes/class-md-yam-i18n.php:111
 msgid "Posts dropdown"
 msgstr "Выбор записи"
 
-#: classes/class-md-yam-i18n.php:107
+#: classes/class-md-yam-i18n.php:112
 msgid "Radio"
 msgstr "Радиокнопка"
 
-#: classes/class-md-yam-i18n.php:108
+#: classes/class-md-yam-i18n.php:113
 msgid "Select"
 msgstr "Выпадающий список"
 
-#: classes/class-md-yam-i18n.php:109
+#: classes/class-md-yam-i18n.php:114
 msgid "Textarea"
 msgstr "Текстовое поле"
 
-#: classes/class-md-yam-i18n.php:110
+#: classes/class-md-yam-i18n.php:115
 msgid "TinyMCE"
 msgstr "TinyMCE"
 
-#: classes/class-md-yam-i18n.php:111
+#: classes/class-md-yam-i18n.php:116
 msgid "WP color picker"
 msgstr "Выбор цвета (WP)"
 
-#: classes/class-md-yam-i18n.php:112
+#: classes/class-md-yam-i18n.php:117
 msgid "WP file picker"
 msgstr "Выбор файла (WP)"
 
-#: classes/class-md-yam-i18n.php:113
+#: classes/class-md-yam-i18n.php:118
 msgid "WP image picker"
 msgstr "Выбор изображения (WP)"
 
-#: classes/class-md-yam-i18n.php:114
+#: classes/class-md-yam-i18n.php:119
 msgid "Text"
 msgstr "Текст"
 
-#: classes/class-md-yam-i18n.php:117
+#: classes/class-md-yam-i18n.php:122
 msgid "Time"
 msgstr "Время"
 
-#: classes/class-md-yam-i18n.php:118
+#: classes/class-md-yam-i18n.php:123
 msgid "Date"
 msgstr "Дата"
 
-#: classes/class-md-yam-i18n.php:119
+#: classes/class-md-yam-i18n.php:124
 msgid "Date and time"
 msgstr "Дата и время"
 
-#: classes/class-md-yam-i18n.php:120
+#: classes/class-md-yam-i18n.php:125
 msgid "Local date and time"
 msgstr "Местные дата и время"
 
-#: classes/class-md-yam-i18n.php:121
+#: classes/class-md-yam-i18n.php:126
 msgid "Month"
 msgstr "Месяц"
 
-#: classes/class-md-yam-i18n.php:122
+#: classes/class-md-yam-i18n.php:127
 msgid "Week"
 msgstr "Неделя"
 
-#: classes/class-md-yam-i18n.php:123
+#: classes/class-md-yam-i18n.php:128
 msgid "Number"
 msgstr "Номер"
 
-#: classes/class-md-yam-i18n.php:124
+#: classes/class-md-yam-i18n.php:129
 msgid "Range"
 msgstr "Range"
 
-#: classes/class-md-yam-i18n.php:125
+#: classes/class-md-yam-i18n.php:130
 msgid "Email"
 msgstr "Email"
 
-#: classes/class-md-yam-i18n.php:126
+#: classes/class-md-yam-i18n.php:131
 msgid "URL"
 msgstr "URL"
 
-#: classes/class-md-yam-i18n.php:127
+#: classes/class-md-yam-i18n.php:132
 msgid "Phone number"
 msgstr "Телефонный номер"
 
-#: classes/class-md-yam-i18n.php:128
+#: classes/class-md-yam-i18n.php:133
 msgid "Color picker"
 msgstr "Выбор цвета"
 
-#: classes/class-md-yam-templates.php:88 classes/class-md-yam-templates.php:139
+#: fieldset/class-md-yam-fieldset.php:99
+msgid "Title of the fieldset is not defined."
+msgstr "Не указано название группы полей."
+
+#: fieldset/class-md-yam-fieldset.php:103
+msgid "ID of the fieldset is not defined."
+msgstr "Не указан ID группы полей."
+
+#: fieldset/class-md-yam-site-options.php:168
+msgid "Nonce not set, can't save options."
+msgstr "Не указано nonce, сохранение не удалось."
+
+#: fieldset/class-md-yam-site-options.php:177
+msgid "Nonce can't be verified, can't save options."
+msgstr "Nonce некорректен, сохранение не удалось."
+
+#: fieldset/class-md-yam-site-options.php:184
+msgid "You don't have enough capabilities to edit this options."
+msgstr "У вас не достаточно прав для управления этими настройками."
+
+#: fieldset/class-md-yam-site-options.php:214
+msgid "Options saved!"
+msgstr "Настройки сохранены!"
+
+#: fieldset/class-md-yam-templates.php:83
+#: fieldset/class-md-yam-templates.php:134
 #, php-format
 msgid "No template: %s"
 msgstr "Отсутствует шабло: %s"
 
-#: templates/fields/icon-picker.php:286
+#: templates/fields/icon-picker.php:288
 msgid "Select an icon"
 msgstr "Выберите иконку"
 
@@ -243,11 +255,12 @@ msgstr "http://mustdigital.ru/projects/md-yam"
 
 #. Description of the plugin/theme
 msgid ""
-"This plugin can work with meta fields (metaboxes) and site options (options "
-"pages and admin dashboard widgets)."
+"This plugin can work with post meta fields (metaboxes), user meta and site "
+"options (options pages and admin dashboard widgets)."
 msgstr ""
-"Этот плагин позволяет управлять мета-полями (метабоксы) и настройками сайта "
-"(страницы в админ-панели и виджеты в консоли)."
+"Этот плагин позволяет управлять метабоксами, дополнительными полями "
+"пользователя, создавать виджеты в консоли, страницы и подстраницы с "
+"настройками."
 
 #. Author of the plugin/theme
 msgid "Dmitry Korolev"
@@ -256,6 +269,19 @@ msgstr "Дмитрий Королёв"
 #. Author URI of the plugin/theme
 msgid "http://mustdigital.ru/"
 msgstr "http://mustdigital.ru/"
+
+#~ msgid "Undefined property \"%s\""
+#~ msgstr "Неизвестное свойство \"%s\""
+
+#~ msgid "Metabox"
+#~ msgstr "Метабокс"
+
+#~ msgid ""
+#~ "This plugin can work with meta fields (metaboxes) and site options "
+#~ "(options pages and admin dashboard widgets)."
+#~ msgstr ""
+#~ "Этот плагин позволяет управлять мета-полями (метабоксы) и настройками "
+#~ "сайта (страницы в админ-панели и виджеты в консоли)."
 
 #~ msgid "Search"
 #~ msgstr "Поиск"

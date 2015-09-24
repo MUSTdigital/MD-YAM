@@ -1,21 +1,21 @@
 <?php
 $options = '';
-if ( isset($meta['options']['required']) ) {
+if ( isset($field['options']['required']) ) {
     $options .= ' required="required"';
 }
-if ( isset($meta['options']['disabled']) ) {
+if ( isset($field['options']['disabled']) ) {
     $options .= ' disabled="disabled"';
 }
 ?>
 <tr>
-    <th scope="row"><label for="<?=$meta['id'];?>"><?=$meta['title'];?></label></th>
+    <th scope="row"><label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label></th>
     <td>
-        <select name="<?=$meta['id'];?>" id="<?=$meta['id'];?>"<?=$options;?>>
+        <select name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>"<?=$options;?>>
             <option value=""><?php _e('-- Select --', 'md-yam'); ?></option>
-        <?php foreach ( $meta['values'] as $key => $value ) { ?>
-            <option value="<?=$key;?>" <?php selected($meta['value'], $key);?>><?=$value;?></option>
+        <?php foreach ( $field['values'] as $key => $value ) { ?>
+            <option value="<?=esc_attr($key);?>" <?php selected($field['value'], $key);?>><?=$value;?></option>
         <?php } ?>
         </select>
-        <?php if ( isset($meta['description']) ) { ?><p class="description"><?=$meta['description'];?></p><?php } ?>
+        <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>
     </td>
 </tr>
