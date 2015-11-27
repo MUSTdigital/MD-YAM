@@ -1,37 +1,23 @@
 <?php
-// Field options
-$options = '';
-if ( isset($field['options']['placeholder']) ) {
-    $options .= ' placeholder="' . esc_attr($field['options']['placeholder']) . '"';
-}
-if ( isset($field['options']['required']) ) {
-    $options .= ' required="required"';
-}
-
-// Field classes
-if ( isset($field['options']['class']) ) {
-    $class = esc_attr($field['options']['class']);
-} else {
-    $class = 'regular-text';
-}
-
-// Button classes
-if ( isset($field['options']['button_class']) ) {
-    $button_class = esc_attr($field['options']['button_class']);
-} else {
-    $button_class = 'button button-secondary md-imagepicker-button';
+// Field attributes
+$default_attributes = [
+    'class' => isset($field['class']) ? $field['class'] : 'regular-text'
+];
+$attributes = wp_parse_args( isset($field['attributes']) ? $field['attributes'] : [], $default_attributes );
+$attrs = '';
+foreach( $attributes as $key => $value ){
+    $attrs .= ' ' . $key . '="' . esc_attr($value)  . '"';
 }
 
 // Value type
-if ( isset($field['options']['value_type']) ) {
-    $value_type = $field['options']['value_type'];
-} else {
-    $value_type = 'id';
-}
+$default_options = [
+    'value_type' => 'id'
+];
+$options = wp_parse_args( isset($field['options']) ? $field['options'] : [], $default_options );
 
 // Get image url
 if ( $field['value'] != '' ) {
-    if ( $value_type === 'id' ) {
+    if ( $options['value_type'] === 'id' ) {
         $image_url = wp_get_attachment_thumb_url($field['value']);
     } else {
         $image_url = $field['value'];
@@ -48,10 +34,10 @@ if ( $field['value'] != '' ) {
             <img src="<?=$image_url;?>" style="max-width:100%;">
         <?php }?>
         </div>
-        <input type="text" value="<?=esc_attr($field['value']);?>" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>" class="<?=$class;?>"<?=$options;?>><br>
-        <button value="<?=$field['value'];?>"
-                class="<?=$button_class;?>"
-                data-value-type="<?=esc_attr($value_type);?>"
+        <input type="text" value="<?=esc_attr($field['value']);?>" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>" <?=$attrs;?>><br>
+        <button value="<?=esc_attr($field['value']);?>"
+                class="button button-secondary md-imagepicker-button"
+                data-value-type="<?=esc_attr($options['value_type']);?>"
                 data-image-container="#<?=esc_attr($field['id']);?>-image"
                 data-target="#<?=esc_attr($field['id']);?>"
                 data-mdyam="filepicker">

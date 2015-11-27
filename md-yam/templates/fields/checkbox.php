@@ -1,18 +1,33 @@
 <?php
-$options = '';
-if ( isset($field['options']['required']) ) {
-    $options .= ' required="required"';
+// Field attributes
+$default_attributes = [
+    'class' => isset($field['class']) ? $field['class'] : ''
+];
+$attributes = wp_parse_args( isset($field['attributes']) ? $field['attributes'] : [], $default_attributes );
+$attrs = '';
+foreach( $attributes as $key => $value ){
+    $attrs .= ' ' . $key . '="' . esc_attr($value)  . '"';
 }
-if ( isset($field['options']['disabled']) ) {
-    $options .= ' disabled="disabled"';
+
+if ( isset( $field['attributes']['multiple'] ) ) {
+    $field['name'] = $field['name'] . '[]';
+}
+
+if ( !isset($field['values'] ) ) {
+    $field['values'] = ['1' => ''];
 }
 ?>
 <tr>
-    <th scope="row">
-        <label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label>
-    </th>
+    <th scope="row"><?=$field['title'];?></th>
     <td>
-        <input name="<?=esc_attr($field['name']);?>" type="checkbox" value="1" id="<?=esc_attr($field['id']);?>" <?php checked($field['value'], 1);?> <?=$options;?> >
+        <fieldset>
+            <legend class="screen-reader-text"><span><?=$field['title'];?></span></legend>
+            <?php foreach ( $field['values'] as $key => $value ) { ?>
+            <label title="<?=esc_attr($key);?>">
+                <input type="checkbox" name="<?=esc_attr($field['name']);?>" value="<?=esc_attr($key);?>" <?php checked($field['value'], $key);?> <?=$attrs;?>> <?=$value;?>
+            </label>
+            <?php } ?>
+        </fieldset>
         <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>
     </td>
 </tr>

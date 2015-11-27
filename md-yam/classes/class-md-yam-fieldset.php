@@ -20,13 +20,14 @@
 class MD_YAM_Fieldset {
 
 	/**
-	 * @access  private
+	 * @access  protected
 	 * @var     array    $fields   Array of fields.
 	 * @var     array    $flags    Array of field types.
 	 * @var     array    $options  Array of options.
-	 * @var     WP_Post  $post     Current post object.
+	 * @var     object   $object   Current post or user object.
 	 * @var     array    $tree     Array of fields with some helper items. Accessable after add_fields method is used.
 	 * @var     array    $tabs     Array of tabs. Accessable after add_fields method is used.
+	 * @var     array    $theme    Path to the theme folder.
 	 * @var     array    $scripts  Scripts needed to be enqueued.
 	 * @var     array    $styles   Styles needed to be enqueued.
 	 * @since   0.5.0
@@ -34,15 +35,17 @@ class MD_YAM_Fieldset {
 	 * @since   0.5.8    Added $scripts and $styles
 	 * @since   0.6.2    Added $fields
 	 * @since   0.6.3    Added $options
+	 * @since   0.7.0    Added $theme
 	 */
-	private $fields,
-            $options,
-            $flags,
-            $object,
-            $tree,
-            $tabs,
-            $scripts,
-            $styles;
+	protected $fields,
+              $options,
+              $flags,
+              $object,
+              $tree,
+              $tabs,
+              $theme,
+              $scripts,
+              $styles;
 
     /**
      * @param  array  $options  Array of options.
@@ -52,67 +55,13 @@ class MD_YAM_Fieldset {
 	public function __construct( $options, $fields ) {
 
 		$this->options = $options;
-		$this->fields   = $fields;
+		$this->fields  = $fields;
+        $this->theme   = get_stylesheet_directory();
 
-        $this->setup();
         $this->rebuild_tree();
         $this->check_scripts();
 
     }
-
-    /**
-     * Setup fieldset properties.
-     *
-     * @access  public
-     */
-    private function setup() {
-
-        $defaults = [
-            // Common
-            'title'     => false,
-            'id'        => false,
-            'group'     => false,
-            'group_val' => false,
-            'thin'      => false,
-            'type'      => 'postmeta',
-
-            // Postmeta
-            'post_type' => null,
-            'post_id'   => false,
-	        'context'   => 'advanced',
-
-            // Usermeta
-            'user_id'   => false,
-
-            // Options page
-            'parent_slug' => 'options-general.php',
-            'menu_title'  => false,
-            'capability'  => 'manage_options',
-            'icon_url'    => '',
-            'position'    => null
-
-        ];
-
-        $this->options = wp_parse_args($this->options, $defaults);
-
-        if ( !$this->options['title'] ) {
-            throw new Exception( __( 'Title of the fieldset is not defined.', 'md-yam' ) );
-        }
-
-        if ( !$this->options['id'] ) {
-            throw new Exception( __( 'ID of the fieldset is not defined.', 'md-yam' ) );
-        }
-
-        // Setup other defaults if needed.
-        if ( $this->options['group'] === true ) {
-            $this->options['group'] = $this->options['id'];
-        }
-        if ( !$this->options['menu_title'] ) {
-            $this->options['menu_title'] = $this->options['title'];
-        }
-
-    }
-
 
     /**
      * Creates an array of fields, blocks and tabs.
@@ -327,6 +276,7 @@ class MD_YAM_Fieldset {
 	public function render_content( $object = null) {
 
         $this->object = $object;
+        $html = '';
 
         foreach ( $this->tree as $field ) {
             $html .= $this->include_template( $field );
@@ -385,6 +335,10 @@ class MD_YAM_Fieldset {
                         case 'usermeta':
                             $group_value = maybe_unserialize( get_user_meta( $object->ID, $this->options['group'], true ) );
                             break;
+
+                        case 'termmeta':
+                            $group_value = maybe_unserialize( get_term_meta( $object->term_id, $this->options['group'], true ) );
+                            break;
                     }
 
                     if (!$group_value) {
@@ -413,6 +367,10 @@ class MD_YAM_Fieldset {
                         case 'usermeta':
                             $field['value'] = get_user_meta($object->ID, $field['name'], true);
                             break;
+
+                        case 'termmeta':
+                            $field['value'] = get_term_meta($object->term_id, $field['name'], true);
+                            break;
                     }
 
                 }
@@ -424,6 +382,8 @@ class MD_YAM_Fieldset {
 
                 break;
         }
+
+
 
         $template = apply_filters( 'md_yam_generate_field_template', $field );
         return apply_filters( 'md_yam_field_template', $template, $field );

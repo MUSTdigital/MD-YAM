@@ -7,48 +7,17 @@
  * @since      0.6.3
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/fieldset
+ * @subpackage MD_YAM/classes
  */
 
 /**
  * Contains user meta actions.
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/fieldset
+ * @subpackage MD_YAM/classes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
  */
-class MD_YAM_Usermeta {
-
-	/**
-	 * @access  private
-	 * @var     MD_YAM_Fieldset  $fieldset  Contains all fieldset options.
-	 * @var     array            $flags     Array of field types.
-	 * @var     array            $options   Array of options.
-	 * @var     array            $scripts   Scripts needed to be enqueued.
-	 * @var     array            $styles    Styles needed to be enqueued.
-	 * @since   0.6.3
-	 */
-	private $fieldset,
-	        $flags,
-            $options,
-            $scripts,
-            $styles;
-
-    /**
-     * @param  MD_YAM_Fieldset  $fieldset
-	 * @since  0.6.3
-	 */
-	public function __construct( $fieldset ) {
-
-        $this->fieldset = $fieldset;
-
-        $this->fields   = $fieldset->get_var('fields');
-        $this->flags    = $fieldset->get_var('flags');
-        $this->options  = $fieldset->get_var('options');
-        $this->scripts  = $fieldset->get_var('scripts');
-        $this->styles   = $fieldset->get_var('styles');
-
-    }
+class MD_YAM_Usermeta extends MD_YAM_Fieldset {
 
     /**
      * Enqueues styles and scripts for post metabox.
@@ -74,19 +43,20 @@ class MD_YAM_Usermeta {
     }
 
 	/**
-	 * Adds the meta box container. (Set as public because of WP needs, do not use in code.)
+	 * Adds the meta box container.
+	 * Public for WP needs.
 	 *
 	 * @since 0.5.0
 	 */
 	public function add_meta_fields() {
 
         global $profileuser;
-        $this->fieldset->render_content( $profileuser );
+        $this->render_content( $profileuser );
 
 	}
 
     /**
-	 * Save the meta when the post is saved.
+	 * Save the meta when the user is saved.
 	 * Public for WP needs.
 	 *
 	 * @param int $user_id The ID of the user being saved.

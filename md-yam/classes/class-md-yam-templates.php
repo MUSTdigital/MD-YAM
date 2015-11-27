@@ -50,15 +50,10 @@ class MD_YAM_Templates {
         switch ( $options['type'] ) {
 
             case ( 'postmeta' ):
-                $template = 'types/postmeta.php';
-                break;
-
             case ( 'usermeta' ):
-                $template = 'types/usermeta.php';
-                break;
-
+            case ( 'termmeta' ):
             case ( 'dashboard' ):
-                $template = 'types/dashboard.php';
+                $template = 'types/' . $options['type'] . '.php';
                 break;
 
             case ( 'menu_page' ):

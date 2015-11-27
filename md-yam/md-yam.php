@@ -29,10 +29,13 @@ define( 'MDYAM_PROJECT_URL', plugin_dir_url( __FILE__ ) );
 define( 'MDYAM_PROJECT_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MDYAM_PROJECT_REL_DIR', dirname( plugin_basename( __FILE__ ) ) );
 
-require MDYAM_PROJECT_DIR . 'classes/class-md-yam.php';
+require MDYAM_PROJECT_DIR . 'classes/class-md-yam-autoloader.php';
+MD_YAM_Autoloader::register();
+
 require MDYAM_PROJECT_DIR . 'functions.php';
 
-$md_yam_object = new MD_YAM();
+$md_yam_all_fieldsets = [];
+
 /**
  * Begins execution of the plugin.
  *
@@ -44,9 +47,15 @@ $md_yam_object = new MD_YAM();
  */
 function run_MD_YAM() {
 
-    global $md_yam_object;
+    global $md_yam_all_fieldsets;
     do_action( 'md_yam_init' );
+
+    $md_yam_object = new MD_YAM();
+    foreach($md_yam_all_fieldsets as $fieldset){
+        $md_yam_object->new_fieldset( $fieldset['options'], $fieldset['fields'] );
+    }
+
 	$md_yam_object->run();
 
 }
-add_action( 'plugins_loaded', 'run_MD_YAM' );
+add_action( 'after_setup_theme', 'run_MD_YAM' );

@@ -1,16 +1,8 @@
 <?php
-$defaults = [
+$default_options = [
     'textarea_name' => $field['name']
 ];
-
-if ( isset($field['options']['tinymce']) ) {
-    $options = $field['options']['tinymce'];
-} else {
-    $options = [];
-}
-
-$options = wp_parse_args($options, $defaults);
-var_dump($options);
+$options = wp_parse_args( isset($field['options']['tinymce']) ? $field['options']['tinymce'] : [], $default_options);
 ?>
 <tr>
     <th scope="row"><label for="<?=esc_attr($field['id']);?>'"><?=$field['title'];?></label></th>

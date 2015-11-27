@@ -1,15 +1,12 @@
 <?php
-// Field options
-$options = '';
-if ( isset($field['options']['disabled']) ) {
-    $options .= ' disabled="disabled"';
-}
-
-// Field classes
-if ( isset($field['options']['class']) ) {
-    $class = esc_attr($field['options']['class']);
-} else {
-    $class = 'regular-text';
+// Field attributes
+$default_attributes = [
+    'class' => isset($field['class']) ? $field['class'] : 'regular-text'
+];
+$attributes = wp_parse_args( isset($field['attributes']) ? $field['attributes'] : [], $default_attributes );
+$attrs = '';
+foreach( $attributes as $key => $value ){
+    $attrs .= ' ' . $key . '="' . esc_attr($value)  . '"';
 }
 ?>
 <tr>

@@ -7,45 +7,17 @@
  * @since      0.6.3
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/fieldset
+ * @subpackage MD_YAM/classes
  */
 
 /**
  * Contains metabox actions.
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/fieldset
+ * @subpackage MD_YAM/classes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
  */
-class MD_YAM_Postmeta {
-
-	/**
-	 * @access  private
-	 * @var     MD_YAM_Fieldset  $fieldset  Contains all fieldset options.
-	 * @var     array            $options   Array of options.
-	 * @var     array            $scripts   Scripts needed to be enqueued.
-	 * @var     array            $styles    Styles needed to be enqueued.
-	 * @since   0.6.3
-	 */
-	private $fieldset,
-            $options,
-            $scripts,
-            $styles;
-
-    /**
-     * @param  MD_YAM_Fieldset  $fieldset
-	 * @since  0.6.3
-	 */
-	public function __construct( $fieldset ) {
-
-        $this->fieldset = $fieldset;
-
-        $this->fields   = $fieldset->get_var('fields');
-        $this->options  = $fieldset->get_var('options');
-        $this->scripts  = $fieldset->get_var('scripts');
-        $this->styles   = $fieldset->get_var('styles');
-
-    }
+class MD_YAM_Postmeta extends MD_YAM_Fieldset {
 
     /**
      * Enqueues styles and scripts for post metabox.
@@ -76,7 +48,7 @@ class MD_YAM_Postmeta {
         add_meta_box(
             $this->options['id'],
             $this->options['title'],
-            [ $this->fieldset, 'render_content' ],
+            [ $this, 'render_content' ],
             $this->options['post_type'],
             $this->options['context']
         );
@@ -90,7 +62,7 @@ class MD_YAM_Postmeta {
 	 * @param int $post_id The ID of the post being saved.
      * @since 0.5.0
 	 */
-	public function save_meta( $post_id = '' ) {
+	public function save_meta( $post_id ) {
 
 		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
 			return $post_id;

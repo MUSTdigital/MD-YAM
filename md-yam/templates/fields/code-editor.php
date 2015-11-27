@@ -1,38 +1,34 @@
 <?php
-// Editor sizes
-$style = '';
-if ( isset($field['options']['width']) ) {
-    $style .= 'width: ' . $field['options']['width'] . '; ';
-}
-if ( isset($field['options']['height']) ) {
-    $style .= 'height: ' . $field['options']['height'] . '; ';
-}
-
-// Editor options
-$language = '';
-$theme = '';
-if ( isset($field['options']['language']) ) {
-    $language = esc_attr($field['options']['language']);
-}
-if ( isset($field['options']['theme']) ) {
-    $theme = esc_attr($field['options']['theme']);
+// Field attributes
+$default_attributes = [
+    'class' => isset($field['class']) ? $field['class'] : 'md-codeeditor-container',
+    'style' => 'height: 200px; width: 100%; max-width: 800px;'
+];
+$attributes = wp_parse_args( isset($field['attributes']) ? $field['attributes'] : [], $default_attributes );
+$attrs = '';
+$styles = '';
+foreach( $attributes as $key => $value ){
+    $attrs .= ' ' . $key . '="' . esc_attr($value)  . '"';
 }
 
-// Container classes.
-if ( isset($field['options']['class']) ) {
-    $class = esc_attr($field['options']['class']);
-}
+//mdd($styles);
+// Value type
+$default_options = [
+    'language' => 'text',
+    'theme' => 'chrome'
+];
+$options = wp_parse_args( isset($field['options']) ? $field['options'] : [], $default_options );
 ?>
 <tr>
     <th scope="row"><?=$field['title'];?></th>
     <td>
-        <div class="md-codeeditor-container <?=$class;?>" style="<?=esc_attr($style);?>">
+        <div <?=$attrs;?>>
             <input type="hidden" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>-input" value="<?=esc_attr($field['value']);?>">
             <div class="md-codeeditor"
                  id="<?=esc_attr($field['id']);?>"
                  data-mdyam="code-editor"
-                 data-language="<?=$language;?>"
-                 data-theme="<?=$theme;?>"
+                 data-language="<?=$options['language'];?>"
+                 data-theme="<?=$options['theme'];?>"
                  data-input="#<?=esc_attr($field['id']);?>-input"><?=esc_textarea($field['value']);?></div>
         </div>
         <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>

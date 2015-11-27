@@ -17,6 +17,8 @@
  * @package    MD_YAM
  * @subpackage MD_YAM/includes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
+ *
+ * @since      0.7.0  Now autoloader handles all classes.
  */
 class MD_YAM {
 
@@ -51,74 +53,13 @@ class MD_YAM {
 		$this->path = MDYAM_PROJECT_DIR;
 		$this->url = MDYAM_PROJECT_URL;
 
-		$this->load_dependencies();
+		$this->loader = new MD_YAM_Loader();
+
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_template_hooks();
 
     }
-
-	/**
-	 * Load the required dependencies for the plugin.
-	 *
-	 * Include the following files that make up the MD YAM:
-	 *
-	 * - MD_YAM_Loader. Orchestrates the hooks.
-	 * - MD_YAM_i18n. Defines internationalization functionality.
-	 * - MD_YAM_Admin. Defines all hooks for the admin area.
-	 * - MD_YAM_Templates. Defines all hooks related to templates.
-	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
-	 *
-	 * @since    0.5.0
-	 * @access   private
-	 */
-	private function load_dependencies() {
-
-		/**
-		 * The class responsible for orchestrating the actions and filters of MD YAM.
-		 */
-		require_once $this->path . 'classes/class-md-yam-loader.php';
-
-		/**
-		 * The class responsible for defining internationalization functionality of MD YAM.
-		 */
-		require_once $this->path . 'classes/class-md-yam-i18n.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
-		require_once $this->path . 'classes/class-md-yam-admin.php';
-
-		/**
-		 * Actions and filters refered to templates.
-		 */
-		require_once $this->path . 'fieldset/class-md-yam-templates.php';
-
-		/**
-		 * Fieldset generator.
-		 */
-		require_once $this->path . 'fieldset/class-md-yam-fieldset.php';
-
-		/**
-		 * Contains metabox actions.
-		 */
-		require_once $this->path . 'fieldset/class-md-yam-postmeta.php';
-
-		/**
-		 * Contains usermeta actions.
-		 */
-		require_once $this->path . 'fieldset/class-md-yam-usermeta.php';
-
-		/**
-		 * Contains options actions..
-		 */
-		require_once $this->path . 'fieldset/class-md-yam-site-options.php';
-
-		$this->loader = new MD_YAM_Loader();
-
-	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
@@ -180,49 +121,68 @@ class MD_YAM {
 	 */
 	private function make_fieldset( $options, $fields ) {
 
-        $fieldset = new MD_YAM_Fieldset( $options, $fields );
+        switch ( $options ['type'] ) {
+            case ('postmeta'):
+                $class = 'MD_YAM_Postmeta';
+                break;
 
+            case ('usermeta'):
+                $class = 'MD_YAM_Usermeta';
+                break;
+
+            case ('termmeta'):
+                $class = 'MD_YAM_Termmeta';
+                break;
+
+            case ('dashboard'):
+            case ('menu_page'):
+            case ('submenu_page'):
+                $class = 'MD_YAM_Site_Options';
+                break;
+        }
+
+        $fieldset = new $class( $options, $fields );
         $this->loader->add_action( '_md_yam_fieldset_list', $fieldset, 'add_fieldset_listitem' );
 
         if (!$fieldset->check_object_id()) {
             return;
         }
 
-        switch ($fieldset->get_var('options')['type']) {
+        switch ( $options ['type'] ) {
 
             case ('postmeta'):
-                $postmeta = new MD_YAM_Postmeta( $fieldset );
-
-                $this->loader->add_action( 'add_meta_boxes', $postmeta, 'add_meta_box' );
-                $this->loader->add_action( 'save_post', $postmeta, 'save_meta' );
-                $this->loader->add_action( 'admin_enqueue_scripts', $postmeta, 'enqueue_postmeta_scripts' );
+                $this->loader->add_action( 'add_meta_boxes', $fieldset, 'add_meta_box' );
+                $this->loader->add_action( 'save_post', $fieldset, 'save_meta' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $fieldset, 'enqueue_postmeta_scripts' );
                 break;
 
             case ('usermeta'):
-                $usermeta = new MD_YAM_Usermeta( $fieldset );
+                $this->loader->add_action( 'show_user_profile', $fieldset, 'add_meta_fields' );
+                $this->loader->add_action( 'edit_user_profile', $fieldset, 'add_meta_fields' );
+                $this->loader->add_action( 'personal_options_update', $fieldset, 'save_meta' );
+                $this->loader->add_action( 'edit_user_profile_update', $fieldset, 'save_meta' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $fieldset, 'enqueue_usermeta_scripts' );
+                break;
 
-                $this->loader->add_action( 'show_user_profile', $usermeta, 'add_meta_fields' );
-                $this->loader->add_action( 'edit_user_profile', $usermeta, 'add_meta_fields' );
-                $this->loader->add_action( 'personal_options_update', $usermeta, 'save_meta' );
-                $this->loader->add_action( 'edit_user_profile_update', $usermeta, 'save_meta' );
-                $this->loader->add_action( 'admin_enqueue_scripts', $usermeta, 'enqueue_usermeta_scripts' );
+            case ('termmeta'):
+                $this->loader->add_action( $options['taxonomy'] . '_edit_form_fields', $fieldset, 'add_meta_fields' );
+                $this->loader->add_action( $options['taxonomy'] . '_add_form_fields', $fieldset, 'add_meta_fields' );
+                $this->loader->add_action( 'edit_' . $options['taxonomy'], $fieldset, 'save_meta' );
+//                $this->loader->add_action( 'edit_user_profile_update', $fieldset, 'save_meta' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $fieldset, 'enqueue_termmeta_scripts' );
                 break;
 
             case ('dashboard'):
-                $site_options = new MD_YAM_Site_Options( $fieldset );
-
-                $this->loader->add_action( 'wp_dashboard_setup', $site_options, 'add_dashboard_widget' );
-                $this->loader->add_action( 'wp_ajax_md_yam_save_options', $site_options, 'ajax_save_options' );
-                $this->loader->add_action( 'admin_enqueue_scripts', $site_options, 'enqueue_dashboard_scripts' );
+                $this->loader->add_action( 'wp_dashboard_setup', $fieldset, 'add_dashboard_widget' );
+                $this->loader->add_action( 'wp_ajax_md_yam_save_options_' . $options['id'], $fieldset, 'ajax_save_options' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $fieldset, 'enqueue_dashboard_scripts' );
                 break;
 
             case ('menu_page'):
             case ('submenu_page'):
-                $site_options = new MD_YAM_Site_Options( $fieldset );
-
-                $this->loader->add_action( 'admin_menu', $site_options, 'add_options_page' );
-                $this->loader->add_action( 'wp_ajax_md_yam_save_options', $site_options, 'ajax_save_options' );
-                $this->loader->add_action( 'admin_enqueue_scripts', $site_options, 'enqueue_menupage_scripts' );
+                $this->loader->add_action( 'admin_menu', $fieldset, 'add_options_page' );
+                $this->loader->add_action( 'wp_ajax_md_yam_save_options_' . $options['id'], $fieldset, 'ajax_save_options' );
+                $this->loader->add_action( 'admin_enqueue_scripts', $fieldset, 'enqueue_menupage_scripts' );
                 break;
 
         }

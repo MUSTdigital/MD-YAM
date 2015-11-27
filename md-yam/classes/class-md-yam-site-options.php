@@ -7,48 +7,17 @@
  * @since      0.6.3
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/fieldset
+ * @subpackage MD_YAM/classes
  */
 
 /**
  * Contains options actions.
  *
  * @package    MD_YAM
- * @subpackage MD_YAM/fieldset
+ * @subpackage MD_YAM/classes
  * @author     Dmitry Korolev <dk@mustdigital.ru>
  */
-class MD_YAM_Site_Options {
-
-	/**
-	 * @access  private
-	 * @var     MD_YAM_Fieldset  $fieldset  Contains all fieldset options.
-	 * @var     array            $flags     Array of field types.
-	 * @var     array            $options   Array of options.
-	 * @var     array            $scripts   Scripts needed to be enqueued.
-	 * @var     array            $styles    Styles needed to be enqueued.
-	 * @since   0.6.3
-	 */
-	private $fieldset,
-            $flags,
-            $options,
-            $scripts,
-            $styles;
-
-    /**
-     * @param  MD_YAM_Fieldset  $fieldset
-	 * @since  0.6.3
-	 */
-	public function __construct( $fieldset ) {
-
-        $this->fieldset = $fieldset;
-
-        $this->fields   = $fieldset->get_var('fields');
-        $this->options  = $fieldset->get_var('options');
-        $this->scripts  = $fieldset->get_var('scripts');
-        $this->styles   = $fieldset->get_var('styles');
-        $this->flags    = $fieldset->get_var('flags');
-
-    }
+class MD_YAM_Site_Options extends MD_YAM_Fieldset {
 
     /**
      * Enqueues styles and scripts for dashboard.
@@ -115,7 +84,7 @@ class MD_YAM_Site_Options {
         wp_add_dashboard_widget(
             $this->options['id'],
             $this->options['title'],
-            [ $this->fieldset, 'render_content' ]
+            [ $this, 'render_content' ]
         );
 
 	}
@@ -134,7 +103,7 @@ class MD_YAM_Site_Options {
                 $this->options['menu_title'],
                 $this->options['capability'],
                 $this->options['id'],
-                [ $this->fieldset, 'render_content' ],
+                [ $this, 'render_content' ],
                 $this->options['icon_url'],
                 $this->options['position']
             );
@@ -142,12 +111,12 @@ class MD_YAM_Site_Options {
         } elseif ( $this->options['type'] == 'submenu_page') {
 
             add_submenu_page(
-                $this->options['parent'],
+                $this->options['parent_slug'],
                 $this->options['title'],
                 $this->options['menu_title'],
                 $this->options['capability'],
                 $this->options['id'],
-                [ $this->fieldset, 'render_content' ]
+                [ $this, 'render_content' ]
             );
 
         }

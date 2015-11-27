@@ -100,6 +100,7 @@ class MD_YAM_i18n {
             // Fieldset types
             'postmeta'       => __('Post metabox', 'md-yam'),
             'usermeta'       => __('User meta', 'md-yam'),
+            'termmeta'       => __('Term meta', 'md-yam'),
             'dashboard'      => __('Dashboard widget', 'md-yam'),
             'menu_page'      => __('Admin menu page', 'md-yam'),
             'submenu_page'   => __('Admin sub menu page', 'md-yam'),

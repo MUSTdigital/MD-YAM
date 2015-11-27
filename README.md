@@ -12,7 +12,7 @@
 - [Licence](#licence)
 
 ## Description
-This plugin can work with post meta fields (metaboxes), user meta and site options (options pages and admin dashboard widgets).
+This plugin can work with post meta fields (metaboxes), user meta, term meta and site options (options pages and admin dashboard widgets).
 
 Thanks to [Wordpress Plugin Boilerplate](https://github.com/devinvinson/WordPress-Plugin-Boilerplate/) for a starting point!
 
@@ -25,17 +25,15 @@ Install MD YAM as any other plugin. You can make new fieldsets with the function
         
         $options = [
             'title' => 'Test metabox',
-            'id' => 'unique_id'
+            'id'    => 'unique_id'
         ];
-        
         $fields = [
             [
                 'title' => 'Textield',
-                'type' => 'text',
-                'id' => 'unique_meta_id',
+                'type'  => 'text',
+                'name'  => 'unique_meta_id'
             ]
         ];
-        
         md_yam_mf( $options, $fields );
 
     }
@@ -51,7 +49,7 @@ See options below to customize the fieldset output or to work with site options.
 
 This plugin was developed for internal use, but still it have some goodies to offer:
 
-1. Unlike other frameworks, MD YAM is all-in-one solution. Post metaboxes, user meta fields, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that. Taxonomy terms meta fields will be added soon.
+1. Unlike other frameworks, MD YAM is all-in-one solution. Post metaboxes, user meta fields, term meta, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that.
 2. MD YAM is incredibly simple, so that almost any customization takes only couple of minutes.
 3. New types of fields can be added easily.
 4. MD YAM uses standart WP admin HTML markup. With default templates you can create options pages, that look absolutly like standart wordpress admin pages.
@@ -187,9 +185,9 @@ Use the special field type `'heading'` to create a heading. In addition to the `
 
 
 ## Changelog
-##### 0.6.3
-* Some rearrangement. 
-* Added user meta fields support.
+##### 0.7.0
+* Added term meta fields support (NB: WP ≥ 4.4 is needed).
+* Added `md_get_field` function. The main thing: it will handle everything (including defaults) automatically.
 
 
 ## Roadmap

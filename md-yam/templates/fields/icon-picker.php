@@ -1,28 +1,21 @@
 <?php
+// Field attributes
+$default_attributes = [
+    'class' => isset( $field['class'] ) ? $field['class'] : 'regular-text'
+];
+$attributes = wp_parse_args( isset($field['attributes']) ? $field['attributes'] : [], $default_attributes );
+$attrs = '';
+foreach( $attributes as $key => $value ){
+    $attrs .= ' ' . $key . '="' . esc_attr( $value )  . '"';
+}
+
 // Field options
-$options = '';
-if ( isset($field['options']['placeholder']) ) {
-    $options .= ' placeholder="' . esc_attr($field['options']['placeholder']) . '"';
-}
-if ( isset($field['options']['required']) ) {
-    $options .= ' required="required"';
-}
+$default_options = [
+    'prefix' => 'dashicons dashicons-'
+];
+$options = wp_parse_args( isset($field['options']) ? $field['options'] : [], $default_options );
 
-// Field classes
-if ( isset($field['options']['class']) ) {
-    $class = esc_attr($field['options']['class']);
-} else {
-    $class = 'regular-text';
-}
-
-// Button classes
-if ( isset($field['options']['button_class']) ) {
-    $button_class = esc_attr($field['options']['button_class']);
-} else {
-    $button_class = 'button button-secondary fonticon-picker-button';
-}
-
-if (!isset($field['values'])) {
+if ( !isset($field['values'] ) ) {
     $field['values'] = [
         'menu',
         'admin-site',
@@ -263,8 +256,6 @@ if (!isset($field['values'])) {
         'layout'
     ];
 
-    $field['options']['prefix'] = 'dashicons dashicons-';
-
 }
 
 if ( is_array( $field['values'] ) ) {
@@ -276,14 +267,14 @@ if ( is_array( $field['values'] ) ) {
         <label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label>
     </th>
     <td>
-        <input type="text" value="<?=esc_attr($field['value']);?>" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>" class="<?=$class;?>"<?=$options;?>>
-        <button class="<?=$button_class;?>"
+        <input type="text" value="<?=esc_attr($field['value']);?>" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>" <?=$attrs;?>>
+        <button class="button button-secondary fonticon-picker-button"
                 data-icons="<?=esc_attr($field['values']);?>"
-                data-prefix="<?=esc_attr($field['options']['prefix']);?>"
+                data-prefix="<?=esc_attr($options['prefix']);?>"
                 data-target="#<?=esc_attr($field['id']);?>"
                 data-mdyam="fonticonspicker">
             <?php if ($field['value'] != '') { ?>
-            <span class="<?=esc_attr($field['options']['prefix'] . $field['value']);?>"></span>
+            <span class="<?=esc_attr($options['prefix'] . $field['value']);?>"></span>
             <?php } ?>
             <?php _e('Select an icon', 'md-yam'); ?>
         </button>
