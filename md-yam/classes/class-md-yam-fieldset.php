@@ -320,57 +320,64 @@ class MD_YAM_Fieldset {
 
                 if ( $this->options['group'] ) {
 
-                    switch ($this->options['type']) {
+                    if ( is_object($object) ) {
+                        switch ($this->options['type']) {
 
-                        case 'dashboard':
-                        case 'menu_page':
-                        case 'submenu_page':
-                            $group_value = maybe_unserialize( get_option( $this->options['group'] ) );
-                            break;
+                            case 'dashboard':
+                            case 'menu_page':
+                            case 'submenu_page':
+                                $group_value = maybe_unserialize( get_option( $this->options['group'] ) );
+                                break;
 
-                        case 'postmeta':
-                            $group_value = maybe_unserialize( get_post_meta( $object->ID, $this->options['group'], true ) );
-                            break;
+                            case 'postmeta':
+                                $group_value = maybe_unserialize( get_post_meta( $object->ID, $this->options['group'], true ) );
+                                break;
 
-                        case 'usermeta':
-                            $group_value = maybe_unserialize( get_user_meta( $object->ID, $this->options['group'], true ) );
-                            break;
+                            case 'usermeta':
+                                $group_value = maybe_unserialize( get_user_meta( $object->ID, $this->options['group'], true ) );
+                                break;
 
-                        case 'termmeta':
-                            $group_value = maybe_unserialize( get_term_meta( $object->term_id, $this->options['group'], true ) );
-                            break;
+                            case 'termmeta':
+                                $group_value = maybe_unserialize( get_term_meta( $object->term_id, $this->options['group'], true ) );
+                                break;
+                        }
+
+                        if (!$group_value) {
+                            $group_value = [];
+                        }
+
+                        if ( array_key_exists( $field['name'], $group_value ) ) {
+                            $field['value'] = $group_value[$field['name']];
+                        }
                     }
 
-                    if (!$group_value) {
-                        $group_value = [];
-                    }
-
-                    if ( array_key_exists( $field['name'], $group_value ) ) {
-                        $field['value'] = $group_value[$field['name']];
-                    }
                     $field['name'] = $this->options['group'] . '[' . $field['name'] . ']';
 
                 } else {
 
-                    switch ($this->options['type']) {
+                    if ( is_object($object) ) {
+                        switch ($this->options['type']) {
 
-                        case 'dashboard':
-                        case 'menu_page':
-                        case 'submenu_page':
-                            $field['value'] = get_option($field['name']);
-                            break;
+                            case 'dashboard':
+                            case 'menu_page':
+                            case 'submenu_page':
+                                $field['value'] = get_option($field['name']);
+                                break;
 
-                        case 'postmeta':
-                            $field['value'] = get_post_meta($object->ID, $field['name'], true);
-                            break;
+                            case 'postmeta':
+                                $field['value'] = get_post_meta($object->ID, $field['name'], true);
+                                break;
 
-                        case 'usermeta':
-                            $field['value'] = get_user_meta($object->ID, $field['name'], true);
-                            break;
+                            case 'usermeta':
+                                $field['value'] = get_user_meta($object->ID, $field['name'], true);
+                                break;
 
-                        case 'termmeta':
-                            $field['value'] = get_term_meta($object->term_id, $field['name'], true);
-                            break;
+                            case 'termmeta':
+                                $field['value'] = get_term_meta($object->term_id, $field['name'], true);
+                                break;
+                        }
+                    } else {
+                        $field['value'] = null;
                     }
 
                 }
@@ -382,8 +389,6 @@ class MD_YAM_Fieldset {
 
                 break;
         }
-
-
 
         $template = apply_filters( 'md_yam_generate_field_template', $field );
         return apply_filters( 'md_yam_field_template', $template, $field );

@@ -13,14 +13,16 @@ if ( !isset($field['values'] ) ) {
     $field['values'] = [$field['name'] => $field['name']];
 }
 
+if ( !$field['value'] ) {
+    $field['value'] = [];
+}
+
 if ( !_md_is_assoc($field['values'])) {
     foreach( $field['values'] as $value ){
         $temp[$value] = $value;
     }
     $field['values'] = $temp;
 }
-
-var_dump(md_get_field( 'unique_id', 'addad15', 1 ));
 ?>
 <tr>
     <th scope="row"><?=$field['title'];?></th>

@@ -42,7 +42,7 @@ This code will create a basic metabox with one text field. It will be added to a
 
 This plugin was developed for internal use, but still it have some goodies to offer:
 
-1. Unlike other frameworks, MD YAM is all-in-one solution. Post metaboxes, user meta fields, term meta, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that.
+1. The main goal of this plugin is to provide a simple yet powerful interface to all kinds of metadata without messing with the database.
 2. MD YAM is incredibly simple, so that almost any customization takes only couple of minutes.
 3. New types of fields can be added easily.
 4. MD YAM uses standart WP admin HTML markup. With default templates you can create options pages, that look absolutly like standart wordpress admin pages.
@@ -57,11 +57,11 @@ This plugin was developed for internal use, but still it have some goodies to of
 
 ## Roadmap
 ### 1.0
-* Repeatable fields support.
-* [x] Default WP color picker~~.
-* [x] Localization support~~.
-* Helper function to get the values of fields.
-* HTML5 input tweaks and fixes.
+* [ ] Repeatable fields support.
+* [x] Default WP color picker.
+* [x] Localization support.
+* [ ] Helper function to get the values of fields.
+* [ ] HTML5 input tweaks and fixes.
 * [x] Multicheck and multiselect
 * [x] Taxonomy meta fields.
 

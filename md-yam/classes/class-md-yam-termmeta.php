@@ -43,14 +43,26 @@ class MD_YAM_Termmeta extends MD_YAM_Fieldset {
     }
 
 	/**
-	 * Adds the meta box container.
+	 * Adds fields to the the edit page.
 	 * Public for WP needs.
 	 *
 	 * @since 0.7.0
 	 */
-	public function add_meta_fields( $term ) {
+	public function edit_meta_fields( $term ) {
 
         $this->render_content( $term );
+
+	}
+
+	/**
+	 * Adds fields to the add new term page.
+	 * Public for WP needs.
+	 *
+	 * @since 0.7.0
+	 */
+	public function add_meta_fields() {
+
+        $this->render_content();
 
 	}
 

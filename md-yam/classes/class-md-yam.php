@@ -165,8 +165,8 @@ class MD_YAM {
                 break;
 
             case ('termmeta'):
-                $this->loader->add_action( $options['taxonomy'] . '_edit_form_fields', $fieldset, 'add_meta_fields' );
-                $this->loader->add_action( $options['taxonomy'] . '_add_form_fields', $fieldset, 'add_meta_fields' );
+                $this->loader->add_action( $options['taxonomy'] . '_edit_form_fields', $fieldset, 'edit_meta_fields' );
+//                $this->loader->add_action( $options['taxonomy'] . '_add_form_fields', $fieldset, 'add_meta_fields' );
                 $this->loader->add_action( 'edit_' . $options['taxonomy'], $fieldset, 'save_meta' );
 //                $this->loader->add_action( 'edit_user_profile_update', $fieldset, 'save_meta' );
                 $this->loader->add_action( 'admin_enqueue_scripts', $fieldset, 'enqueue_termmeta_scripts' );
