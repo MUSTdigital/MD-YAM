@@ -8,6 +8,13 @@ $attrs = '';
 foreach( $attributes as $key => $value ){
     $attrs .= ' ' . $key . '="' . esc_attr($value)  . '"';
 }
+
+if ( !_md_is_assoc($field['values'])) {
+    foreach( $field['values'] as $value ){
+        $temp[$value] = $value;
+    }
+    $field['values'] = $temp;
+}
 ?>
 <tr>
     <th scope="row"><?=$field['title'];?></th>

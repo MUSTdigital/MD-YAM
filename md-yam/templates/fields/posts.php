@@ -11,6 +11,8 @@ foreach( $attributes as $key => $value ){
 
 if ( isset( $field['attributes']['multiple'] ) ) {
     $field['name'] = $field['name'] . '[]';
+} else {
+    $field['value'] = [$field['value']];
 }
 
 // Field options
@@ -19,7 +21,7 @@ $default_options = [
     'post_type' => 'page',
     'post_status' => 'any'
 ];
-$options = wp_parse_args($field['options'], $default_options);
+$options = wp_parse_args( isset($field['options']) ? $field['options'] : [], $default_options );
 if ( !isset( $field['values'] ) ) {
     $field['values'] = get_posts($options);
 }
@@ -31,7 +33,7 @@ if ( !isset( $field['values'] ) ) {
         <select name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>"<?=$attrs;?>>
             <option value=""><?php _e('-- Select --', 'md-yam'); ?></option>
         <?php foreach ( $field['values'] as $post ) { ?>
-            <option value="<?=$post->ID;?>" <?php selected($field['value'], $post->ID);?>><?=$post->post_title;?></option>
+            <option value="<?=$post->ID;?>" <?php selected(in_array($post->ID, $field['value']), true);?>><?=$post->post_title;?></option>
         <?php } ?>
         </select>
         <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>

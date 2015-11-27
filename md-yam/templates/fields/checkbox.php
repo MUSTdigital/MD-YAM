@@ -9,13 +9,18 @@ foreach( $attributes as $key => $value ){
     $attrs .= ' ' . $key . '="' . esc_attr($value)  . '"';
 }
 
-if ( isset( $field['attributes']['multiple'] ) ) {
-    $field['name'] = $field['name'] . '[]';
+if ( !isset($field['values'] ) ) {
+    $field['values'] = [$field['name'] => $field['name']];
 }
 
-if ( !isset($field['values'] ) ) {
-    $field['values'] = ['1' => ''];
+if ( !_md_is_assoc($field['values'])) {
+    foreach( $field['values'] as $value ){
+        $temp[$value] = $value;
+    }
+    $field['values'] = $temp;
 }
+
+var_dump(md_get_field( 'unique_id', 'addad15', 1 ));
 ?>
 <tr>
     <th scope="row"><?=$field['title'];?></th>
@@ -24,7 +29,7 @@ if ( !isset($field['values'] ) ) {
             <legend class="screen-reader-text"><span><?=$field['title'];?></span></legend>
             <?php foreach ( $field['values'] as $key => $value ) { ?>
             <label title="<?=esc_attr($key);?>">
-                <input type="checkbox" name="<?=esc_attr($field['name']);?>" value="<?=esc_attr($key);?>" <?php checked($field['value'], $key);?> <?=$attrs;?>> <?=$value;?>
+                <input type="checkbox" name="<?=esc_attr($field['name']);?>[]" value="<?=esc_attr($key);?>" <?php checked(in_array($key, $field['value']), true);?> <?=$attrs;?>> <?=$value;?>
             </label>
             <?php } ?>
         </fieldset>

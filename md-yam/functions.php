@@ -152,20 +152,32 @@ function _md_yam_fix_id( $var ) {
     return strtr( $var, $replace );
 }
 
-if ( !function_exists( '_md_recursive_array_search' ) ) {
-    /**
-     * Recursivly searches the array for a given value and returns the corresponding key if successful
-     * @param  string  $needle   The searched value.
-     * @param  array   $haystack The array
-     * @return mixed   Returns the key for needle if it is found in the array, false otherwise
-     */
-    function _md_recursive_array_search( $needle, $haystack ) {
-        foreach( $haystack as $key => $value ) {
-            $current_key = $key;
-            if ( $needle === $value OR ( is_array( $value ) && _md_recursive_array_search( $needle, $value ) !== false ) ) {
-                return $current_key;
-            }
+if ( !function_exists( '_md_recursive_array_search' ) ) :
+/**
+ * Recursivly searches the array for a given value and returns the corresponding key if successful
+ * @param  string $needle   The searched value.
+ * @param  array  $haystack The array
+ * @return mixed  Returns the key for needle if it is found in the array, false otherwise
+ */
+function _md_recursive_array_search( $needle, $haystack ) {
+    foreach( $haystack as $key => $value ) {
+        $current_key = $key;
+        if ( $needle === $value OR ( is_array( $value ) && _md_recursive_array_search( $needle, $value ) !== false ) ) {
+            return $current_key;
         }
-        return false;
     }
+    return false;
 }
+endif;
+
+
+if ( !function_exists( '_md_is_assoc' ) ) :
+/**
+ * Checks if the provided array is associative.
+ * @param  array   $arr  Array to check
+ * @return boolean       True if array is associative, false if array is sequential.
+ */
+function _md_is_assoc( $arr ) {
+    return array_keys( $arr ) !== range( 0, count( $arr ) - 1 );
+}
+endif;

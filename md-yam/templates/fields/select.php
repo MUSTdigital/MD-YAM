@@ -11,6 +11,15 @@ foreach( $attributes as $key => $value ){
 
 if ( isset( $field['attributes']['multiple'] ) ) {
     $field['name'] = $field['name'] . '[]';
+} else {
+    $field['value'] = [$field['value']];
+}
+
+if ( !_md_is_assoc($field['values'])) {
+    foreach( $field['values'] as $value ){
+        $temp[$value] = $value;
+    }
+    $field['values'] = $temp;
 }
 ?>
 <tr>
@@ -19,7 +28,7 @@ if ( isset( $field['attributes']['multiple'] ) ) {
         <select name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>"<?=$attrs;?>>
             <option value=""><?php _e('-- Select --', 'md-yam'); ?></option>
         <?php foreach ( $field['values'] as $key => $value ) { ?>
-            <option value="<?=esc_attr($key);?>" <?php selected($field['value'], $key);?>><?=$value;?></option>
+            <option value="<?=esc_attr($key);?>" <?php selected(in_array($key, $field['value']), true);?>><?=$value;?></option>
         <?php } ?>
         </select>
         <?php if ( isset($field['description']) ) { ?><p class="description"><?=$field['description'];?></p><?php } ?>

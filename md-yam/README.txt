@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 MD YAM is all-in-one solution. Post metaboxes, user meta fields, term meta, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that.
 
 == Description ==
-This plugin can work with post meta fields, user meta, term meta and site options. All-in-one solution. Post metaboxes, user meta fields, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that. Taxonomy terms meta fields will be added soon.
+This plugin can work with post meta fields, user meta, term meta and site options. All-in-one solution. Post metaboxes, user meta fields, term meta, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that. Taxonomy terms meta fields will be added soon.
 
 == Installation ==
 Install MD YAM as any other plugin. You can make new fieldsets with the function `md_yam_mf()`. Basic code looks like that:
@@ -27,7 +27,7 @@ function my_metabox() {
         [
             'title' => 'Textield',
             'type' => 'text',
-            'id' => 'unique_meta_id',
+            'name' => 'unique_meta_id',
         ]
     ];
 
@@ -42,7 +42,7 @@ See [GitHub repo](https://github.com/MUSTdigital/md-yam) for full readme and sup
 
 == Frequently Asked Questions ==
 = Another one? How come? =
-1. Unlike other frameworks, MD YAM is all-in-one solution. Post metaboxes, user meta fields, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that. Taxonomy terms meta fields will be added soon.
+1. Unlike other frameworks, MD YAM is all-in-one solution. Post metaboxes, user meta fields, term meta, admin menu and submenu pages, dashboard widgets - MD YAM works with any of that. Taxonomy terms meta fields will be added soon.
 2. MD YAM is incredibly simple, so that almost any customization takes only couple of minutes.
 3. New types of fields can be added easily.
 4. MD YAM uses standart WP admin HTML markup. With default templates you can create options pages, that look absolutly like standart wordpress admin pages.
@@ -50,6 +50,11 @@ See [GitHub repo](https://github.com/MUSTdigital/md-yam) for full readme and sup
 6. Custom templates. 
 
 == Changelog ==
+= 0.7.0 =
+* Added term meta fields support (NB: WP ≥ 4.4 is needed).
+* Added `md_get_field` function. The main thing about it: it will handle everything (including defaults) automatically.
+* Added multicheck and multiselect support.
+
 = 0.6.3 =
 * Some rearrangement. 
 * Added user meta fields support.
