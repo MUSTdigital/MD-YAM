@@ -11,7 +11,7 @@ foreach( $attributes as $key => $value ){
     $attrs .= ' ' . $key . '="' . esc_attr($value)  . '"';
 }
 ?>
-<tr>
+<tr class="md_yam-<?=$field['type'];?>">
     <th scope="row"><label for="<?=esc_attr($field['id']);?>'"><?=$field['title'];?></label></th>
     <td>
         <p>

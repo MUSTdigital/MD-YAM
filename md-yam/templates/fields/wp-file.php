@@ -15,7 +15,7 @@ $default_options = [
 ];
 $options = wp_parse_args( isset($field['options']) ? $field['options'] : [], $default_options );
 ?>
-<tr>
+<tr class="md_yam-<?=$field['type'];?>">
     <th scope="row">
         <label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label>
     </th>

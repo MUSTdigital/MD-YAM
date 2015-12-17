@@ -42,47 +42,47 @@ class MD_YAM_Termmeta extends MD_YAM_Fieldset {
 
     }
 
-	/**
-	 * Adds fields to the the edit page.
-	 * Public for WP needs.
-	 *
-	 * @since 0.7.0
-	 */
-	public function edit_meta_fields( $term ) {
+    /**
+     * Adds fields to the the edit page.
+     * Public for WP needs.
+     *
+     * @since 0.7.0
+     */
+    public function edit_meta_fields( $term ) {
 
         $this->render_content( $term );
 
-	}
+    }
 
-	/**
-	 * Adds fields to the add new term page.
-	 * Public for WP needs.
-	 *
-	 * @since 0.7.0
-	 */
-	public function add_meta_fields() {
+    /**
+     * Adds fields to the add new term page.
+     * Public for WP needs.
+     *
+     * @since 0.7.0
+     */
+    public function add_meta_fields() {
 
         $this->render_content();
 
-	}
+    }
 
     /**
-	 * Save the meta when the post is saved.
-	 * Public for WP needs.
-	 *
-	 * @param int $term_id The ID of the term being saved.
+     * Save the meta when the post is saved.
+     * Public for WP needs.
+     *
+     * @param int $term_id The ID of the term being saved.
      * @since 0.7.0
-	 */
-	public function save_meta( $term_id = '' ) {
+     */
+    public function save_meta( $term_id = '' ) {
 
-		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
-			return $term_id;
+        if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
+            return $term_id;
         }
 
-		$nonce = $_POST['_wpnonce_md_yam' . $this->options['id']];
+        $nonce = $_POST['_wpnonce_md_yam' . $this->options['id']];
 
-		if ( ! wp_verify_nonce( $nonce, 'save_termmeta_' . $this->options['id'] ) ) {
-			return $term_id;
+        if ( ! wp_verify_nonce( $nonce, 'save_termmeta_' . $this->options['id'] ) ) {
+            return $term_id;
         }
 
         if ( $this->options['group'] != NULL ) {
@@ -109,6 +109,6 @@ class MD_YAM_Termmeta extends MD_YAM_Fieldset {
 
         }
 
-	}
+    }
 
 }

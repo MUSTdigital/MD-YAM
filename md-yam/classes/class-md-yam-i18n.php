@@ -26,56 +26,56 @@
  */
 class MD_YAM_i18n {
 
-	/**
-	 * The domain specified for this plugin.
-	 *
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string    $domain    The domain identifier for this plugin.
-	 * @var      string    $path    The path to the plugin core.
-	 */
-	private $domain,
-	        $plugin_name,
+    /**
+     * The domain specified for this plugin.
+     *
+     * @since    0.5.0
+     * @access   private
+     * @var      string    $domain    The domain identifier for this plugin.
+     * @var      string    $path    The path to the plugin core.
+     */
+    private $domain,
+            $plugin_name,
             $path;
 
-	/**
-	 * Set the domain equal to that of the specified domain.
-	 *
-	 * @since    0.5.0
-	 * @param    string    $domain    The domain identifier for this plugin.
-	 * @param    string    $path    The path to the plugin core.
-	 */
-	public function __construct() {
+    /**
+     * Set the domain equal to that of the specified domain.
+     *
+     * @since    0.5.0
+     * @param    string    $domain    The domain identifier for this plugin.
+     * @param    string    $path    The path to the plugin core.
+     */
+    public function __construct() {
 
-		$this->domain      = MDYAM_PROJECT_NAME;
-		$this->plugin_name = MDYAM_PROJECT_NAME;
-		$this->path        = MDYAM_PROJECT_REL_DIR;
+        $this->domain      = MDYAM_PROJECT_NAME;
+        $this->plugin_name = MDYAM_PROJECT_NAME;
+        $this->path        = MDYAM_PROJECT_REL_DIR;
 
-	}
+    }
 
     /**
-	 * Load the plugin text domain for translation.
-	 *
-	 * @since    0.5.0
-	 */
-	public function load_plugin_textdomain() {
+     * Load the plugin text domain for translation.
+     *
+     * @since    0.5.0
+     */
+    public function load_plugin_textdomain() {
 
         $var = load_plugin_textdomain(
-			$this->domain,
-			false,
-			$this->path . '/languages'
-		);
+            $this->domain,
+            false,
+            $this->path . '/languages'
+        );
 
 //        if (!$var) {
 //            mdd(MDYAM_PROJECT_REL_DIR);
 //        }
 
-	}
+    }
 
     /**
-	 * @since    0.6.0
-	 */
-	public function localize_scripts() {
+     * @since    0.6.0
+     */
+    public function localize_scripts() {
 
         wp_localize_script(
             $this->plugin_name . '-iconpicker',
@@ -85,7 +85,7 @@ class MD_YAM_i18n {
             ]
         );
 
-	}
+    }
 
     /**
      * Localize strings in some special occasions.

@@ -1,8 +1,24 @@
-/*jslint browser: true, devel: true*/
-/*global jQuery, ajaxurl, ace */
+/*jslint browser: true, nomen: true*/
+/*global jQuery, ajaxurl, ace, alert, tinyMCE */
+/* http://jslint.it/lint.html */
 
 (function ($) {
-	'use strict';
+    'use strict';
+
+    $.fn.preBind = function (type, data, fn) {
+        this.each(function () {
+            var currentBindings;
+
+            $(this).bind(type, data, fn);
+            currentBindings = $._data($(this)[0], 'events');
+
+            if ($.isArray(currentBindings[type])) {
+                currentBindings[type].unshift(currentBindings[type].pop());
+            }
+        });
+
+        return this;
+    };
 
     $(document).ready(function ($) {
 
@@ -71,10 +87,17 @@
             data = $('#' + form_id).serialize();
 
         $.post(ajaxurl, data, function (response) {
-            console.log(response);
             alert(response.message);
         }, 'json');
 
     });
+
+//    $('#addtag #submit').preBind('click', function () {
+//        if (typeof tinyMCE !== 'undefined' && $('input[name=action]').val() === 'add-tag') {
+//            tinyMCE.editors.forEach(function (editor) {
+//                editor.setContent('');
+//            });
+//        }
+//    });
 
 }(jQuery));

@@ -1,7 +1,7 @@
 <?php
 // Field attributes
 $default_attributes = [
-    'class' => isset( $field['class'] ) ? $field['class'] : 'regular-text'
+    'class' => isset( $field['class'] ) ? $field['class'] : 'regular-text fonticon-picker-input'
 ];
 $attributes = wp_parse_args( isset($field['attributes']) ? $field['attributes'] : [], $default_attributes );
 $attrs = '';
@@ -262,7 +262,7 @@ if ( is_array( $field['values'] ) ) {
     $field['values'] = implode($field['values'], ',');
 }
 ?>
-<tr>
+<tr class="md_yam-<?=$field['type'];?>">
     <th scope="row">
         <label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label>
     </th>

@@ -19,25 +19,25 @@
  */
 class MD_YAM_Fieldset {
 
-	/**
-	 * @access  protected
-	 * @var     array    $fields   Array of fields.
-	 * @var     array    $flags    Array of field types.
-	 * @var     array    $options  Array of options.
-	 * @var     object   $object   Current post or user object.
-	 * @var     array    $tree     Array of fields with some helper items. Accessable after add_fields method is used.
-	 * @var     array    $tabs     Array of tabs. Accessable after add_fields method is used.
-	 * @var     array    $theme    Path to the theme folder.
-	 * @var     array    $scripts  Scripts needed to be enqueued.
-	 * @var     array    $styles   Styles needed to be enqueued.
-	 * @since   0.5.0
-	 * @since   0.5.47   Added $flags
-	 * @since   0.5.8    Added $scripts and $styles
-	 * @since   0.6.2    Added $fields
-	 * @since   0.6.3    Added $options
-	 * @since   0.7.0    Added $theme
-	 */
-	protected $fields,
+    /**
+     * @access  protected
+     * @var     array    $fields   Array of fields.
+     * @var     array    $flags    Array of field types.
+     * @var     array    $options  Array of options.
+     * @var     object   $object   Current post or user object.
+     * @var     array    $tree     Array of fields with some helper items. Accessable after add_fields method is used.
+     * @var     array    $tabs     Array of tabs. Accessable after add_fields method is used.
+     * @var     array    $theme    Path to the theme folder.
+     * @var     array    $scripts  Scripts needed to be enqueued.
+     * @var     array    $styles   Styles needed to be enqueued.
+     * @since   0.5.0
+     * @since   0.5.47   Added $flags
+     * @since   0.5.8    Added $scripts and $styles
+     * @since   0.6.2    Added $fields
+     * @since   0.6.3    Added $options
+     * @since   0.7.0    Added $theme
+     */
+    protected $fields,
               $options,
               $flags,
               $object,
@@ -50,12 +50,12 @@ class MD_YAM_Fieldset {
     /**
      * @param  array  $options  Array of options.
      * @param  array  $fields   Array of fields.
-	 * @since  0.5.0
-	 */
-	public function __construct( $options, $fields ) {
+     * @since  0.5.0
+     */
+    public function __construct( $options, $fields ) {
 
-		$this->options = $options;
-		$this->fields  = $fields;
+        $this->options = $options;
+        $this->fields  = $fields;
         $this->theme   = get_stylesheet_directory();
 
         $this->rebuild_tree();
@@ -253,27 +253,27 @@ class MD_YAM_Fieldset {
     }
 
 
-	/**
-	 * Adds fieldset to the admin menu page
-	 *
-	 * @access  public
-	 * @since   0.6.2
-	 */
-	public function add_fieldset_listitem() {
+    /**
+     * Adds fieldset to the admin menu page
+     *
+     * @access  public
+     * @since   0.6.2
+     */
+    public function add_fieldset_listitem() {
         require MDYAM_PROJECT_DIR . 'assets/partitials/fieldset-table.php';
-	}
+    }
 
 
-	/**
-	 * Echoes $this->html.
-	 * Public for WP needs.
-	 *
-	 * @access  public
-	 * @since   0.5.0
-	 * @since   0.6.3 Combined with generate_html();
-	 * @param   WP_Post $post The post object.
-	 */
-	public function render_content( $object = null) {
+    /**
+     * Echoes $this->html.
+     * Public for WP needs.
+     *
+     * @access  public
+     * @since   0.5.0
+     * @since   0.6.3 Combined with generate_html();
+     * @param   WP_Post $post The post object.
+     */
+    public function render_content( $object = null) {
 
         $this->object = $object;
         $html = '';
@@ -286,7 +286,7 @@ class MD_YAM_Fieldset {
 
         echo $this->html;
 
-	}
+    }
 
 
     /**
@@ -390,7 +390,7 @@ class MD_YAM_Fieldset {
                 break;
         }
 
-        $template = apply_filters( 'md_yam_generate_field_template', $field );
+        $template = apply_filters( 'md_yam_generate_field_template', $field, $this->options);
         return apply_filters( 'md_yam_field_template', $template, $field );
     }
 
@@ -437,18 +437,18 @@ class MD_YAM_Fieldset {
 
     }
 
-	/**
-	 * @access  public
-	 * @since   0.6.3
-	 * @param   $var   Variable to return.
-	 * @return  mixed  Requested variable.
-	 */
-	public function get_var($var) {
+    /**
+     * @access  public
+     * @since   0.6.3
+     * @param   $var   Variable to return.
+     * @return  mixed  Requested variable.
+     */
+    public function get_var($var) {
         $available = ['options', 'scripts', 'styles', 'fields', 'flags'];
         if ( in_array($var, $available) ) {
-		  return $this->$var;
+          return $this->$var;
         } else {
             throw new Exception($var . ' is not available.');
         }
-	}
+    }
 }

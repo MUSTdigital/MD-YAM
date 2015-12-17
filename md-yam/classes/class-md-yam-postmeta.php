@@ -38,12 +38,12 @@ class MD_YAM_Postmeta extends MD_YAM_Fieldset {
 
     }
 
-	/**
-	 * Adds the meta box container. (Set as public because of WP needs, do not use in code.)
-	 *
-	 * @since 0.5.0
-	 */
-	public function add_meta_box() {
+    /**
+     * Adds the meta box container. (Set as public because of WP needs, do not use in code.)
+     *
+     * @since 0.5.0
+     */
+    public function add_meta_box() {
 
         add_meta_box(
             $this->options['id'],
@@ -53,25 +53,25 @@ class MD_YAM_Postmeta extends MD_YAM_Fieldset {
             $this->options['context']
         );
 
-	}
+    }
 
     /**
-	 * Save the meta when the post is saved.
-	 * Public for WP needs.
-	 *
-	 * @param int $post_id The ID of the post being saved.
+     * Save the meta when the post is saved.
+     * Public for WP needs.
+     *
+     * @param int $post_id The ID of the post being saved.
      * @since 0.5.0
-	 */
-	public function save_meta( $post_id ) {
+     */
+    public function save_meta( $post_id ) {
 
-		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
-			return $post_id;
+        if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
+            return $post_id;
         }
 
-		$nonce = $_POST['_wpnonce_md_yam' . $this->options['id']];
+        $nonce = $_POST['_wpnonce_md_yam' . $this->options['id']];
 
-		if ( ! wp_verify_nonce( $nonce, 'save_postmeta_' . $this->options['id'] ) ) {
-			return $post_id;
+        if ( ! wp_verify_nonce( $nonce, 'save_postmeta_' . $this->options['id'] ) ) {
+            return $post_id;
         }
 
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -116,6 +116,6 @@ class MD_YAM_Postmeta extends MD_YAM_Fieldset {
 
         }
 
-	}
+    }
 
 }

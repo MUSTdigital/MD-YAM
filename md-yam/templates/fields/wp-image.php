@@ -24,7 +24,7 @@ if ( $field['value'] != '' ) {
     }
 }
 ?>
-<tr>
+<tr class="md_yam-<?=$field['type'];?>">
     <th scope="row">
         <label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label>
     </th>

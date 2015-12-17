@@ -22,79 +22,79 @@
  */
 class MD_YAM_Admin {
 
-	/**
-	 * @since    0.5.0
-	 * @access   private
-	 * @var      string  $plugin_name  The ID of this plugin.
-	 * @var      string  $version       The current version of this plugin.
-	 * @var      string  $url           The url to the plugin core folder.
-	 */
-	private $plugin_name,
+    /**
+     * @since    0.5.0
+     * @access   private
+     * @var      string  $plugin_name  The ID of this plugin.
+     * @var      string  $version       The current version of this plugin.
+     * @var      string  $url           The url to the plugin core folder.
+     */
+    private $plugin_name,
             $version,
             $url;
 
-	/**
-	 * @since  0.5.0
-	 * @param  string  $plugin_name  The ID of this plugin.
-	 * @param  string  $version       The current version of this plugin.
-	 * @param  string  $url           The url to the plugin core folder.
-	 */
-	public function __construct() {
+    /**
+     * @since  0.5.0
+     * @param  string  $plugin_name  The ID of this plugin.
+     * @param  string  $version       The current version of this plugin.
+     * @param  string  $url           The url to the plugin core folder.
+     */
+    public function __construct() {
 
         $this->plugin_name = MDYAM_PROJECT_NAME;
-		$this->version = MDYAM_VERSION;
-		$this->path = MDYAM_PROJECT_DIR;
-		$this->url = MDYAM_PROJECT_URL;
-
-	}
-
-	/**
-	 * Enqueue the stylesheets for the admin area.
-	 *
-	 * @since    0.5.0
-	 */
-	public function enqueue_styles() {
-
-		wp_enqueue_style( $this->plugin_name, $this->url . 'assets/css/md-yam-admin.css', array(), $this->version, 'all' );
+        $this->version = MDYAM_VERSION;
+        $this->path = MDYAM_PROJECT_DIR;
+        $this->url = MDYAM_PROJECT_URL;
 
     }
 
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    0.6.0
-	 */
+    /**
+     * Enqueue the stylesheets for the admin area.
+     *
+     * @since    0.5.0
+     */
+    public function enqueue_styles() {
+
+        wp_enqueue_style( $this->plugin_name, $this->url . 'assets/css/md-yam-admin.css', array(), $this->version, 'all' );
+
+    }
+
+    /**
+     * Register the stylesheets for the admin area.
+     *
+     * @since    0.6.0
+     */
     public function register_styles() {
 
-		wp_register_style( $this->plugin_name . '-iconpicker', $this->url . 'assets/css/md-iconpicker.css', array(), $this->version, 'all' );
-		wp_register_style( $this->plugin_name . '-filepicker', $this->url . 'assets/css/md-filepicker.css', array(), $this->version, 'all' );
-		wp_register_style( $this->plugin_name . '-ace', $this->url . 'assets/css/md-codeeditor.css', array(), $this->version, 'all' );
+        wp_register_style( $this->plugin_name . '-iconpicker', $this->url . 'assets/css/md-iconpicker.css', array(), $this->version, 'all' );
+        wp_register_style( $this->plugin_name . '-filepicker', $this->url . 'assets/css/md-filepicker.css', array(), $this->version, 'all' );
+        wp_register_style( $this->plugin_name . '-ace', $this->url . 'assets/css/md-codeeditor.css', array(), $this->version, 'all' );
 
-	}
+    }
 
-	/**
-	 * Enqueue the JavaScript for the admin area.
-	 *
-	 * @since    0.5.0
-	 */
-	public function enqueue_scripts() {
+    /**
+     * Enqueue the JavaScript for the admin area.
+     *
+     * @since    0.5.0
+     */
+    public function enqueue_scripts() {
 
         wp_enqueue_script( $this->plugin_name, $this->url . 'assets/js/md-yam-admin.js', array( 'jquery' ), $this->version, true );
 
     }
 
     /**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    0.6.0
-	 */
-	public function register_scripts() {
+     * Register the JavaScript for the admin area.
+     *
+     * @since    0.6.0
+     */
+    public function register_scripts() {
 
-		wp_register_script( $this->plugin_name . '-iconpicker', $this->url . 'assets/js/md-iconpicker.js', array( 'jquery', $this->plugin_name ), $this->version, true );
-		wp_register_script( $this->plugin_name . '-filepicker', $this->url . 'assets/js/md-filepicker.js', array( 'jquery', $this->plugin_name ), $this->version, true );
-		wp_register_script( $this->plugin_name . '-ace', $this->url . 'assets/js/ace/ace.js', array(), $this->version, true );
+        wp_register_script( $this->plugin_name . '-iconpicker', $this->url . 'assets/js/md-iconpicker.js', array( 'jquery', $this->plugin_name ), $this->version, true );
+        wp_register_script( $this->plugin_name . '-filepicker', $this->url . 'assets/js/md-filepicker.js', array( 'jquery', $this->plugin_name ), $this->version, true );
+        wp_register_script( $this->plugin_name . '-ace', $this->url . 'assets/js/ace/ace.js', array(), $this->version, true );
 
-	}
+    }
 
     /**
      * Admin page for MD YAM

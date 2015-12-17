@@ -22,7 +22,7 @@ if ( !_md_is_assoc($field['values'])) {
     $field['values'] = $temp;
 }
 ?>
-<tr>
+<tr class="md_yam-<?=$field['type'];?>">
     <th scope="row"><label for="<?=esc_attr($field['id']);?>"><?=$field['title'];?></label></th>
     <td>
         <select name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>"<?=$attrs;?>>

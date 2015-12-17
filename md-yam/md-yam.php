@@ -20,7 +20,7 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-	die;
+    die;
 }
 
 define( 'MDYAM_VERSION', '0.7.1' );
@@ -55,7 +55,7 @@ function run_MD_YAM() {
         $md_yam_object->new_fieldset( $fieldset['options'], $fieldset['fields'] );
     }
 
-	$md_yam_object->run();
+    $md_yam_object->run();
 
 }
 add_action( 'after_setup_theme', 'run_MD_YAM' );

@@ -9,6 +9,7 @@
 
 ## Description
 This plugin can work with post meta fields (metaboxes), user meta, term meta and site options (options pages and admin dashboard widgets). Theme customizer is not supported yet.
+See full [documentation](https://github.com/MUSTdigital/md-yam/wiki).
 
 ## Installation and usage
 
@@ -16,7 +17,7 @@ Install MD YAM as any other plugin. You can make new fieldsets with the function
 
 ```php
     function my_metabox() {
-        
+
         $options = [
             'title' => 'Test metabox',
             'id'    => 'unique_id'
@@ -35,8 +36,6 @@ Install MD YAM as any other plugin. You can make new fieldsets with the function
 ```
 This code will create a basic metabox with one text field. It will be added to all post types. Note that the variable `$fields` is an array of arrays. If you are using `md_yam_mf()` inside another plugin, don't dorget to place it in a function, hooked to `'md_yam_init'`, to avoid plugin order issues.
 
-[Documentation](https://github.com/MUSTdigital/md-yam/wiki)
-
 ## Frequently Asked Questions
 #### Another one? How come?
 
@@ -47,21 +46,22 @@ This plugin was developed for internal use, but still it have some goodies to of
 3. New types of fields can be added easily.
 4. MD YAM uses standart WP admin HTML markup. With default templates you can create options pages, that look absolutly like standart wordpress admin pages.
 5. Tabs! Yep, creating tabs is as simple as that.
-6. Custom templates. 
+6. Custom templates.
 
 ## Changelog
-##### 0.7.0
-* Added term meta fields support (NB: WP ≥ 4.4 is needed).
-* Added `md_get_field` function. The main thing: it will handle everything (including defaults) automatically.
-* Added multicheck and multiselect support.
+##### 0.7.1
+* Added term meta fields to add-term page.
+* Some style fixes.
+* Fixed whitespaces.
 
 ## Roadmap
 ### 1.0
 * [ ] Repeatable fields support.
+* [ ] Admin columns
 * [x] Default WP color picker.
 * [x] Localization support.
-* [ ] Helper function to get the values of fields.
-* [ ] HTML5 input tweaks and fixes.
+* [x] Helper function to get the values of fields.
+* [x] HTML5 input tweaks and fixes.
 * [x] Multicheck and multiselect
 * [x] Taxonomy meta fields.
 

@@ -19,7 +19,7 @@ $default_options = [
 ];
 $options = wp_parse_args( isset($field['options']) ? $field['options'] : [], $default_options );
 ?>
-<tr>
+<tr class="md_yam-<?=$field['type'];?>">
     <th scope="row"><?=$field['title'];?></th>
     <td>
         <div <?=$attrs;?>>

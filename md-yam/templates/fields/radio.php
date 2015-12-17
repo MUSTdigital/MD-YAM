@@ -16,7 +16,7 @@ if ( !_md_is_assoc($field['values'])) {
     $field['values'] = $temp;
 }
 ?>
-<tr>
+<tr class="md_yam-<?=$field['type'];?>">
     <th scope="row"><?=$field['title'];?></th>
     <td>
         <fieldset>

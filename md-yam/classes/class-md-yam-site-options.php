@@ -74,12 +74,12 @@ class MD_YAM_Site_Options extends MD_YAM_Fieldset {
 
     }
 
-	/**
-	 * Adds the widget to dashboard. (Set as public because of WP needs, do not use in code.)
-	 *
-	 * @since 0.5.0
-	 */
-	public function add_dashboard_widget() {
+    /**
+     * Adds the widget to dashboard. (Set as public because of WP needs, do not use in code.)
+     *
+     * @since 0.5.0
+     */
+    public function add_dashboard_widget() {
 
         wp_add_dashboard_widget(
             $this->options['id'],
@@ -87,14 +87,14 @@ class MD_YAM_Site_Options extends MD_YAM_Fieldset {
             [ $this, 'render_content' ]
         );
 
-	}
+    }
 
-	/**
-	 * Adds the page (or sub-page) to admin menu. (Set as public because of WP needs, do not use in code.)
-	 *
-	 * @since 0.5.0
-	 */
-	public function add_options_page() {
+    /**
+     * Adds the page (or sub-page) to admin menu. (Set as public because of WP needs, do not use in code.)
+     *
+     * @since 0.5.0
+     */
+    public function add_options_page() {
 
         if ( $this->options['type'] == 'menu_page') {
 
@@ -121,34 +121,34 @@ class MD_YAM_Site_Options extends MD_YAM_Fieldset {
 
         }
 
-	}
+    }
 
     /**
-	 * Save options via AJAX.
-	 *
-	 * @param int $post_id The ID of the post being saved.
+     * Save options via AJAX.
+     *
+     * @param int $post_id The ID of the post being saved.
      * @since 0.5.0
-	 */
-	public function ajax_save_options() {
+     */
+    public function ajax_save_options() {
 
-		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
-			exit(json_encode([
+        if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
+            exit(json_encode([
                 'result' => 'error',
                 'message' => __( 'Nonce not set, can\'t save options.', 'md-yam')
             ]));
         }
 
-		$nonce = $_POST['_wpnonce_md_yam' . $this->options['id']];
+        $nonce = $_POST['_wpnonce_md_yam' . $this->options['id']];
 
-		if ( ! wp_verify_nonce( $nonce, 'save_options_' . $this->options['id'] ) ) {
-			exit(json_encode([
+        if ( ! wp_verify_nonce( $nonce, 'save_options_' . $this->options['id'] ) ) {
+            exit(json_encode([
                 'result' => 'error',
                 'message' => __( 'Nonce can\'t be verified, can\'t save options.', 'md-yam')
             ]));
         }
 
         if ( ! current_user_can( $this->options['capability'] ) ) {
-			exit(json_encode([
+            exit(json_encode([
                 'result' => 'error',
                 'message' => __( 'You don\'t have enough capabilities to edit this options.', 'md-yam')
             ]));
@@ -183,6 +183,6 @@ class MD_YAM_Site_Options extends MD_YAM_Fieldset {
             'message' => __( 'Options saved!', 'md-yam')
         ]));
 
-	}
+    }
 
 }

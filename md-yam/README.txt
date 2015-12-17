@@ -47,16 +47,21 @@ See [GitHub repo](https://github.com/MUSTdigital/md-yam) for full readme and sup
 3. New types of fields can be added easily.
 4. MD YAM uses standart WP admin HTML markup. With default templates you can create options pages, that look absolutly like standart wordpress admin pages.
 5. Tabs! Yep, creating tabs is as simple as that.
-6. Custom templates. 
+6. Custom templates.
 
 == Changelog ==
+= 0.7.1 =
+* Added term meta fields to add-term page.
+* Some style fixes.
+* Fixed whitespaces.
+
 = 0.7.0 =
 * Added term meta fields support (NB: WP ≥ 4.4 is needed).
 * Added `md_get_field` function. The main thing about it: it will handle everything (including defaults) automatically.
 * Added multicheck and multiselect support.
 
 = 0.6.3 =
-* Some rearrangement. 
+* Some rearrangement.
 * Added user meta fields support.
 
 = 0.6.2 =

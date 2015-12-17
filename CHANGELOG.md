@@ -1,11 +1,16 @@
 ## Changelog
+##### 0.7.1
+* Added term meta fields to add-term page.
+* Some style fixes.
+* Fixed whitespaces.
+
 ##### 0.7.0
 * Added term meta fields support (NB: WP ≥ 4.4 is needed).
 * Added `md_get_field` function. The main thing about it: it will handle everything (including defaults) automatically.
 * Added multicheck and multiselect support.
 
 ##### 0.6.3
-* Some rearrangement. 
+* Some rearrangement.
 * Added user meta fields support.
 
 ##### 0.6.2

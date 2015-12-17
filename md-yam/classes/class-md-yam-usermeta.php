@@ -42,36 +42,36 @@ class MD_YAM_Usermeta extends MD_YAM_Fieldset {
 
     }
 
-	/**
-	 * Adds the meta box container.
-	 * Public for WP needs.
-	 *
-	 * @since 0.5.0
-	 */
-	public function add_meta_fields() {
+    /**
+     * Adds the meta box container.
+     * Public for WP needs.
+     *
+     * @since 0.5.0
+     */
+    public function add_meta_fields() {
 
         global $profileuser;
         $this->render_content( $profileuser );
 
-	}
+    }
 
     /**
-	 * Save the meta when the user is saved.
-	 * Public for WP needs.
-	 *
-	 * @param int $user_id The ID of the user being saved.
+     * Save the meta when the user is saved.
+     * Public for WP needs.
+     *
+     * @param int $user_id The ID of the user being saved.
      * @since 0.5.0
-	 */
-	public function save_meta( $user_id = '' ) {
+     */
+    public function save_meta( $user_id = '' ) {
 
-		if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
-			return $user_id;
+        if ( ! isset( $_POST['_wpnonce_md_yam' . $this->options['id']] ) ) {
+            return $user_id;
         }
 
-		$nonce = $_POST['_wpnonce_md_yam' . $this->options['id']];
+        $nonce = $_POST['_wpnonce_md_yam' . $this->options['id']];
 
-		if ( ! wp_verify_nonce( $nonce, 'save_usermeta_' . $this->options['id'] ) ) {
-			return $user_id;
+        if ( ! wp_verify_nonce( $nonce, 'save_usermeta_' . $this->options['id'] ) ) {
+            return $user_id;
         }
 
         if ( ! current_user_can( 'edit_user', $user_id ) ) {
@@ -102,6 +102,6 @@ class MD_YAM_Usermeta extends MD_YAM_Fieldset {
 
         }
 
-	}
+    }
 
 }
