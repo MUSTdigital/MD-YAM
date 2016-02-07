@@ -44,7 +44,7 @@ class MD_YAM_Autoloader {
      */
     public static function autoload( $class ) {
 
-        if ( is_file( $file = MDYAM_PROJECT_REL_DIR . '/classes/' . 'class-' . strtolower( str_replace( ['_', "\0"], ['-', ''], $class ) . '.php' ) ) ) {
+        if ( is_file( $file = MDYAM_PROJECT_DIR . '/classes/' . 'class-' . strtolower( str_replace( ['_', "\0"], ['-', ''], $class ) . '.php' ) ) ) {
             require_once $file;
         }
 
