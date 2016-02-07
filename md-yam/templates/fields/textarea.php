@@ -12,7 +12,9 @@ foreach( $attributes as $key => $value ){
 }
 ?>
 <tr class="md_yam-<?=$field['type'];?>">
-    <th scope="row"><label for="<?=esc_attr($field['id']);?>'"><?=$field['title'];?></label></th>
+    <th scope="row">
+        <label for="<?=esc_attr($field['id']);?>'"><?=$field['title'];?></label>
+    </th>
     <td>
         <p>
             <textarea name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>" <?=$attrs;?>><?=esc_textarea($field['value']);?></textarea>

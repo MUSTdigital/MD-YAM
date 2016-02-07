@@ -20,7 +20,9 @@ $default_options = [
 $options = wp_parse_args( isset($field['options']) ? $field['options'] : [], $default_options );
 ?>
 <tr class="md_yam-<?=$field['type'];?>">
-    <th scope="row"><?=$field['title'];?></th>
+    <th scope="row">
+        <label><?=$field['title'];?></label>
+    </th>
     <td>
         <div <?=$attrs;?>>
             <input type="hidden" name="<?=esc_attr($field['name']);?>" id="<?=esc_attr($field['id']);?>-input" value="<?=esc_attr($field['value']);?>">

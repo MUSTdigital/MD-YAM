@@ -17,7 +17,7 @@ if ( !_md_is_assoc($field['values'])) {
 }
 ?>
 <tr class="md_yam-<?=$field['type'];?>">
-    <th scope="row"><?=$field['title'];?></th>
+    <th scope="row"><label><?=$field['title'];?></label></th>
     <td>
         <fieldset>
             <legend class="screen-reader-text"><span><?=$field['title'];?></span></legend>
