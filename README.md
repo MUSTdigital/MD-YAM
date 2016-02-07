@@ -49,10 +49,8 @@ This plugin was developed for internal use, but still it have some goodies to of
 6. Custom templates.
 
 ## Changelog
-##### 0.7.1
-* Added term meta fields to add-term page.
-* Some style fixes.
-* Fixed whitespaces.
+##### 0.7.2
+* Various fixes.
 
 ## Roadmap
 ### 1.0

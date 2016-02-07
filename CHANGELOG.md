@@ -1,4 +1,7 @@
 ## Changelog
+##### 0.7.2
+* Various fixes.
+
 ##### 0.7.1
 * Added term meta fields to add-term page.
 * Some style fixes.
